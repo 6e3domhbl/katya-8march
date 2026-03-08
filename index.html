@@ -392,7 +392,7 @@ footer p{font-family:'Montserrat',sans-serif;font-size:.78rem;color:var(--t4);li
 <div class="toast" id="toast"></div>
 
 <!-- TOPBAR -->
-<div class="topbar" id="topbar"><button class="menu-btn" onclick="toggleSB()">☰</button><div class="topbar-title">Тима & Катя 💝</div><div class="topbar-right"></div></div>
+<div class="topbar" id="topbar" style="display:none"><button class="menu-btn" onclick="toggleSB()">☰</button><div class="topbar-title">Тима & Катя 💝</div><div class="topbar-right"></div></div>
 
 <!-- SIDEBAR -->
 <div class="sidebar-overlay" id="sbOverlay" onclick="toggleSB()"></div>
@@ -416,7 +416,7 @@ footer p{font-family:'Montserrat',sans-serif;font-size:.78rem;color:var(--t4);li
 </div>
 
 <!-- QUICK ACTIONS -->
-<div class="quick-bar" id="qbar">
+<div class="quick-bar" id="qbar" style="display:none">
     <button class="q-btn q1" onclick="qPhoto()" title="Фото">📸</button>
     <button class="q-btn q2" onclick="qNote()" title="Запись">📝</button>
     <button class="q-btn q3" onclick="qLove(event)" title="Сердечко">❤️</button>
@@ -432,7 +432,7 @@ footer p{font-family:'Montserrat',sans-serif;font-size:.78rem;color:var(--t4);li
 <div class="modal" id="mW"><div class="mbox"><h3>Желание 🎁</h3><input type="text" class="m-input" id="mWT" placeholder="Что хочется?"><select class="m-input" id="mWC" style="appearance:auto"><option value="🎁 Подарок">🎁 Подарок</option><option value="✈️ Путешествие">✈️ Путешествие</option><option value="🍽️ Ресторан">🍽️ Ресторан</option><option value="🎬 Развлечение">🎬 Развлечение</option><option value="💝 Мечта">💝 Мечта</option><option value="📚 Другое">📚 Другое</option></select><div class="m-btns"><button class="btn bp" onclick="saveW()">Добавить 💫</button><button class="btn bo" onclick="closeM('mW')">Отмена</button></div></div></div>
 <div class="modal" id="mSong"><div class="mbox"><h3>Добавить песню 🎵</h3><input type="text" class="m-input" id="mST" placeholder="Название — Исполнитель"><input type="text" class="m-input" id="mSL" placeholder="Ссылка (YouTube, Spotify...)"><input type="text" class="m-input" id="mSD" placeholder="Почему эта песня? 💭"><div class="m-btns"><button class="btn bp" onclick="saveSong()">Добавить 🎶</button><button class="btn bo" onclick="closeM('mSong')">Отмена</button></div></div></div>
 
-<div class="sync-i"><span class="sd" id="syncD"></span><span id="syncT">...</span></div>
+<div class="sync-i" id="syncI" style="display:none"><span class="sd" id="syncD"></span><span id="syncT">...</span></div>
 
 <!-- ====== MAIN ====== -->
 <div class="main" id="mainC">
@@ -507,7 +507,7 @@ footer p{font-family:'Montserrat',sans-serif;font-size:.78rem;color:var(--t4);li
 <footer><span class="fh">💝</span><p class="fb">Тима & Катя — навсегда ❤️</p><p>Наше особенное место • 2026</p></footer>
 </div>
 
-<button class="music-btn" id="mBtn" onclick="toggleMu()">🎵</button>
+<button class="music-btn" id="mBtn" style="display:none" onclick="toggleMu()">🎵</button>
 
 <script>
 // ===== FIREBASE =====
@@ -527,7 +527,7 @@ function esc(s){const d=document.createElement('div');d.textContent=s;return d.i
 function fmtD(s){const m=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];const d=new Date(s);return`${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`}
 
 // ENTER
-function enter(){document.getElementById('intro').classList.add('hid');document.getElementById('mainC').classList.add('vis');createPetals();createGarl();startObs();initFB()}
+function enter(){document.getElementById('intro').classList.add('hid');document.getElementById('mainC').classList.add('vis');document.getElementById('qbar').style.display='';document.getElementById('syncI').style.display='';document.getElementById('mBtn').style.display='';document.getElementById('topbar').style.display='';createPetals();createGarl();startObs();initFB()}
 function createPetals(){const c=document.getElementById('particles');['#ff6b9d','#ffc2d1','#e6b8f7','#ffd700','#ff9a9e'].forEach((col,ci)=>{for(let i=0;i<3;i++){setTimeout(()=>{const p=document.createElement('div');p.classList.add('petal');p.style.cssText=`left:${Math.random()*100}vw;background:${col};animation-duration:${Math.random()*9+7}s;animation-delay:${Math.random()*14}s;width:${Math.random()*7+4}px;height:${Math.random()*7+4}px;opacity:${Math.random()*.3+.12}`;c.appendChild(p)},(ci*3+i)*350)})}
 function createGarl(){const g=document.getElementById('garl');const c=['#ff6b9d','#ffd700','#e6b8f7','#ff9a9e','#87CEEB','#7dd3c0'];for(let i=0;i<50;i++){const l=document.createElement('span');l.style.cssText=`width:6px;height:6px;border-radius:50%;display:inline-block;background:${c[i%c.length]};box-shadow:0 0 4px ${c[i%c.length]};animation:twinkle 2.5s ease infinite;animation-delay:${i*.1}s;margin:0 2px`;g.appendChild(l)}}
 function startObs(){const o=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('vis')})},{threshold:.1});document.querySelectorAll('.tli').forEach(i=>o.observe(i))}
