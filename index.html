@@ -28,7 +28,6 @@
 html{scroll-behavior:smooth}
 body{font-family:'Comfortaa',cursive;background:var(--bg1);color:var(--t1);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-/* AMBIENT */
 .amb{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .orb{position:absolute;border-radius:50%;filter:blur(120px);animation:od 25s ease-in-out infinite}
 .o1{width:600px;height:600px;background:radial-gradient(circle,rgba(255,107,157,.16),transparent 70%);top:-15%;left:-10%}
@@ -37,7 +36,16 @@ body{font-family:'Comfortaa',cursive;background:var(--bg1);color:var(--t1);overf
 .o4{width:350px;height:350px;background:radial-gradient(circle,rgba(107,164,255,.06),transparent 70%);top:10%;right:20%;animation-delay:-12s}
 @keyframes od{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(40px,-60px) scale(1.08)}50%{transform:translate(-30px,50px) scale(.95)}75%{transform:translate(50px,30px) scale(1.05)}}
 
-/* TOP BAR */
+/* INTRO — HIGHEST Z-INDEX */
+.intro{position:fixed;inset:0;background:var(--bg1);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity 1s ease,visibility 1s}
+.intro.hid{opacity:0;visibility:hidden;pointer-events:none}
+.intro h1{font-family:'Great Vibes',cursive;font-size:clamp(2.5rem,8vw,4.5rem);background:linear-gradient(135deg,var(--pink),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px;animation:gf 4s ease-in-out infinite}
+.intro p{font-size:.95rem;color:var(--t3);margin-bottom:36px}
+.intro-btn{padding:16px 48px;font-family:'Comfortaa',cursive;font-size:1rem;background:linear-gradient(135deg,var(--pink),var(--deep));color:#fff;border:none;border-radius:16px;cursor:pointer;transition:all .35s;box-shadow:0 6px 28px var(--pink-g);position:relative;z-index:99999}
+.intro-btn:hover{transform:translateY(-3px);box-shadow:0 10px 40px var(--pink-g)}
+@keyframes gf{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* TOPBAR */
 .topbar{position:fixed;top:0;left:0;right:0;height:52px;z-index:9991;background:rgba(15,5,23,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;padding:0 16px;transition:transform .3s ease}
 .topbar.hide{transform:translateY(-100%)}
 .topbar-title{font-family:'Great Vibes',cursive;font-size:1.3rem;color:var(--pink);flex:1;text-align:center}
@@ -48,7 +56,6 @@ body{font-family:'Comfortaa',cursive;background:var(--bg1);color:var(--t1);overf
 /* SIDEBAR */
 .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9992;opacity:0;visibility:hidden;pointer-events:none;transition:all .3s ease}
 .sidebar-overlay.open{opacity:1;visibility:visible;pointer-events:auto}
-.sidebar-overlay.open{opacity:1;visibility:visible}
 .sidebar{position:fixed;top:0;left:0;width:280px;height:100%;background:var(--bg2);border-right:1px solid rgba(255,255,255,.06);z-index:9993;transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow-y:auto}
 .sidebar.open{transform:translateX(0)}
 .sb-header{padding:28px 20px 20px;border-bottom:1px solid rgba(255,255,255,.04)}
@@ -59,7 +66,7 @@ body{font-family:'Comfortaa',cursive;background:var(--bg1);color:var(--t1);overf
 .sb-item:hover{background:rgba(255,255,255,.03);color:var(--t1)}
 .sb-item.active{color:var(--pink-l);background:rgba(255,107,157,.06);border-left-color:var(--pink)}
 .sb-item .sb-icon{font-size:1.1rem;width:24px;text-align:center}
-.sb-item .sb-badge{margin-left:auto;padding:2px 8px;border-radius:8px;font-size:.6rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.sb-badge{margin-left:auto;padding:2px 8px;border-radius:8px;font-size:.6rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
 .sb-badge.hot{background:linear-gradient(135deg,#ff4500,#ff6b00);color:#fff;animation:hotP 2s ease infinite}
 @keyframes hotP{0%,100%{box-shadow:0 0 6px rgba(255,69,0,.25)}50%{box-shadow:0 0 14px rgba(255,69,0,.45)}}
 .sb-badge.new{background:rgba(107,164,255,.15);color:var(--blue)}
@@ -72,22 +79,12 @@ body{font-family:'Comfortaa',cursive;background:var(--bg1);color:var(--t1);overf
 .q-btn.q2{background:rgba(107,164,255,.12);color:var(--blue)}
 .q-btn.q3{background:rgba(255,215,0,.12);color:var(--gold)}
 .q-btn.q4{background:rgba(125,211,192,.12);color:var(--mint)}
-.q-btn:hover{transform:translateY(-3px);box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.q-btn:hover{transform:translateY(-3px)}
 .q-btn:active{transform:scale(.92)!important}
-
-/* MAIN */
-.intro{position:fixed;inset:0;background:var(--bg1);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity 1s ease,visibility 1s}
-.intro.hid{opacity:0;visibility:hidden;pointer-events:none}
-.intro h1{font-family:'Great Vibes',cursive;font-size:clamp(2.5rem,8vw,4.5rem);background:linear-gradient(135deg,var(--pink),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px;animation:gf 4s ease-in-out infinite}
-.intro p{font-size:.95rem;color:var(--t3);margin-bottom:36px}
-.intro-btn{padding:16px 48px;font-family:'Comfortaa',cursive;font-size:1rem;background:linear-gradient(135deg,var(--pink),var(--deep));color:#fff;border:none;border-radius:16px;cursor:pointer;transition:all .35s;box-shadow:0 6px 28px var(--pink-g)}
-.intro-btn:hover{transform:translateY(-3px);box-shadow:0 10px 40px var(--pink-g)}
-@keyframes gf{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 .particles{position:fixed;inset:0;pointer-events:none;z-index:9994;overflow:hidden}
 .petal{position:absolute;top:-50px;border-radius:50% 0 50% 50%;animation:pf linear infinite}
 @keyframes pf{0%{transform:translateY(-5vh) rotate(0) translateX(0);opacity:0}8%{opacity:.55}85%{opacity:.35}100%{transform:translateY(108vh) rotate(600deg) translateX(80px);opacity:0}}
-
 .fw-cv{position:fixed;inset:0;pointer-events:none;z-index:9995}
 
 .main{opacity:0;transition:opacity 1.2s;padding-top:52px;position:relative;z-index:1}
@@ -96,36 +93,28 @@ body{font-family:'Comfortaa',cursive;background:var(--bg1);color:var(--t1);overf
 .page.act{display:block}
 @keyframes pi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-/* COMMON */
 section{padding:60px 18px;max-width:860px;margin:0 auto}
 .st{font-family:'Great Vibes',cursive;font-size:clamp(1.9rem,5.5vw,3rem);color:var(--pink);text-align:center;margin-bottom:10px}
 .ss{text-align:center;color:var(--t3);font-size:.84rem;margin-bottom:40px;font-family:'Montserrat',sans-serif}
-
 .card{background:var(--c-bg);border:1px solid var(--c-b);border-radius:18px;transition:all .3s cubic-bezier(.4,0,.2,1)}
 .card:hover{background:var(--c-h);border-color:var(--c-hb);box-shadow:0 6px 24px rgba(255,107,157,.06);transform:translateY(-2px)}
-
-.btn{padding:12px 30px;font-family:'Comfortaa',cursive;font-size:.88rem;border:none;border-radius:13px;cursor:pointer;transition:all .25s;font-weight:400}
+.btn{padding:12px 30px;font-family:'Comfortaa',cursive;font-size:.88rem;border:none;border-radius:13px;cursor:pointer;transition:all .25s}
 .bp{background:linear-gradient(135deg,var(--pink),var(--deep));color:#fff;box-shadow:0 3px 16px rgba(255,107,157,.18)}
 .bp:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(255,107,157,.28)}
-.bg{background:linear-gradient(135deg,var(--gold),#ffaa00);color:var(--bg1);font-weight:700;box-shadow:0 3px 16px rgba(255,215,0,.18)}
-.bg:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(255,215,0,.28)}
+.bg-btn{background:linear-gradient(135deg,var(--gold),#ffaa00);color:var(--bg1);font-weight:700}
 .bo{background:transparent;border:1px solid rgba(255,107,157,.22);color:var(--pink-l)}
 .bo:hover{background:rgba(255,107,157,.08)}
 .bs{padding:7px 18px;font-size:.78rem;border-radius:10px}
 .btn:active{transform:scale(.95)!important}
-
 .m-input{width:100%;padding:12px 16px;font-family:'Comfortaa',cursive;font-size:.84rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;color:#fff;margin-bottom:12px;outline:none;transition:border .3s}
 .m-input:focus{border-color:rgba(255,107,157,.28)}
 .m-input::placeholder{color:var(--t4)}
-
-.toast{position:fixed;top:62px;left:50%;transform:translateX(-50%) translateY(-14px);padding:10px 20px;border-radius:13px;font-size:.8rem;z-index:10003;opacity:0;transition:all .3s;background:rgba(15,5,23,.92);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.05);color:var(--t2)}
+.toast{position:fixed;top:62px;left:50%;transform:translateX(-50%) translateY(-14px);padding:10px 20px;border-radius:13px;font-size:.8rem;z-index:100000;opacity:0;transition:all .3s;background:rgba(15,5,23,.92);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.05);color:var(--t2)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.ok{border-color:rgba(74,222,128,.15);color:#4ade80}
-
 .empty{text-align:center;padding:45px 20px;color:var(--t4)}
 .empty .ei{font-size:2.5rem;margin-bottom:10px;display:block;opacity:.4}
 
-/* MODALS */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);z-index:10002;display:none;align-items:center;justify-content:center;padding:18px}
 .modal.act{display:flex}
 .mbox{background:var(--bg2);border:1px solid var(--c-b);border-radius:22px;padding:32px;width:100%;max-width:460px;animation:pi .3s;max-height:88vh;overflow-y:auto}
@@ -133,10 +122,9 @@ section{padding:60px 18px;max-width:860px;margin:0 auto}
 .m-preview{width:100%;max-height:170px;object-fit:contain;border-radius:14px;margin-bottom:16px}
 .m-btns{display:flex;gap:10px;justify-content:center;margin-top:8px;flex-wrap:wrap}
 
-/* LIGHTBOX */
 .lb{position:fixed;inset:0;background:rgba(0,0,0,.94);backdrop-filter:blur(18px);z-index:10001;display:none;align-items:center;justify-content:center;flex-direction:column}
 .lb.act{display:flex}
-.lb img{max-width:92%;max-height:74vh;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.lb img{max-width:92%;max-height:74vh;border-radius:14px}
 .lb-cap{margin-top:14px;text-align:center}
 .lb-d{color:var(--gold);font-size:.78rem;opacity:.55}
 .lb-t{color:var(--pink-l);font-family:'Great Vibes',cursive;font-size:1.3rem;margin-top:3px}
@@ -146,7 +134,9 @@ section{padding:60px 18px;max-width:860px;margin:0 auto}
 .lb-n:hover{background:rgba(255,255,255,.1);color:#fff}
 .lb-n.p{left:10px}.lb-n.n{right:10px}
 
-/* === DASHBOARD === */
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* DASHBOARD */
 .dash-hi{text-align:center;margin-bottom:10px}
 .dash-hi h1{font-family:'Great Vibes',cursive;font-size:clamp(2rem,6.5vw,3.5rem);color:var(--pink);margin-bottom:6px}
 .dash-hi p{color:var(--t3);font-size:.9rem}
@@ -160,7 +150,6 @@ section{padding:60px 18px;max-width:860px;margin:0 auto}
 .dm-card .dm-n{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:700;color:var(--pink);display:block}
 .dm-card .dm-l{font-size:.72rem;color:var(--t3);margin-top:2px}
 .dm-card .dm-i{font-size:1rem;margin-bottom:4px;display:block;opacity:.5}
-
 .dash-feed{display:flex;flex-direction:column;gap:14px;margin-top:35px}
 .feed-card{padding:18px 20px}
 .feed-label{font-size:.68rem;color:var(--gold);opacity:.6;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;font-family:'Montserrat',sans-serif}
@@ -171,31 +160,25 @@ section{padding:60px 18px;max-width:860px;margin:0 auto}
 .march-h{min-height:65vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 18px}
 .march-t{font-family:'Great Vibes',cursive;font-size:clamp(2.8rem,9vw,6rem);background:linear-gradient(135deg,var(--pink),var(--gold),var(--lav),var(--pink));background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gs 5s ease infinite;line-height:1.1;margin-bottom:10px}
 .march-s{font-family:'Great Vibes',cursive;font-size:clamp(1.2rem,3.5vw,2.2rem);color:var(--t2);margin-bottom:22px;opacity:0;animation:fu 1.2s ease .4s forwards}
-.march-b{display:inline-block;padding:9px 26px;border:1px solid rgba(255,107,157,.22);border-radius:50px;font-size:.84rem;color:var(--t3);letter-spacing:3px;background:rgba(255,107,157,.03);opacity:0;animation:fu 1.2s ease .8s forwards}
-@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.march-b{display:inline-block;padding:9px 26px;border:1px solid rgba(255,107,157,.22);border-radius:50px;font-size:.84rem;color:var(--t3);letter-spacing:3px;opacity:0;animation:fu 1.2s ease .8s forwards}
 .garland{display:flex;justify-content:center;gap:5px;margin:18px 0;flex-wrap:wrap}
-
 .g-card{padding:42px 32px;text-align:center;border-color:rgba(255,107,157,.12)!important;background:linear-gradient(135deg,rgba(255,107,157,.05),rgba(201,24,74,.02))!important;position:relative;overflow:hidden}
-.g-card::after{content:'';position:absolute;inset:-1px;border-radius:18px;background:linear-gradient(135deg,rgba(255,107,157,.1),rgba(255,215,0,.06),rgba(201,160,247,.06));z-index:-1;animation:gs 8s ease infinite;background-size:300% 300%}
 .gt{font-family:'Montserrat',sans-serif;font-size:1rem;line-height:2.1;color:var(--t1)}
 .gt .hl{color:var(--pink);font-weight:600}
 .gt .nm{font-family:'Great Vibes',cursive;font-size:1.8rem;color:var(--gold)}
-
 .q-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
 .qc{padding:26px 20px;text-align:center}
 .qc .qi{font-size:2rem;margin-bottom:10px;display:block}
 .qc h3{font-family:'Montserrat',sans-serif;font-size:.95rem;color:var(--pink-l);margin-bottom:6px;font-weight:600}
-.qc p{font-size:.8rem;color:var(--t3);font-family:'Montserrat',sans-serif;line-height:1.5}
-
+.qc p{font-size:.8rem;color:var(--t3);font-family:'Montserrat',sans-serif}
 .tl{position:relative;padding-left:36px}
-.tl::before{content:'';position:absolute;left:13px;top:0;width:2px;height:100%;background:linear-gradient(to bottom,var(--pink),var(--lav),var(--gold),transparent);border-radius:1px}
+.tl::before{content:'';position:absolute;left:13px;top:0;width:2px;height:100%;background:linear-gradient(to bottom,var(--pink),var(--lav),var(--gold),transparent)}
 .tli{position:relative;margin-bottom:24px;padding:20px 22px;opacity:0;transform:translateX(24px);transition:all .5s cubic-bezier(.4,0,.2,1)}
 .tli.vis{opacity:1;transform:translateX(0)}
 .tli::before{content:'';position:absolute;left:-31px;top:24px;width:9px;height:9px;border-radius:50%;background:var(--pink);box-shadow:0 0 8px var(--pink-g)}
 .tli .te{font-size:1.3rem;margin-bottom:5px;display:block}
 .tli h3{font-family:'Montserrat',sans-serif;font-size:.95rem;color:var(--gold-s);margin-bottom:4px;font-weight:500}
 .tli p{font-family:'Montserrat',sans-serif;font-size:.84rem;color:var(--t2);line-height:1.6}
-
 .env-s{text-align:center;padding:45px 18px}
 .env{width:240px;height:155px;background:linear-gradient(135deg,#f5c6d0,#f0a0b8);border-radius:11px;position:relative;margin:0 auto;transition:transform .3s;box-shadow:0 10px 30px rgba(0,0,0,.18);cursor:pointer}
 .env:hover{transform:scale(1.04)}
@@ -205,24 +188,22 @@ section{padding:60px 18px;max-width:860px;margin:0 auto}
 .env-sl{position:absolute;top:33%;left:50%;transform:translateX(-50%);font-size:1.6rem;z-index:3;animation:hb 2s ease infinite;transition:opacity .5s}
 .env.op .env-sl{opacity:0}
 @keyframes hb{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.1)}}
-.env-hint{margin-top:12px;font-size:.75rem;color:var(--t4);animation:pu 2.5s ease infinite}
-@keyframes pu{0%,100%{opacity:.25}50%{opacity:.6}}
+.env-hint{margin-top:12px;font-size:.75rem;color:var(--t4)}
 .sec-msg{display:none;margin-top:24px;padding:26px}
 .sec-msg.show{display:block;animation:fu .7s ease}
 .sec-msg p{font-family:'Great Vibes',cursive;font-size:1.35rem;color:var(--pink);line-height:1.8}
-
 .poem-b{padding:32px 24px;min-height:200px;display:flex;align-items:center;justify-content:center}
 .ps{display:none;text-align:center;animation:fu .5s}
 .ps.act{display:block}
 .ps p{font-family:'Montserrat',sans-serif;font-size:.9rem;color:var(--t2);line-height:2.1;font-style:italic}
 .pd{display:flex;justify-content:center;gap:9px;margin-top:16px}
 .pd button{width:7px;height:7px;border-radius:50%;border:1.5px solid rgba(255,107,157,.3);background:transparent;cursor:pointer;transition:all .25s;padding:0}
-.pd button.act{background:var(--pink);border-color:var(--pink);width:20px;border-radius:4px;box-shadow:0 0 6px rgba(255,107,157,.25)}
+.pd button.act{background:var(--pink);border-color:var(--pink);width:20px;border-radius:4px}
 
 /* GALLERY */
-.uz{border:1.5px dashed rgba(255,107,157,.18);border-radius:20px;padding:32px;text-align:center;cursor:pointer;transition:all .3s;background:rgba(255,107,157,.01);margin-bottom:24px}
-.uz:hover{border-color:rgba(255,107,157,.3);background:rgba(255,107,157,.025)}
-.uz.dg{border-color:var(--gold);background:rgba(255,215,0,.025)}
+.uz{border:1.5px dashed rgba(255,107,157,.18);border-radius:20px;padding:32px;text-align:center;cursor:pointer;transition:all .3s;margin-bottom:24px}
+.uz:hover{border-color:rgba(255,107,157,.3)}
+.uz.dg{border-color:var(--gold)}
 .uz .ui{font-size:2rem;margin-bottom:8px;display:block;opacity:.45}
 .uz .ut{font-size:.9rem;color:var(--t2)}
 .uz .uh{font-size:.7rem;color:var(--t4);margin-top:3px}
@@ -232,11 +213,11 @@ section{padding:60px 18px;max-width:860px;margin:0 auto}
 .gi img{width:100%;height:230px;object-fit:cover;cursor:pointer;transition:transform .5s cubic-bezier(.4,0,.2,1)}
 .gi:hover img{transform:scale(1.04)}
 .gi-info{padding:12px 15px}
-.gi-d{font-size:.7rem;color:var(--gold);opacity:.55;margin-bottom:2px}
-.gi-c{font-family:'Montserrat',sans-serif;font-size:.82rem;color:var(--t2);line-height:1.4}
+.gi-d{font-size:.7rem;color:var(--gold);opacity:.55}
+.gi-c{font-family:'Montserrat',sans-serif;font-size:.82rem;color:var(--t2)}
 .gi-a{display:flex;justify-content:flex-end;padding:0 12px 10px}
 .gi-del{padding:4px 10px;font-size:.68rem;font-family:'Comfortaa',cursive;border:1px solid rgba(255,255,255,.05);background:transparent;color:var(--t4);border-radius:9px;cursor:pointer;transition:all .25s}
-.gi-del:hover{background:rgba(255,80,80,.08);color:#ff6b6b;border-color:rgba(255,80,80,.15)}
+.gi-del:hover{background:rgba(255,80,80,.08);color:#ff6b6b}
 
 /* DIARY */
 .diary-s{max-width:660px;margin:0 auto}
@@ -269,13 +250,12 @@ section{padding:60px 18px;max-width:860px;margin:0 auto}
 
 /* LOVE */
 .love-s{text-align:center;padding:45px 18px}
-.lv{font-family:'JetBrains Mono',monospace;font-size:clamp(2.8rem,9vw,5rem);font-weight:700;color:var(--pink);text-shadow:0 0 20px rgba(255,107,157,.12);cursor:pointer;user-select:none;transition:transform .15s}
+.lv{font-family:'JetBrains Mono',monospace;font-size:clamp(2.8rem,9vw,5rem);font-weight:700;color:var(--pink);cursor:pointer;user-select:none;transition:transform .15s}
 .lv:active{transform:scale(1.08)}
-.lv .lv-heart{font-family:sans-serif}
 
 /* ROULETTE */
 .rb{min-height:130px;display:flex;align-items:center;justify-content:center;padding:26px;margin:24px auto;max-width:460px}
-.rb.spin{border-color:rgba(255,215,0,.22)!important;box-shadow:0 0 24px rgba(255,215,0,.06)}
+.rb.spin{border-color:rgba(255,215,0,.22)!important}
 .rb p{font-family:'Great Vibes',cursive;font-size:clamp(1.1rem,3.5vw,1.6rem);color:var(--pink-l)}
 .rb .re{font-size:2.2rem;display:block;margin-bottom:6px}
 .it{display:inline-block;padding:4px 12px;margin:2px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.05);border-radius:16px;font-size:.72rem;color:var(--t3)}
@@ -307,9 +287,8 @@ section{padding:60px 18px;max-width:860px;margin:0 auto}
 .chat-input-row{display:flex;gap:8px}
 .chat-input{flex:1}
 .chat-who{display:flex;gap:8px;justify-content:center;margin-bottom:16px}
-.chat-who-btn{padding:8px 20px;border-radius:12px;font-family:'Comfortaa',cursive;font-size:.78rem;border:1px solid rgba(255,255,255,.08);background:transparent;color:var(--t3);cursor:pointer;transition:all .25s}
-.chat-who-btn.act{border-color:var(--pink);color:var(--pink-l);background:rgba(255,107,157,.06)}
-.chat-who-btn:hover{background:rgba(255,255,255,.04)}
+.cwb{padding:8px 20px;border-radius:12px;font-family:'Comfortaa',cursive;font-size:.78rem;border:1px solid rgba(255,255,255,.08);background:transparent;color:var(--t3);cursor:pointer;transition:all .25s}
+.cwb.act{border-color:var(--pink);color:var(--pink-l);background:rgba(255,107,157,.06)}
 
 /* PLAYLIST */
 .pl-list{display:flex;flex-direction:column;gap:10px}
@@ -321,14 +300,13 @@ section{padding:60px 18px;max-width:860px;margin:0 auto}
 .pl-item .pl-del{background:none;border:none;color:var(--t4);cursor:pointer;font-size:.8rem;transition:color .25s}
 .pl-item .pl-del:hover{color:#ff6b6b}
 
-/* GAME - TRUTH */
-.truth-card{min-height:200px;display:flex;align-items:center;justify-content:center;padding:32px;margin:28px auto;max-width:520px;text-align:center}
+/* GAMES */
+.truth-card{min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;margin:28px auto;max-width:520px;text-align:center}
 .truth-q{font-family:'Montserrat',sans-serif;font-size:clamp(1rem,3vw,1.25rem);color:var(--t1);line-height:1.7;transition:opacity .3s}
 .truth-cat{font-size:.68rem;color:var(--t3);margin-top:12px;text-transform:uppercase;letter-spacing:1px}
 .truth-filters{display:flex;justify-content:center;gap:8px;margin:20px 0;flex-wrap:wrap}
 .tf-btn{padding:6px 16px;border-radius:10px;font-family:'Comfortaa',cursive;font-size:.72rem;border:1px solid rgba(255,255,255,.08);background:transparent;color:var(--t3);cursor:pointer;transition:all .2s}
 .tf-btn.act{border-color:var(--pink);color:var(--pink-l);background:rgba(255,107,157,.06)}
-.tf-btn:hover{background:rgba(255,255,255,.04)}
 
 /* STATS */
 .sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin:32px 0}
@@ -350,7 +328,7 @@ section{padding:60px 18px;max-width:860px;margin:0 auto}
 @keyframes hf{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-110px) scale(.15)}}
 
 .music-btn{position:fixed;bottom:22px;right:22px;width:44px;height:44px;border-radius:50%;background:rgba(255,107,157,.1);backdrop-filter:blur(14px);border:1px solid rgba(255,107,157,.12);cursor:pointer;z-index:9988;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all .25s}
-.music-btn:hover{background:rgba(255,107,157,.16);transform:scale(1.06)}
+.music-btn:hover{transform:scale(1.06)}
 .music-btn.on{animation:mp 2s ease infinite}
 @keyframes mp{0%,100%{box-shadow:0 0 10px rgba(255,107,157,.12)}50%{box-shadow:0 0 20px rgba(255,107,157,.25)}}
 
@@ -359,24 +337,17 @@ section{padding:60px 18px;max-width:860px;margin:0 auto}
 .sd.off{background:#f87171;animation:none}
 @keyframes sp{0%,100%{opacity:1}50%{opacity:.3}}
 
-footer{text-align:center;padding:45px 18px 30px;border-top:1px solid rgba(255,255,255,.03)}
+footer{text-align:center;padding:45px 18px 100px;border-top:1px solid rgba(255,255,255,.03)}
 footer p{font-family:'Montserrat',sans-serif;font-size:.78rem;color:var(--t4);line-height:1.8}
 .fb{font-family:'Great Vibes',cursive;font-size:1.5rem;color:var(--pink);margin-bottom:8px}
 .fh{font-size:2rem;animation:hb 2s ease infinite;display:block;margin-bottom:10px}
 
 @media(max-width:640px){
-    .g-card{padding:28px 16px}
-    .q-grid{grid-template-columns:1fr}
-    .tl{padding-left:26px}.tli{padding:15px 16px}
-    section{padding:40px 13px}
-    .gg{grid-template-columns:1fr}
+    .g-card{padding:28px 16px}.q-grid{grid-template-columns:1fr}.tl{padding-left:26px}
+    section{padding:40px 13px}.gg,.wg{grid-template-columns:1fr}
     .cdg{gap:6px}.cdi{min-width:62px;padding:13px 8px}.cdn{font-size:1.8rem}
-    .mbox{padding:22px}
-    .ag{grid-template-columns:repeat(2,1fr)}
-    .sg{grid-template-columns:repeat(2,1fr)}
-    .wg{grid-template-columns:1fr}
-    .dash-mini{gap:8px}
-    .quick-bar{bottom:14px;padding:6px 10px;gap:5px}
+    .mbox{padding:22px}.ag{grid-template-columns:repeat(2,1fr)}.sg{grid-template-columns:repeat(2,1fr)}
+    .dash-mini{gap:8px}.quick-bar{bottom:14px;padding:6px 10px;gap:5px}
     .q-btn{width:40px;height:40px;font-size:1rem;border-radius:12px}
     .chat-msgs{height:300px}
 }
@@ -385,18 +356,21 @@ footer p{font-family:'Montserrat',sans-serif;font-size:.78rem;color:var(--t4);li
 <body>
 <div class="amb"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="orb o4"></div></div>
 
-<div class="intro" id="intro"><h1>Тима & Катя 💝</h1><p>Наше особенное место</p><button class="intro-btn" onclick="enter()">Открыть 🌸</button></div>
+<!-- INTRO — поверх всего -->
+<div class="intro" id="intro">
+    <h1>Тима & Катя 💝</h1>
+    <p>Наше особенное место</p>
+    <button class="intro-btn" onclick="enter()">Открыть 🌸</button>
+</div>
 
 <div class="particles" id="particles"></div>
 <canvas class="fw-cv" id="fwCv"></canvas>
 <div class="toast" id="toast"></div>
 
-<!-- TOPBAR -->
+<!-- Всё ниже скрыто до входа -->
 <div class="topbar" id="topbar" style="display:none"><button class="menu-btn" onclick="toggleSB()">☰</button><div class="topbar-title">Тима & Катя 💝</div><div class="topbar-right"></div></div>
-
-<!-- SIDEBAR -->
-<div class="sidebar-overlay" id="sbOverlay" onclick="toggleSB()"></div>
-<div class="sidebar" id="sidebar">
+<div class="sidebar-overlay" id="sbO" onclick="toggleSB()"></div>
+<div class="sidebar" id="sb">
     <div class="sb-header"><h2>Тима & Катя 💝</h2><p>Наш мир для двоих</p></div>
     <nav class="sb-nav">
         <div class="sb-item active" onclick="go('home')"><span class="sb-icon">🏠</span>Главная</div>
@@ -407,117 +381,50 @@ footer p{font-family:'Montserrat',sans-serif;font-size:.78rem;color:var(--t4);li
         <div class="sb-item" onclick="go('wishlist')"><span class="sb-icon">🎁</span>Желания</div>
         <div class="sb-item" onclick="go('capsule')"><span class="sb-icon">🕰️</span>Капсула</div>
         <div class="sb-item" onclick="go('chat')"><span class="sb-icon">💬</span>Чат<span class="sb-badge new">NEW</span></div>
-        <div class="sb-item" onclick="go('playlist')"><span class="sb-icon">🎵</span>Наши песни<span class="sb-badge new">NEW</span></div>
+        <div class="sb-item" onclick="go('playlist')"><span class="sb-icon">🎵</span>Песни<span class="sb-badge new">NEW</span></div>
         <div class="sb-item" onclick="go('games')"><span class="sb-icon">🎲</span>Игры<span class="sb-badge new">NEW</span></div>
         <div class="sb-item" onclick="go('fun')"><span class="sb-icon">✨</span>Развлечения</div>
         <div class="sb-item" onclick="go('stats')"><span class="sb-icon">📊</span>Статистика</div>
     </nav>
     <div class="sb-footer">С любовью 💕 2026</div>
 </div>
-
-<!-- QUICK ACTIONS -->
 <div class="quick-bar" id="qbar" style="display:none">
-    <button class="q-btn q1" onclick="qPhoto()" title="Фото">📸</button>
-    <button class="q-btn q2" onclick="qNote()" title="Запись">📝</button>
-    <button class="q-btn q3" onclick="qLove(event)" title="Сердечко">❤️</button>
-    <button class="q-btn q4" onclick="go('chat')" title="Чат">💬</button>
+    <button class="q-btn q1" onclick="qPhoto()">📸</button>
+    <button class="q-btn q2" onclick="qNote()">📝</button>
+    <button class="q-btn q3" onclick="qLove(event)">❤️</button>
+    <button class="q-btn q4" onclick="go('chat')">💬</button>
 </div>
-
-<!-- LIGHTBOX -->
-<div class="lb" id="lb"><button class="lb-x" onclick="closeLB()">✕</button><button class="lb-n p" onclick="lbN(-1)">‹</button><button class="lb-n n" onclick="lbN(1)">›</button><img id="lbI" src=""><div class="lb-cap"><div class="lb-d" id="lbD"></div><div class="lb-t" id="lbC"></div></div></div>
-
-<!-- MODALS -->
-<div class="modal" id="mPh"><div class="mbox"><h3>Добавить фото 📷</h3><img class="m-preview" id="mPrv" src="" style="display:none"><input type="text" class="m-input" id="mPhC" placeholder="Подпись..."><input type="date" class="m-input" id="mPhD"><div class="m-btns"><button class="btn bp" onclick="savePh()">Сохранить 💝</button><button class="btn bo" onclick="closeM('mPh')">Отмена</button></div></div></div>
-<div class="modal" id="mCap"><div class="mbox"><h3>Капсула 🕰️</h3><textarea class="dta" id="mCpT" placeholder="Письмо в будущее..."></textarea><label style="color:var(--t4);font-size:.75rem;display:block;margin-bottom:5px">Открыть после:</label><input type="date" class="m-input" id="mCpD"><div class="m-btns"><button class="btn bp" onclick="saveCap()">Запечатать 🔒</button><button class="btn bo" onclick="closeM('mCap')">Отмена</button></div></div></div>
-<div class="modal" id="mW"><div class="mbox"><h3>Желание 🎁</h3><input type="text" class="m-input" id="mWT" placeholder="Что хочется?"><select class="m-input" id="mWC" style="appearance:auto"><option value="🎁 Подарок">🎁 Подарок</option><option value="✈️ Путешествие">✈️ Путешествие</option><option value="🍽️ Ресторан">🍽️ Ресторан</option><option value="🎬 Развлечение">🎬 Развлечение</option><option value="💝 Мечта">💝 Мечта</option><option value="📚 Другое">📚 Другое</option></select><div class="m-btns"><button class="btn bp" onclick="saveW()">Добавить 💫</button><button class="btn bo" onclick="closeM('mW')">Отмена</button></div></div></div>
-<div class="modal" id="mSong"><div class="mbox"><h3>Добавить песню 🎵</h3><input type="text" class="m-input" id="mST" placeholder="Название — Исполнитель"><input type="text" class="m-input" id="mSL" placeholder="Ссылка (YouTube, Spotify...)"><input type="text" class="m-input" id="mSD" placeholder="Почему эта песня? 💭"><div class="m-btns"><button class="btn bp" onclick="saveSong()">Добавить 🎶</button><button class="btn bo" onclick="closeM('mSong')">Отмена</button></div></div></div>
-
 <div class="sync-i" id="syncI" style="display:none"><span class="sd" id="syncD"></span><span id="syncT">...</span></div>
-
-<!-- ====== MAIN ====== -->
-<div class="main" id="mainC">
-
-<!-- HOME -->
-<div class="page act" id="p-home">
-<section>
-    <div class="dash-hi"><h1>Тима & Катя 💕</h1><p>Добро пожаловать в наш мир</p></div>
-    <div class="dash-days"><div class="big" id="dDays">0</div><div class="dl">дней вместе</div><div class="ds" id="dDateI"></div></div>
-    <div class="dash-mini">
-        <div class="card dm-card" onclick="go('gallery')"><span class="dm-i">📸</span><span class="dm-n" id="dPh">0</span><span class="dm-l">фото</span></div>
-        <div class="card dm-card" onclick="go('diary')"><span class="dm-i">📝</span><span class="dm-n" id="dNo">0</span><span class="dm-l">записей</span></div>
-        <div class="card dm-card" onclick="go('fun')"><span class="dm-i">❤️</span><span class="dm-n" id="dLo">0</span><span class="dm-l">сердечек</span></div>
-        <div class="card dm-card" onclick="go('wishlist')"><span class="dm-i">🎁</span><span class="dm-n" id="dWi">0</span><span class="dm-l">желаний</span></div>
-    </div>
-    <div class="dash-feed" id="dFeed"></div>
-</section>
-</div>
-
-<!-- 8 MARCH -->
-<div class="page" id="p-march">
-    <div class="march-h"><div class="march-t">С 8 Марта, Катя!</div><div class="march-s">Самой прекрасной девушке</div><div class="march-b">✦ 8 МАРТА 2026 ✦</div></div>
-    <div class="garland" id="garl"></div>
-    <section><div class="st">Моё поздравление</div><div class="ss">От всего сердца</div><div class="card g-card"><div class="gt"><span class="nm">Катюша,</span><br><br>Сегодня <span class="hl">особенный день</span> — день красоты и нежности. Но для меня каждый день рядом с тобой — это праздник. 🌷<br><br>Ты — мой <span class="hl">солнечный лучик</span>, моя <span class="hl">тихая гавань</span> и <span class="hl">яркая звезда</span>. ✨<br><br>Спасибо за каждую улыбку и за то, что <span class="hl">наполняешь жизнь смыслом</span>. 💕<br><br>Будь <span class="hl">безгранично счастлива</span>. 🌸<br><br>Твой Тима ❤️</div></div></section>
-    <section><div class="st">Почему ты особенная</div><div class="q-grid"><div class="card qc"><span class="qi">🌺</span><h3>Красота</h3><p>Твоя душа сияет</p></div><div class="card qc"><span class="qi">💫</span><h3>Вдохновение</h3><p>С тобой хочу быть лучше</p></div><div class="card qc"><span class="qi">🦋</span><h3>Нежность</h3><p>Согревает в любой день</p></div><div class="card qc"><span class="qi">🔥</span><h3>Сила</h3><p>Невероятная сила духа</p></div><div class="card qc"><span class="qi">✨</span><h3>Уникальность</h3><p>Таких больше нет</p></div><div class="card qc"><span class="qi">🌙</span><h3>Магия</h3><p>Обычное → волшебное</p></div></div></section>
-    <section><div class="st">Строки для тебя</div><div class="card poem-b"><div class="ps act" data-p="0"><p>Весна приходит не с капелью,<br>Не с первым солнечным лучом —<br>Она приходит с нежной трелью<br>Твоих шагов за мой порог.<br><br>Ты — вся весна в одном дыханье. 🌷</p></div><div class="ps" data-p="1"><p>Когда ты рядом — мир светлее,<br>И звёзды ярче в вышине,<br>И я становлюсь чуть смелее.<br><br>Ты — самая красивая картина. 💐</p></div><div class="ps" data-p="2"><p>Не хватит слов, не хватит строчек,<br>Чтоб описать твою красу,<br>Ты — целый сад. Тебя люблю! 🌸</p></div></div><div class="pd"><button class="act" onclick="poem(0)"></button><button onclick="poem(1)"></button><button onclick="poem(2)"></button></div></section>
-    <section><div class="st">Мои пожелания</div><div class="tl"><div class="card tli"><span class="te">🌅</span><h3>Счастья</h3><p>Пусть каждое утро — с улыбки.</p></div><div class="card tli"><span class="te">💪</span><h3>Здоровья</h3><p>Энергии для всех планов.</p></div><div class="card tli"><span class="te">🎯</span><h3>Мечт</h3><p>Пусть все мечты сбудутся!</p></div><div class="card tli"><span class="te">🌈</span><h3>Ярких моментов</h3><p>Захватывающие мгновения.</p></div><div class="card tli"><span class="te">🤗</span><h3>Любви</h3><p>Люблю тебя! ❤️</p></div><div class="card tli"><span class="te">🦄</span><h3>Волшебства</h3><p>Чудеса и сказка!</p></div></div></section>
-    <section class="env-s"><div class="st">Секретное послание</div><div onclick="openEnv()"><div class="env" id="env"><div class="env-f"></div><div class="env-b"></div><span class="env-sl">💌</span></div><p class="env-hint">Нажми, чтобы открыть</p></div><div class="card sec-msg" id="secM"><p>Катя, ты — лучшее в моей жизни. 💖<br><br>Каждый день с тобой — подарок. 🌟<br><br>Ты делаешь мой мир прекрасным. 🦋<br><br>— Тима</p></div></section>
-</div>
-
-<!-- GALLERY -->
-<div class="page" id="p-gallery"><section><div class="st">Наши моменты</div><div class="ss">Фото синхронизируются в реальном времени</div><div class="uz" id="upZ" onclick="document.getElementById('fi').click()"><span class="ui">📷</span><div class="ut">Нажми или перетащи фото</div><div class="uh">JPG, PNG, WEBP</div></div><input type="file" id="fi" accept="image/*" multiple onchange="handleF(this.files)"><div class="gg" id="gGrid"></div><div class="empty" id="gE"><span class="ei">📸</span><p>Добавь первое фото!</p></div></section></div>
-
-<!-- DIARY -->
-<div class="page" id="p-diary"><section class="diary-s"><div class="st">Наш дневник</div><div class="ss">Записи видны вам обоим 💝</div><div class="card df"><textarea class="dta" id="nText" placeholder="Напиши что-нибудь... 💭"></textarea><div class="dr"><div class="ms"><button class="mb sel" onclick="selM(this,'🥰')">🥰</button><button class="mb" onclick="selM(this,'😍')">😍</button><button class="mb" onclick="selM(this,'🤗')">🤗</button><button class="mb" onclick="selM(this,'💕')">💕</button><button class="mb" onclick="selM(this,'🌸')">🌸</button><button class="mb" onclick="selM(this,'✨')">✨</button></div><button class="btn bp" onclick="addN()" style="margin-left:auto">💌</button></div></div><div class="nl" id="nList"></div></section></div>
-
-<!-- COUNTDOWN -->
-<div class="page" id="p-countdown"><section class="cds"><div class="st">Сколько мы вместе</div><div class="ss">Тима & Катя</div><div style="text-align:center;margin-bottom:24px"><input type="date" class="m-input" id="relD" style="width:auto;display:inline-block" onchange="saveRD()"></div><div class="cdg"><div class="card cdi"><span class="cdn" id="cD">0</span><span class="cdl">дней</span></div><div class="card cdi"><span class="cdn" id="cH">0</span><span class="cdl">часов</span></div><div class="card cdi"><span class="cdn" id="cMi">0</span><span class="cdl">минут</span></div><div class="card cdi"><span class="cdn" id="cS">0</span><span class="cdl">секунд</span></div></div><div style="margin-top:50px"><div class="st">Обратный отсчёт</div><div class="ss">Годовщины, поездки, праздники</div><div class="cdf"><input type="text" class="m-input" id="evN" placeholder="Событие 🎉"><input type="date" class="m-input" id="evD"><button class="btn bp" onclick="saveEv()">+</button></div><div id="evL" style="margin-top:20px;max-width:560px;margin-left:auto;margin-right:auto"></div></div></section></div>
-
-<!-- WISHLIST -->
-<div class="page" id="p-wishlist"><section><div class="st">Список желаний</div><div class="ss">Подарки, поездки, мечты 🎁</div><div style="text-align:center;margin-bottom:24px"><button class="btn bp" onclick="openM('mW')">Добавить ✨</button></div><div class="wg" id="wGrid"></div><div class="empty" id="wE"><span class="ei">🎁</span><p>Добавь первое желание!</p></div></section></div>
-
-<!-- CAPSULE -->
-<div class="page" id="p-capsule"><section><div class="st">Капсула времени</div><div class="ss">Письмо в будущее — откроется в указанную дату 🔒</div><div style="text-align:center;margin-bottom:24px"><button class="btn bp" onclick="openCapM()">Создать 🕰️</button></div><div id="capL"></div><div class="empty" id="capE"><span class="ei">🕰️</span><p>Создай первую капсулу!</p></div></section></div>
-
-<!-- CHAT -->
-<div class="page" id="p-chat"><section class="chat-box"><div class="st">Наш чат 💬</div><div class="ss">Сообщения видны обоим</div><div class="chat-who"><button class="chat-who-btn act" onclick="setChatUser('Тима',this)">Я — Тима</button><button class="chat-who-btn" onclick="setChatUser('Катя',this)">Я — Катя</button></div><div class="card chat-msgs" id="chatMsgs"></div><div class="chat-input-row"><input type="text" class="m-input chat-input" id="chatIn" placeholder="Написать..." style="margin:0" onkeydown="if(event.key==='Enter')sendMsg()"><button class="btn bp bs" onclick="sendMsg()">➤</button></div></section></div>
-
-<!-- PLAYLIST -->
-<div class="page" id="p-playlist"><section><div class="st">Наши песни 🎵</div><div class="ss">Музыка, которая связана с нами</div><div style="text-align:center;margin-bottom:24px"><button class="btn bp" onclick="openM('mSong')">Добавить песню 🎶</button></div><div class="pl-list" id="plList"></div><div class="empty" id="plE"><span class="ei">🎵</span><p>Добавь первую песню!</p></div></section></div>
-
-<!-- GAMES -->
-<div class="page" id="p-games">
-<section><div class="st">Правда или Правда 🔥</div><div class="ss">300+ вопросов для вас двоих</div>
-    <div class="truth-filters"><button class="tf-btn act" onclick="setTF('all',this)">Все</button><button class="tf-btn" onclick="setTF('light',this)">😊 Лёгкие</button><button class="tf-btn" onclick="setTF('deep',this)">💭 Глубокие</button><button class="tf-btn" onclick="setTF('fun',this)">😂 Смешные</button><button class="tf-btn" onclick="setTF('hot',this)">🔥 18+</button></div>
-    <div class="card truth-card" id="truthCard"><div class="truth-q" id="truthQ">Нажми кнопку чтобы начать!</div><div class="truth-cat" id="truthCat"></div></div>
-    <div style="text-align:center"><button class="btn bp" onclick="nextTruth()" style="padding:14px 40px;font-size:1rem">🎲 Следующий вопрос</button></div>
-</section>
-<section><div class="st">Куда пойдём? 🎲</div><div class="ss">Рулетка свиданий</div><div style="text-align:center"><div class="card rb" id="rB"><div><span class="re" id="rE">🎰</span><p id="rT">Нажми кнопку!</p></div></div><button class="btn bg" onclick="spin()">🎲 Крутить!</button><div style="margin-top:18px"><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:8px"><input type="text" class="m-input" id="ciIn" placeholder="Своя идея..." style="width:auto;min-width:170px;margin:0"><button class="btn bo bs" onclick="addCI()">+</button></div><div id="ciT"></div></div></div></section>
-</div>
-
-<!-- FUN -->
-<div class="page" id="p-fun">
-    <section style="text-align:center"><div class="st">Комплименты</div><div class="card" style="min-height:110px;display:flex;align-items:center;justify-content:center;padding:26px;margin:24px 0"><p id="compT" style="font-family:'Great Vibes',cursive;font-size:clamp(1.2rem,3.5vw,1.8rem);color:var(--pink-l);transition:opacity .4s">Нажми кнопку ✨</p></div><button class="btn bp" onclick="comp()">🌸 Комплимент</button></section>
-    <section style="text-align:center"><div class="st">Салют!</div><button class="btn bg" onclick="fw()">🎆 Запустить!</button></section>
-    <section class="love-s"><div class="st">Счётчик любви</div><div class="lv" id="lVal" onclick="addLove(event)"><span class="lv-heart">❤️</span> <span id="lNum">0</span></div><p style="color:var(--t4);margin-top:6px;font-size:.82rem">раз нажато с любовью</p></section>
-</div>
-
-<!-- STATS -->
-<div class="page" id="p-stats"><section><div class="st">Статистика</div><div class="sg" id="sGrid"></div></section><section><div class="st">Достижения</div><div class="ss">Разблокируйте вместе! 🏆</div><div class="ag" id="aGrid"></div></section></div>
-
-<footer><span class="fh">💝</span><p class="fb">Тима & Катя — навсегда ❤️</p><p>Наше особенное место • 2026</p></footer>
-</div>
-
 <button class="music-btn" id="mBtn" style="display:none" onclick="toggleMu()">🎵</button>
 
+<div class="lb" id="lb"><button class="lb-x" onclick="closeLB()">✕</button><button class="lb-n p" onclick="lbN(-1)">‹</button><button class="lb-n n" onclick="lbN(1)">›</button><img id="lbI" src=""><div class="lb-cap"><div class="lb-d" id="lbD"></div><div class="lb-t" id="lbC"></div></div></div>
+<div class="modal" id="mPh"><div class="mbox"><h3>Фото 📷</h3><img class="m-preview" id="mPrv" src="" style="display:none"><input type="text" class="m-input" id="mPhC" placeholder="Подпись..."><input type="date" class="m-input" id="mPhD"><div class="m-btns"><button class="btn bp" onclick="savePh()">💝</button><button class="btn bo" onclick="closeM('mPh')">Отмена</button></div></div></div>
+<div class="modal" id="mCap"><div class="mbox"><h3>Капсула 🕰️</h3><textarea class="dta" id="mCpT" placeholder="Письмо в будущее..."></textarea><label style="color:var(--t4);font-size:.75rem;display:block;margin-bottom:5px">Открыть после:</label><input type="date" class="m-input" id="mCpD"><div class="m-btns"><button class="btn bp" onclick="saveCap()">🔒</button><button class="btn bo" onclick="closeM('mCap')">Отмена</button></div></div></div>
+<div class="modal" id="mW"><div class="mbox"><h3>Желание 🎁</h3><input type="text" class="m-input" id="mWT" placeholder="Что хочется?"><select class="m-input" id="mWC" style="appearance:auto"><option value="🎁 Подарок">🎁 Подарок</option><option value="✈️ Путешествие">✈️ Путешествие</option><option value="🍽️ Ресторан">🍽️ Ресторан</option><option value="🎬 Развлечение">🎬 Развлечение</option><option value="💝 Мечта">💝 Мечта</option><option value="📚 Другое">📚 Другое</option></select><div class="m-btns"><button class="btn bp" onclick="saveW()">💫</button><button class="btn bo" onclick="closeM('mW')">Отмена</button></div></div></div>
+<div class="modal" id="mSong"><div class="mbox"><h3>Песня 🎵</h3><input type="text" class="m-input" id="mST" placeholder="Название — Исполнитель"><input type="text" class="m-input" id="mSL" placeholder="Ссылка (YouTube, Spotify)"><input type="text" class="m-input" id="mSD" placeholder="Почему эта песня? 💭"><div class="m-btns"><button class="btn bp" onclick="saveSong()">🎶</button><button class="btn bo" onclick="closeM('mSong')">Отмена</button></div></div></div>
+
+<div class="main" id="mainC">
+<!-- HOME --><div class="page act" id="p-home"><section><div class="dash-hi"><h1>Тима & Катя 💕</h1><p>Добро пожаловать в наш мир</p></div><div class="dash-days"><div class="big" id="dDays">0</div><div class="dl">дней вместе</div><div class="ds" id="dDateI"></div></div><div class="dash-mini"><div class="card dm-card" onclick="go('gallery')"><span class="dm-i">📸</span><span class="dm-n" id="dPh">0</span><span class="dm-l">фото</span></div><div class="card dm-card" onclick="go('diary')"><span class="dm-i">📝</span><span class="dm-n" id="dNo">0</span><span class="dm-l">записей</span></div><div class="card dm-card" onclick="go('fun')"><span class="dm-i">❤️</span><span class="dm-n" id="dLo">0</span><span class="dm-l">сердечек</span></div><div class="card dm-card" onclick="go('wishlist')"><span class="dm-i">🎁</span><span class="dm-n" id="dWi">0</span><span class="dm-l">желаний</span></div></div><div class="dash-feed" id="dFeed"></div></section></div>
+<!-- MARCH --><div class="page" id="p-march"><div class="march-h"><div class="march-t">С 8 Марта, Катя!</div><div class="march-s">Самой прекрасной девушке</div><div class="march-b">✦ 8 МАРТА 2026 ✦</div></div><div class="garland" id="garl"></div><section><div class="st">Моё поздравление</div><div class="ss">От всего сердца</div><div class="card g-card"><div class="gt"><span class="nm">Катюша,</span><br><br>Сегодня <span class="hl">особенный день</span> — день красоты и нежности. Для меня каждый день рядом с тобой — праздник. 🌷<br><br>Ты — мой <span class="hl">солнечный лучик</span>, моя <span class="hl">тихая гавань</span> и <span class="hl">яркая звезда</span>. ✨<br><br>Спасибо за каждую улыбку и за то, что <span class="hl">наполняешь жизнь смыслом</span>. 💕<br><br>Будь <span class="hl">безгранично счастлива</span>. 🌸<br><br>Твой Тима ❤️</div></div></section><section><div class="st">Почему ты особенная</div><div class="q-grid"><div class="card qc"><span class="qi">🌺</span><h3>Красота</h3><p>Душа сияет</p></div><div class="card qc"><span class="qi">💫</span><h3>Вдохновение</h3><p>Хочу быть лучше</p></div><div class="card qc"><span class="qi">🦋</span><h3>Нежность</h3><p>Согревает</p></div><div class="card qc"><span class="qi">🔥</span><h3>Сила</h3><p>Сила духа</p></div><div class="card qc"><span class="qi">✨</span><h3>Уникальность</h3><p>Одна такая</p></div><div class="card qc"><span class="qi">🌙</span><h3>Магия</h3><p>Всё волшебно</p></div></div></section><section><div class="st">Строки для тебя</div><div class="card poem-b"><div class="ps act" data-p="0"><p>Весна приходит не с капелью,<br>Не с первым солнечным лучом —<br>Она приходит с нежной трелью<br>Твоих шагов за мой порог. 🌷</p></div><div class="ps" data-p="1"><p>Когда ты рядом — мир светлее,<br>И звёзды ярче в вышине,<br>И я становлюсь чуть смелее.<br>Ты — самая красивая картина. 💐</p></div><div class="ps" data-p="2"><p>Не хватит слов и строчек,<br>Чтоб описать твою красу,<br>Ты — целый сад. Тебя люблю! 🌸</p></div></div><div class="pd"><button class="act" onclick="poem(0)"></button><button onclick="poem(1)"></button><button onclick="poem(2)"></button></div></section><section><div class="st">Пожелания</div><div class="tl"><div class="card tli"><span class="te">🌅</span><h3>Счастья</h3><p>Каждое утро — с улыбки.</p></div><div class="card tli"><span class="te">💪</span><h3>Здоровья</h3><p>Энергии для планов.</p></div><div class="card tli"><span class="te">🎯</span><h3>Мечт</h3><p>Пусть сбудутся!</p></div><div class="card tli"><span class="te">🌈</span><h3>Моментов</h3><p>Захватывающих.</p></div><div class="card tli"><span class="te">🤗</span><h3>Любви</h3><p>Люблю! ❤️</p></div><div class="card tli"><span class="te">🦄</span><h3>Волшебства</h3><p>Чудеса и сказка!</p></div></div></section><section class="env-s"><div class="st">Секретное послание</div><div onclick="openEnv()"><div class="env" id="env"><div class="env-f"></div><div class="env-b"></div><span class="env-sl">💌</span></div><p class="env-hint">Нажми</p></div><div class="card sec-msg" id="secM"><p>Катя, ты — лучшее в моей жизни. 💖<br><br>Каждый день с тобой — подарок. 🌟<br><br>— Тима</p></div></section></div>
+<!-- GALLERY --><div class="page" id="p-gallery"><section><div class="st">Наши моменты</div><div class="ss">Фото синхронизируются</div><div class="uz" id="upZ" onclick="document.getElementById('fi').click()"><span class="ui">📷</span><div class="ut">Нажми или перетащи</div><div class="uh">JPG, PNG, WEBP</div></div><input type="file" id="fi" accept="image/*" multiple onchange="handleF(this.files)"><div class="gg" id="gGrid"></div><div class="empty" id="gE"><span class="ei">📸</span><p>Добавь первое фото!</p></div></section></div>
+<!-- DIARY --><div class="page" id="p-diary"><section class="diary-s"><div class="st">Наш дневник</div><div class="ss">Записи видны обоим 💝</div><div class="card df"><textarea class="dta" id="nText" placeholder="Напиши... 💭"></textarea><div class="dr"><div class="ms"><button class="mb sel" onclick="selM(this,'🥰')">🥰</button><button class="mb" onclick="selM(this,'😍')">😍</button><button class="mb" onclick="selM(this,'🤗')">🤗</button><button class="mb" onclick="selM(this,'💕')">💕</button><button class="mb" onclick="selM(this,'🌸')">🌸</button><button class="mb" onclick="selM(this,'✨')">✨</button></div><button class="btn bp" onclick="addN()" style="margin-left:auto">💌</button></div></div><div class="nl" id="nList"></div></section></div>
+<!-- COUNTDOWN --><div class="page" id="p-countdown"><section class="cds"><div class="st">Сколько мы вместе</div><div class="ss">Тима & Катя</div><div style="text-align:center;margin-bottom:24px"><input type="date" class="m-input" id="relD" style="width:auto;display:inline-block" onchange="saveRD()"></div><div class="cdg"><div class="card cdi"><span class="cdn" id="cD">0</span><span class="cdl">дней</span></div><div class="card cdi"><span class="cdn" id="cH">0</span><span class="cdl">часов</span></div><div class="card cdi"><span class="cdn" id="cMi">0</span><span class="cdl">минут</span></div><div class="card cdi"><span class="cdn" id="cS">0</span><span class="cdl">секунд</span></div></div><div style="margin-top:50px"><div class="st">Обратный отсчёт</div><div class="ss">События</div><div class="cdf"><input type="text" class="m-input" id="evN" placeholder="Событие 🎉"><input type="date" class="m-input" id="evD"><button class="btn bp" onclick="saveEv()">+</button></div><div id="evL" style="margin-top:20px;max-width:560px;margin-left:auto;margin-right:auto"></div></div></section></div>
+<!-- WISHLIST --><div class="page" id="p-wishlist"><section><div class="st">Желания</div><div class="ss">Подарки, мечты 🎁</div><div style="text-align:center;margin-bottom:24px"><button class="btn bp" onclick="openM('mW')">Добавить ✨</button></div><div class="wg" id="wGrid"></div><div class="empty" id="wE"><span class="ei">🎁</span><p>Добавь первое!</p></div></section></div>
+<!-- CAPSULE --><div class="page" id="p-capsule"><section><div class="st">Капсула времени</div><div class="ss">Письмо в будущее 🔒</div><div style="text-align:center;margin-bottom:24px"><button class="btn bp" onclick="openCapM()">Создать 🕰️</button></div><div id="capL"></div><div class="empty" id="capE"><span class="ei">🕰️</span><p>Создай первую!</p></div></section></div>
+<!-- CHAT --><div class="page" id="p-chat"><section class="chat-box"><div class="st">Чат 💬</div><div class="ss">Сообщения видны обоим</div><div class="chat-who"><button class="cwb act" onclick="setCU('Тима',this)">Я — Тима</button><button class="cwb" onclick="setCU('Катя',this)">Я — Катя</button></div><div class="card chat-msgs" id="chatM"></div><div class="chat-input-row"><input type="text" class="m-input chat-input" id="chatIn" placeholder="Написать..." style="margin:0" onkeydown="if(event.key==='Enter')sendMsg()"><button class="btn bp bs" onclick="sendMsg()">➤</button></div></section></div>
+<!-- PLAYLIST --><div class="page" id="p-playlist"><section><div class="st">Наши песни 🎵</div><div class="ss">Музыка, связанная с нами</div><div style="text-align:center;margin-bottom:24px"><button class="btn bp" onclick="openM('mSong')">Добавить 🎶</button></div><div class="pl-list" id="plList"></div><div class="empty" id="plE"><span class="ei">🎵</span><p>Добавь первую!</p></div></section></div>
+<!-- GAMES --><div class="page" id="p-games"><section><div class="st">Правда или Правда 🔥</div><div class="ss">300+ вопросов</div><div class="truth-filters"><button class="tf-btn act" onclick="setTF('all',this)">Все</button><button class="tf-btn" onclick="setTF('light',this)">😊 Лёгкие</button><button class="tf-btn" onclick="setTF('deep',this)">💭 Глубокие</button><button class="tf-btn" onclick="setTF('fun',this)">😂 Смешные</button><button class="tf-btn" onclick="setTF('hot',this)">🔥 18+</button></div><div class="card truth-card" id="tCard"><div class="truth-q" id="tQ">Нажми кнопку!</div><div class="truth-cat" id="tCat"></div></div><div style="text-align:center"><button class="btn bp" onclick="nextT()" style="padding:14px 40px;font-size:1rem">🎲 Следующий</button></div></section><section><div class="st">Куда пойдём? 🎲</div><div class="ss">Рулетка свиданий</div><div style="text-align:center"><div class="card rb" id="rB"><div><span class="re" id="rE">🎰</span><p id="rT">Нажми!</p></div></div><button class="btn bg-btn" onclick="spin()">🎲 Крутить!</button><div style="margin-top:18px"><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:8px"><input type="text" class="m-input" id="ciIn" placeholder="Своя идея..." style="width:auto;min-width:170px;margin:0"><button class="btn bo bs" onclick="addCI()">+</button></div><div id="ciT"></div></div></div></section></div>
+<!-- FUN --><div class="page" id="p-fun"><section style="text-align:center"><div class="st">Комплименты</div><div class="card" style="min-height:110px;display:flex;align-items:center;justify-content:center;padding:26px;margin:24px 0"><p id="compT" style="font-family:'Great Vibes',cursive;font-size:clamp(1.2rem,3.5vw,1.8rem);color:var(--pink-l);transition:opacity .4s">Нажми ✨</p></div><button class="btn bp" onclick="comp()">🌸</button></section><section style="text-align:center"><div class="st">Салют!</div><button class="btn bg-btn" onclick="fw()">🎆 Запустить!</button></section><section class="love-s"><div class="st">Счётчик любви</div><div class="lv" id="lVal" onclick="addLove(event)">❤️ <span id="lNum">0</span></div><p style="color:var(--t4);margin-top:6px;font-size:.82rem">раз с любовью</p></section></div>
+<!-- STATS --><div class="page" id="p-stats"><section><div class="st">Статистика</div><div class="sg" id="sGrid"></div></section><section><div class="st">Достижения</div><div class="ss">Разблокируйте вместе! 🏆</div><div class="ag" id="aGrid"></div></section></div>
+<footer><span class="fh">💝</span><p class="fb">Тима & Катя — навсегда ❤️</p><p>2026</p></footer>
+</div>
 <script>
-// ===== FIREBASE =====
 firebase.initializeApp({apiKey:"AIzaSyDE2bid72G79lKtUAocThg2ewKm1xkMjlI",authDomain:"katya-app-6e039.firebaseapp.com",databaseURL:"https://katya-app-6e039-default-rtdb.europe-west1.firebasedatabase.app",projectId:"katya-app-6e039",storageBucket:"katya-app-6e039.firebasestorage.app",messagingSenderId:"797067432120",appId:"1:797067432120:web:8af5cf9586906aa44a644d"});
 const db=firebase.database();
 db.ref('.info/connected').on('value',s=>{document.getElementById('syncD').classList.toggle('off',!s.val());document.getElementById('syncT').textContent=s.val()?'Синхронизировано ✓':'Офлайн'});
 
-// NAV
-function toggleSB(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sbOverlay').classList.toggle('open')}
-function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('act'));document.getElementById('p-'+id).classList.add('act');document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));const items=document.querySelectorAll('.sb-item');const map={home:0,march:1,gallery:2,diary:3,countdown:4,wishlist:5,capsule:6,chat:7,playlist:8,games:9,fun:10,stats:11};if(map[id]!==undefined)items[map[id]].classList.add('active');document.getElementById('sidebar').classList.remove('open');document.getElementById('sbOverlay').classList.remove('open');scrollTo({top:0,behavior:'smooth'});if(id==='stats'){renderS();renderA()}if(id==='chat')scrollChat()}
+function toggleSB(){document.getElementById('sb').classList.toggle('open');document.getElementById('sbO').classList.toggle('open')}
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('act'));document.getElementById('p-'+id).classList.add('act');document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));const map={home:0,march:1,gallery:2,diary:3,countdown:4,wishlist:5,capsule:6,chat:7,playlist:8,games:9,fun:10,stats:11};const items=document.querySelectorAll('.sb-item');if(map[id]!==undefined&&items[map[id]])items[map[id]].classList.add('active');document.getElementById('sb').classList.remove('open');document.getElementById('sbO').classList.remove('open');scrollTo({top:0,behavior:'smooth'});if(id==='stats'){renderS();renderA()}if(id==='chat')setTimeout(()=>{document.getElementById('chatM').scrollTop=99999},200)}
 let lastSY=0;addEventListener('scroll',()=>{const t=document.getElementById('topbar');if(scrollY>lastSY&&scrollY>60)t.classList.add('hide');else t.classList.remove('hide');lastSY=scrollY});
 
 function toast(m,t){const e=document.getElementById('toast');e.textContent=m;e.className='toast show '+(t||'');setTimeout(()=>e.classList.remove('show'),2500)}
@@ -526,13 +433,20 @@ function closeM(id){document.getElementById(id).classList.remove('act')}
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 function fmtD(s){const m=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];const d=new Date(s);return`${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`}
 
-// ENTER
-function enter(){document.getElementById('intro').classList.add('hid');document.getElementById('mainC').classList.add('vis');document.getElementById('qbar').style.display='';document.getElementById('syncI').style.display='';document.getElementById('mBtn').style.display='';document.getElementById('topbar').style.display='';createPetals();createGarl();startObs();initFB()}
-function createPetals(){const c=document.getElementById('particles');['#ff6b9d','#ffc2d1','#e6b8f7','#ffd700','#ff9a9e'].forEach((col,ci)=>{for(let i=0;i<3;i++){setTimeout(()=>{const p=document.createElement('div');p.classList.add('petal');p.style.cssText=`left:${Math.random()*100}vw;background:${col};animation-duration:${Math.random()*9+7}s;animation-delay:${Math.random()*14}s;width:${Math.random()*7+4}px;height:${Math.random()*7+4}px;opacity:${Math.random()*.3+.12}`;c.appendChild(p)},(ci*3+i)*350)})}
+function enter(){
+    document.getElementById('intro').classList.add('hid');
+    document.getElementById('mainC').classList.add('vis');
+    document.getElementById('topbar').style.display='';
+    document.getElementById('qbar').style.display='';
+    document.getElementById('syncI').style.display='';
+    document.getElementById('mBtn').style.display='';
+    createPetals();createGarl();startObs();initFB();
+}
+
+function createPetals(){const c=document.getElementById('particles');['#ff6b9d','#ffc2d1','#e6b8f7','#ffd700','#ff9a9e'].forEach((col,ci)=>{for(let i=0;i<3;i++){setTimeout(()=>{const p=document.createElement('div');p.classList.add('petal');p.style.cssText=`left:${Math.random()*100}vw;background:${col};animation-duration:${Math.random()*9+7}s;animation-delay:${Math.random()*14}s;width:${Math.random()*7+4}px;height:${Math.random()*7+4}px;opacity:${Math.random()*.3+.1}`;c.appendChild(p)},(ci*3+i)*350)}})}
 function createGarl(){const g=document.getElementById('garl');const c=['#ff6b9d','#ffd700','#e6b8f7','#ff9a9e','#87CEEB','#7dd3c0'];for(let i=0;i<50;i++){const l=document.createElement('span');l.style.cssText=`width:6px;height:6px;border-radius:50%;display:inline-block;background:${c[i%c.length]};box-shadow:0 0 4px ${c[i%c.length]};animation:twinkle 2.5s ease infinite;animation-delay:${i*.1}s;margin:0 2px`;g.appendChild(l)}}
 function startObs(){const o=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('vis')})},{threshold:.1});document.querySelectorAll('.tli').forEach(i=>o.observe(i))}
 
-// DATA
 let photos=[],notes=[],wishes=[],capsules=[],events=[],loveCount=0,customIdeas=[],songs=[],msgs=[];
 
 function initFB(){
@@ -548,7 +462,6 @@ function initFB(){
     db.ref('messages').orderByChild('ts').limitToLast(100).on('value',s=>{const d=s.val();msgs=d?Object.entries(d).map(([k,v])=>({...v,_k:k})).sort((a,b)=>a.ts-b.ts):[];renderChat()});
 }
 
-// DASHBOARD
 function updDash(){
     const rd=document.getElementById('relD').value;
     if(rd){const d=Math.floor((new Date()-new Date(rd))/864e5);document.getElementById('dDays').textContent=d;document.getElementById('dDateI').textContent=`с ${fmtD(rd)}`}
@@ -556,40 +469,32 @@ function updDash(){
     document.getElementById('dNo').textContent=notes.length;
     document.getElementById('dLo').textContent=loveCount;
     document.getElementById('dWi').textContent=wishes.length;
-    // Feed
     const feed=document.getElementById('dFeed');feed.innerHTML='';
     const comps=["Ты — моё всё 🌸","Люблю тебя ❤️","Ты прекрасна ✨","Скучаю 💕","Ты лучшая 🌺","Моё солнышко ☀️","Ты — чудо 🦋","Невероятная 💫","Мне повезло 🍀","С тобой я дома 🏡"];
-    const todayComp=comps[Math.floor(new Date().getDate()*7.3)%comps.length];
-    feed.innerHTML+=`<div class="card feed-card"><div class="feed-label">💕 Комплимент дня</div><div class="feed-big">${todayComp}</div></div>`;
-    if(notes.length){const ln=notes[0];const d=new Date(ln.date);feed.innerHTML+=`<div class="card feed-card"><div class="feed-label">📝 Последняя запись</div><div class="feed-text">${esc(ln.text).substring(0,120)}${ln.text.length>120?'...':''}</div></div>`}
-    const upcoming=events.filter(e=>new Date(e.date)>new Date()).sort((a,b)=>new Date(a.date)-new Date(b.date));
-    if(upcoming.length){const ne=upcoming[0];const days=Math.floor((new Date(ne.date)-new Date())/864e5);feed.innerHTML+=`<div class="card feed-card"><div class="feed-label">🎉 Ближайшее событие</div><div class="feed-text"><strong>${esc(ne.name)}</strong> — через ${days} дн.</div></div>`}
+    feed.innerHTML+=`<div class="card feed-card"><div class="feed-label">💕 Комплимент дня</div><div class="feed-big">${comps[Math.floor(new Date().getDate()*7.3)%comps.length]}</div></div>`;
+    if(notes.length){const ln=notes[0];feed.innerHTML+=`<div class="card feed-card"><div class="feed-label">📝 Последняя запись</div><div class="feed-text">${esc(ln.text).substring(0,120)}${ln.text.length>120?'...':''}</div></div>`}
+    const up=events.filter(e=>new Date(e.date)>new Date()).sort((a,b)=>new Date(a.date)-new Date(b.date));
+    if(up.length){const ne=up[0];feed.innerHTML+=`<div class="card feed-card"><div class="feed-label">🎉 Ближайшее</div><div class="feed-text"><strong>${esc(ne.name)}</strong> — через ${Math.floor((new Date(ne.date)-new Date())/864e5)} дн.</div></div>`}
 }
 
-// QUICK ACTIONS
 function qPhoto(){document.getElementById('fi').click()}
 function qNote(){go('diary');setTimeout(()=>document.getElementById('nText').focus(),300)}
 function qLove(e){addLove(e)}
 
-// ENVELOPE
 function openEnv(){const e=document.getElementById('env'),m=document.getElementById('secM');e.classList.toggle('op');if(e.classList.contains('op'))setTimeout(()=>m.classList.add('show'),500);else m.classList.remove('show')}
 
-// POEMS
 let curP=0;
 function poem(i){document.querySelectorAll('.ps').forEach(s=>s.classList.remove('act'));document.querySelectorAll('.pd button').forEach(b=>b.classList.remove('act'));document.querySelector(`[data-p="${i}"]`).classList.add('act');document.querySelectorAll('.pd button')[i].classList.add('act');curP=i}
 setInterval(()=>{curP=(curP+1)%3;poem(curP)},8000);
 
-// COMPLIMENTS
-const compList=["Катя, ты прекраснее рассветов 🌅","Твоя улыбка лечит 💝","Ты — чудо ✨","Каждый взгляд — вселенная 🌌","Красивее всех цветов 🌺","Твой смех — мелодия 🎶","Рядом с тобой — счастье 🌸","Ты делаешь мир ярче 🌈","Твои глаза — океаны 🌊","Ты — солнце ☀️","Каждый момент — бриллиант 💎","Ты идеальна 🪄","Твоя доброта согревает 🔥","Ты — «вау» 🤩","Звёзды завидуют ⭐","Лучший подарок судьбы 🎁","Потрясающая 💫","Обычное → необыкновенное 🦋","Сердце бьётся чаще 💓","Мне повезло 🍀","Ты — мечта 🌠","С тобой я дома 🏡","Ты — моя вселенная 🌌","Благодарю за тебя 🙏"];
+const compList=["Катя, ты прекраснее рассветов 🌅","Твоя улыбка лечит 💝","Ты — чудо ✨","Каждый взгляд — вселенная 🌌","Красивее цветов 🌺","Смех — мелодия 🎶","Рядом — счастье 🌸","Мир ярче 🌈","Глаза — океаны 🌊","Солнце ☀️","Каждый момент — бриллиант 💎","Ты идеальна 🪄","Доброта согревает 🔥","Ты — «вау» 🤩","Звёзды завидуют ⭐","Подарок судьбы 🎁","Потрясающая 💫","Обычное → необыкновенное 🦋","Сердце бьётся чаще 💓","Мне повезло 🍀","Ты — мечта 🌠","С тобой — дома 🏡","Моя вселенная 🌌","Благодарю 🙏"];
 let lastCo=-1;
 function comp(){let i;do{i=Math.floor(Math.random()*compList.length)}while(i===lastCo);lastCo=i;const t=document.getElementById('compT');t.style.opacity=0;setTimeout(()=>{t.textContent=compList[i];t.style.opacity=1},300)}
 
-// LOVE
 function addLove(e){loveCount++;db.ref('loveCount').set(loveCount);spawnH(e.clientX||innerWidth/2,e.clientY||innerHeight/2);checkAch()}
 function spawnH(x,y){const h=document.createElement('div');h.classList.add('c-heart');h.textContent=['❤️','💕','💖','💗','💝','🌸','✨'][Math.floor(Math.random()*7)];h.style.left=x+'px';h.style.top=y+'px';document.body.appendChild(h);setTimeout(()=>h.remove(),1500)}
-document.addEventListener('click',e=>{if(e.target.closest('.love-s')||e.target.closest('button')||e.target.closest('input')||e.target.closest('textarea')||e.target.closest('select')||e.target.closest('.modal')||e.target.closest('.lb')||e.target.closest('.sidebar')||e.target.closest('.topbar')||e.target.closest('.quick-bar'))return;spawnH(e.clientX,e.clientY)});
+document.addEventListener('click',e=>{if(e.target.closest('.love-s')||e.target.closest('button')||e.target.closest('input')||e.target.closest('textarea')||e.target.closest('select')||e.target.closest('.modal')||e.target.closest('.lb')||e.target.closest('.sidebar')||e.target.closest('.topbar')||e.target.closest('.quick-bar')||e.target.closest('.intro'))return;spawnH(e.clientX,e.clientY)});
 
-// FIREWORKS
 const cvs=document.getElementById('fwCv'),cx=cvs.getContext('2d');let fp=[],fr=false;
 function rCvs(){cvs.width=innerWidth;cvs.height=innerHeight}rCvs();addEventListener('resize',rCvs);
 class P{constructor(x,y,c){this.x=x;this.y=y;this.c=c;const a=Math.random()*Math.PI*2,s=Math.random()*6+2;this.vx=Math.cos(a)*s;this.vy=Math.sin(a)*s;this.a=1;this.d=Math.random()*.014+.007;this.s=Math.random()*3+1}u(){this.x+=this.vx;this.y+=this.vy;this.vy+=.04;this.a-=this.d}dr(){cx.save();cx.globalAlpha=this.a;cx.fillStyle=this.c;cx.beginPath();cx.arc(this.x,this.y,this.s,0,Math.PI*2);cx.fill();cx.restore()}}
@@ -597,20 +502,18 @@ function mkFW(){const x=Math.random()*cvs.width,y=Math.random()*cvs.height*.5+50
 function aFW(){if(!fr&&!fp.length)return;cx.clearRect(0,0,cvs.width,cvs.height);fp=fp.filter(p=>p.a>0);fp.forEach(p=>{p.u();p.dr()});if(fp.length||fr)requestAnimationFrame(aFW)}
 function fw(){fr=true;let c=0;const iv=setInterval(()=>{mkFW();if(Math.random()>.4)mkFW();c++;if(c>18){clearInterval(iv);fr=false}},350);aFW()}
 
-// MUSIC
 let actx,playing=false,mInt;
 function toggleMu(){const b=document.getElementById('mBtn');if(!playing){if(!actx)actx=new(AudioContext||webkitAudioContext)();playMu();b.classList.add('on');b.textContent='🎶';playing=true}else{clearInterval(mInt);b.classList.remove('on');b.textContent='🎵';playing=false}}
 function pNo(f,s,d,t='sine'){const o=actx.createOscillator(),g=actx.createGain();o.type=t;o.frequency.value=f;g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(.035,s+.05);g.gain.exponentialRampToValueAtTime(.001,s+d);o.connect(g);g.connect(actx.destination);o.start(s);o.stop(s+d)}
 function playMu(){const n=[523.25,587.33,659.25,698.46,783.99,659.25,523.25,587.33,659.25,523.25,493.88,440,392,440,493.88,523.25,587.33,659.25,783.99,880,783.99,659.25,587.33,523.25];function p(){if(!playing)return;const now=actx.currentTime;n.forEach((f,i)=>{pNo(f,now+i*.35,.5);pNo(f*.5,now+i*.35,.6,'triangle')})}p();mInt=setInterval(()=>{if(playing)p()},n.length*350+500)}
 
-// GALLERY
 let pendF=null,curLB=0;
 const uz=document.getElementById('upZ');
 uz.addEventListener('dragover',e=>{e.preventDefault();uz.classList.add('dg')});
 uz.addEventListener('dragleave',()=>uz.classList.remove('dg'));
 uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('dg');handleF(e.dataTransfer.files)});
 function handleF(f){for(const fi of f){if(!fi.type.startsWith('image/'))continue;const r=new FileReader();r.onload=e=>{pendF=e.target.result;document.getElementById('mPrv').src=pendF;document.getElementById('mPrv').style.display='block';document.getElementById('mPhD').value=new Date().toISOString().split('T')[0];document.getElementById('mPhC').value='';openM('mPh')};r.readAsDataURL(fi);break}}
-function savePh(){if(!pendF)return;db.ref('photos').push({src:pendF,caption:document.getElementById('mPhC').value||'💕',date:document.getElementById('mPhD').value||new Date().toISOString().split('T')[0],id:Date.now()});closeM('mPh');pendF=null;toast('Фото добавлено! 📸','ok');checkAch()}
+function savePh(){if(!pendF)return;db.ref('photos').push({src:pendF,caption:document.getElementById('mPhC').value||'💕',date:document.getElementById('mPhD').value||new Date().toISOString().split('T')[0],id:Date.now()});closeM('mPh');pendF=null;toast('Фото! 📸','ok');checkAch()}
 function delPh(k){if(!confirm('Удалить?'))return;db.ref('photos/'+k).remove()}
 function renderGal(){const g=document.getElementById('gGrid'),e=document.getElementById('gE');g.innerHTML='';if(!photos.length){e.style.display='block';return}e.style.display='none';photos.forEach((p,i)=>{const d=document.createElement('div');d.className='card gi';d.innerHTML=`<img src="${p.src}" onclick="openLB(${i})"><div class="gi-info"><div class="gi-d">📅 ${fmtD(p.date)}</div><div class="gi-c">${esc(p.caption)}</div></div><div class="gi-a"><button class="gi-del" onclick="delPh('${p._k}')">🗑️</button></div>`;g.appendChild(d)})}
 function openLB(i){curLB=i;updLB();document.getElementById('lb').classList.add('act')}
@@ -619,14 +522,12 @@ function closeLB(){document.getElementById('lb').classList.remove('act')}
 function lbN(d){curLB+=d;if(curLB<0)curLB=photos.length-1;if(curLB>=photos.length)curLB=0;updLB()}
 document.getElementById('lb').addEventListener('click',e=>{if(e.target===document.getElementById('lb'))closeLB()});
 
-// DIARY
 let mood='🥰';
 function selM(b,m){document.querySelectorAll('.mb').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');mood=m}
 function addN(){const t=document.getElementById('nText').value.trim();if(!t)return;db.ref('notes').push({text:t,mood,date:new Date().toISOString(),id:Date.now()});document.getElementById('nText').value='';toast('Записано! 📝','ok');checkAch()}
 function delN(k){db.ref('notes/'+k).remove()}
-function renderN(){const l=document.getElementById('nList');l.innerHTML='';if(!notes.length){l.innerHTML='<div class="empty"><span class="ei">📝</span><p>Пока пусто</p></div>';return}notes.forEach(n=>{const c=document.createElement('div');c.className='card nc';const d=new Date(n.date);c.innerHTML=`<button class="nx" onclick="delN('${n._k}')">✕</button><div class="nh"><span class="nd">${d.getDate().toString().padStart(2,'0')}.${(d.getMonth()+1).toString().padStart(2,'0')}.${d.getFullYear()} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}</span><span class="nm2">${n.mood}</span></div><div class="nb">${esc(n.text)}</div>`;l.appendChild(c)})}
+function renderN(){const l=document.getElementById('nList');l.innerHTML='';if(!notes.length){l.innerHTML='<div class="empty"><span class="ei">📝</span><p>Пусто</p></div>';return}notes.forEach(n=>{const c=document.createElement('div');c.className='card nc';const d=new Date(n.date);c.innerHTML=`<button class="nx" onclick="delN('${n._k}')">✕</button><div class="nh"><span class="nd">${d.getDate().toString().padStart(2,'0')}.${(d.getMonth()+1).toString().padStart(2,'0')}.${d.getFullYear()} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}</span><span class="nm2">${n.mood}</span></div><div class="nb">${esc(n.text)}</div>`;l.appendChild(c)})}
 
-// COUNTDOWN
 let cInt;
 function saveRD(){const d=document.getElementById('relD').value;if(d)db.ref('relationshipDate').set(d)}
 function startTC(){if(cInt)clearInterval(cInt);const sd=new Date(document.getElementById('relD').value);function u(){const n=new Date(),df=n-sd;if(df<0)return;document.getElementById('cD').textContent=Math.floor(df/864e5);document.getElementById('cH').textContent=Math.floor((df%864e5)/36e5);document.getElementById('cMi').textContent=Math.floor((df%36e5)/6e4);document.getElementById('cS').textContent=Math.floor((df%6e4)/1e3)}u();cInt=setInterval(u,1000)}
@@ -635,87 +536,71 @@ function delEv(k){db.ref('events/'+k).remove()}
 function renderEv(){const c=document.getElementById('evL');c.innerHTML='';events.forEach(ev=>{const df=new Date(ev.date)-new Date();let ts;if(df<=0)ts='🎉 Наступило!';else ts=`${Math.floor(df/864e5)} дн. ${Math.floor((df%864e5)/36e5)} ч.`;const cd=document.createElement('div');cd.className='card nc';cd.innerHTML=`<button class="nx" onclick="delEv('${ev._k}')">✕</button><div class="nh"><span class="nd">📅 ${fmtD(ev.date)}</span></div><div class="nb"><strong>${esc(ev.name)}</strong><br><span style="color:var(--pink)">⏰ ${ts}</span></div>`;c.appendChild(cd)})}
 setInterval(renderEv,60000);
 
-// WISHLIST
 function saveW(){const t=document.getElementById('mWT').value.trim(),c=document.getElementById('mWC').value;if(!t)return;db.ref('wishes').push({title:t,category:c,completed:false,id:Date.now()});document.getElementById('mWT').value='';closeM('mW');toast('Добавлено! 🎁','ok');checkAch()}
 function togW(k,c){db.ref('wishes/'+k+'/completed').set(!c)}
 function delW(k){db.ref('wishes/'+k).remove()}
 function renderWL(){const g=document.getElementById('wGrid'),e=document.getElementById('wE');g.innerHTML='';if(!wishes.length){e.style.display='block';return}e.style.display='none';wishes.forEach(w=>{const c=document.createElement('div');c.className=`card wc ${w.completed?'dn':''}`;c.innerHTML=`<button class="wck" onclick="togW('${w._k}',${w.completed})">${w.completed?'✅':'☐'}</button><button class="nx" onclick="delW('${w._k}')">✕</button><div class="wcat">${w.category}</div><div class="wt">${esc(w.title)}</div>`;g.appendChild(c)})}
 
-// CAPSULE
 function openCapM(){openM('mCap');const d=new Date();d.setMonth(d.getMonth()+6);document.getElementById('mCpD').value=d.toISOString().split('T')[0]}
 function saveCap(){const t=document.getElementById('mCpT').value.trim(),d=document.getElementById('mCpD').value;if(!t||!d)return;db.ref('capsules').push({text:t,openDate:d,createdDate:new Date().toISOString(),id:Date.now()});document.getElementById('mCpT').value='';closeM('mCap');toast('Создано! 🕰️','ok');checkAch()}
 function delCap(k){if(!confirm('Удалить?'))return;db.ref('capsules/'+k).remove()}
 function renderCap(){const c=document.getElementById('capL'),e=document.getElementById('capE');c.innerHTML='';if(!capsules.length){e.style.display='block';return}e.style.display='none';capsules.forEach(cp=>{const now=new Date(),op=new Date(cp.openDate),isO=now>=op;const cd=document.createElement('div');cd.className='card cpc';if(isO){cd.innerHTML=`<button class="nx" onclick="delCap('${cp._k}')">✕</button><div class="nh"><span class="nd">Создано: ${fmtD(cp.createdDate.split('T')[0])}</span><span class="nm2">📬</span></div><div class="nb">${esc(cp.text)}</div>`}else{cd.innerHTML=`<button class="nx" onclick="delCap('${cp._k}')">✕</button><div class="cpl"><span class="cli">🔒</span><p>Откроется <strong style="color:var(--gold)">${fmtD(cp.openDate)}</strong><br><span style="color:var(--pink)">Через ${Math.floor((op-now)/864e5)} дн.</span></p></div>`}c.appendChild(cd)})}
 
-// CHAT
 let chatUser='Тима';
-function setChatUser(u,btn){chatUser=u;document.querySelectorAll('.chat-who-btn').forEach(b=>b.classList.remove('act'));btn.classList.add('act')}
+function setCU(u,btn){chatUser=u;document.querySelectorAll('.cwb').forEach(b=>b.classList.remove('act'));btn.classList.add('act')}
 function sendMsg(){const t=document.getElementById('chatIn').value.trim();if(!t)return;db.ref('messages').push({text:t,user:chatUser,ts:Date.now()});document.getElementById('chatIn').value=''}
-function renderChat(){const c=document.getElementById('chatMsgs');c.innerHTML='';msgs.forEach(m=>{const d=document.createElement('div');const isMe=m.user===chatUser;d.className=`chat-msg ${isMe?'me':'them'}`;const t=new Date(m.ts);d.innerHTML=`<div class="cm-name">${m.user}</div>${esc(m.text)}<div class="cm-time">${t.getHours().toString().padStart(2,'0')}:${t.getMinutes().toString().padStart(2,'0')}</div>`;c.appendChild(d)});c.scrollTop=c.scrollHeight}
-function scrollChat(){setTimeout(()=>{const c=document.getElementById('chatMsgs');c.scrollTop=c.scrollHeight},100)}
+function renderChat(){const c=document.getElementById('chatM');c.innerHTML='';msgs.forEach(m=>{const d=document.createElement('div');const isMe=m.user===chatUser;d.className=`chat-msg ${isMe?'me':'them'}`;const t=new Date(m.ts);d.innerHTML=`<div class="cm-name">${m.user}</div>${esc(m.text)}<div class="cm-time">${t.getHours().toString().padStart(2,'0')}:${t.getMinutes().toString().padStart(2,'0')}</div>`;c.appendChild(d)});c.scrollTop=c.scrollHeight}
 
-// PLAYLIST
-function saveSong(){const t=document.getElementById('mST').value.trim(),l=document.getElementById('mSL').value.trim(),d=document.getElementById('mSD').value.trim();if(!t)return;db.ref('songs').push({title:t,link:l,desc:d||'',id:Date.now()});document.getElementById('mST').value='';document.getElementById('mSL').value='';document.getElementById('mSD').value='';closeM('mSong');toast('Песня добавлена! 🎵','ok')}
+function saveSong(){const t=document.getElementById('mST').value.trim(),l=document.getElementById('mSL').value.trim(),d=document.getElementById('mSD').value.trim();if(!t)return;db.ref('songs').push({title:t,link:l,desc:d||'',id:Date.now()});document.getElementById('mST').value='';document.getElementById('mSL').value='';document.getElementById('mSD').value='';closeM('mSong');toast('Добавлено! 🎵','ok')}
 function delSong(k){db.ref('songs/'+k).remove()}
 function renderPL(){const l=document.getElementById('plList'),e=document.getElementById('plE');l.innerHTML='';if(!songs.length){e.style.display='block';return}e.style.display='none';songs.forEach(s=>{const d=document.createElement('div');d.className='card pl-item';d.innerHTML=`<span class="pl-emoji">🎵</span><div class="pl-info"><div class="pl-title">${s.link?`<a href="${esc(s.link)}" target="_blank" style="color:var(--pink-l);text-decoration:none">${esc(s.title)}</a>`:esc(s.title)}</div>${s.desc?`<div class="pl-desc">${esc(s.desc)}</div>`:''}</div><button class="pl-del" onclick="delSong('${s._k}')">✕</button>`;l.appendChild(d)})}
 
-// ROULETTE
-const defI=[{e:'🍕',t:'Пицца и кино'},{e:'🚶',t:'Прогулка в парке'},{e:'🍽️',t:'Новый ресторан'},{e:'🎬',t:'Кино'},{e:'🎨',t:'Мастер-класс'},{e:'🧁',t:'Испечь вместе'},{e:'🎮',t:'Настолки'},{e:'📸',t:'Фотосессия'},{e:'🌅',t:'Закат'},{e:'🛁',t:'Спа-вечер'},{e:'📖',t:'Читать вместе'},{e:'🎤',t:'Караоке'},{e:'🚗',t:'За город'},{e:'🎡',t:'Аттракционы'},{e:'☕',t:'Уютное кафе'},{e:'🌃',t:'Ночная прогулка'},{e:'🏊',t:'Бассейн'},{e:'🎪',t:'Концерт'},{e:'🧘',t:'Йога'},{e:'🎳',t:'Боулинг'},{e:'🏔️',t:'Поход'},{e:'🛍️',t:'Шоппинг'},{e:'🎭',t:'Театр'},{e:'🍣',t:'Суши'},{e:'🎯',t:'Квест'},{e:'🖼️',t:'Музей'},{e:'🍳',t:'Готовить ужин'},{e:'🌊',t:'К воде'},{e:'🎠',t:'Зоопарк'},{e:'🧗',t:'Скалодром'},{e:'🚴',t:'Велопрогулка'},{e:'🎧',t:'Танцы дома'},{e:'🏰',t:'Экскурсия'},{e:'🎂',t:'Торт вместе'},{e:'📺',t:'Сериалы'},{e:'🌻',t:'Пикник'},{e:'💆',t:'Массаж'},{e:'🌮',t:'Стрит-фуд'},{e:'🔭',t:'Звёзды'},{e:'🎸',t:'Живая музыка'}];
+const defI=[{e:'🍕',t:'Пицца и кино'},{e:'🚶',t:'Прогулка в парке'},{e:'🍽️',t:'Новый ресторан'},{e:'🎬',t:'Кино'},{e:'🎨',t:'Мастер-класс'},{e:'🧁',t:'Испечь вместе'},{e:'🎮',t:'Настолки'},{e:'📸',t:'Фотосессия'},{e:'🌅',t:'Закат'},{e:'🛁',t:'Спа-вечер'},{e:'📖',t:'Читать'},{e:'🎤',t:'Караоке'},{e:'🚗',t:'За город'},{e:'🎡',t:'Аттракционы'},{e:'☕',t:'Кафе'},{e:'🌃',t:'Ночная прогулка'},{e:'🏊',t:'Бассейн'},{e:'🎪',t:'Концерт'},{e:'🧘',t:'Йога'},{e:'🎳',t:'Боулинг'},{e:'🏔️',t:'Поход'},{e:'🛍️',t:'Шоппинг'},{e:'🎭',t:'Театр'},{e:'🍣',t:'Суши'},{e:'🎯',t:'Квест'},{e:'🖼️',t:'Музей'},{e:'🍳',t:'Готовить ужин'},{e:'🌊',t:'К воде'},{e:'🎠',t:'Зоопарк'},{e:'🧗',t:'Скалодром'},{e:'🚴',t:'Велопрогулка'},{e:'🎧',t:'Танцы дома'},{e:'🏰',t:'Экскурсия'},{e:'🎂',t:'Торт вместе'},{e:'📺',t:'Сериалы'},{e:'🌻',t:'Пикник'},{e:'💆',t:'Массаж'},{e:'🌮',t:'Стрит-фуд'},{e:'🔭',t:'Звёзды'},{e:'🎸',t:'Живая музыка'}];
 function allI(){return[...defI,...customIdeas.map(i=>({e:'💡',t:i.text}))]}
 function spin(){const ideas=allI(),box=document.getElementById('rB'),em=document.getElementById('rE'),tx=document.getElementById('rT');box.classList.add('spin');let c=0;const total=45;function tick(){if(c>=total){box.classList.remove('spin');const f=ideas[Math.floor(Math.random()*ideas.length)];em.textContent=f.e;tx.textContent=f.t;return}const r=ideas[Math.floor(Math.random()*ideas.length)];em.textContent=r.e;tx.textContent=r.t;c++;setTimeout(tick,50+c*c*1.8)}tick()}
 function addCI(){const v=document.getElementById('ciIn').value.trim();if(!v)return;db.ref('customIdeas').push({text:v,id:Date.now()});document.getElementById('ciIn').value=''}
 function rmCI(k){db.ref('customIdeas/'+k).remove()}
 function renderCI(){const c=document.getElementById('ciT');c.innerHTML='';customIdeas.forEach(i=>{c.innerHTML+=`<span class="it">${esc(i.text)} <span class="ri" onclick="rmCI('${i._k}')">✕</span></span>`})}
 
-// ===== TRUTH OR TRUTH - 300+ QUESTIONS =====
-const truthQs=[
-// 😊 ЛЁГКИЕ (100)
-{q:"Какое первое впечатление у тебя было обо мне?",c:"light"},{q:"Какой наш лучший совместный момент?",c:"light"},{q:"Что тебе больше всего нравится в наших отношениях?",c:"light"},{q:"Какая моя привычка тебе нравится больше всего?",c:"light"},{q:"Если бы мы были героями фильма, какого?",c:"light"},{q:"Какую суперспособность ты бы мне дал(а)?",c:"light"},{q:"Какое моё выражение лица тебе нравится больше всего?",c:"light"},{q:"Какой подарок от меня запомнился больше всего?",c:"light"},{q:"Что бы ты хотел(а) делать со мной каждый день?",c:"light"},{q:"Какая наша общая песня?",c:"light"},
-{q:"Опиши меня тремя словами",c:"light"},{q:"Какое место ты хочешь посетить со мной?",c:"light"},{q:"Какой мой наряд тебе нравится больше всего?",c:"light"},{q:"Что ты думаешь, когда просыпаешься рядом со мной?",c:"light"},{q:"Какое животное я тебе напоминаю?",c:"light"},{q:"Если бы ты мог(ла) изменить одну вещь в нашем первом свидании?",c:"light"},{q:"Какая моя шутка тебе запомнилась?",c:"light"},{q:"Что бы ты приготовил(а) мне на ужин?",c:"light"},{q:"Какой фильм ты хочешь пересмотреть со мной?",c:"light"},{q:"Что тебе больше нравится: обнимашки или поцелуи?",c:"light"},
-{q:"Какой запах ассоциируется со мной?",c:"light"},{q:"Какое мороженое ты бы купил(а) для нас?",c:"light"},{q:"Что ты чувствуешь когда я держу тебя за руку?",c:"light"},{q:"Какая наша лучшая совместная фотография?",c:"light"},{q:"Если бы мы завели питомца, кого?",c:"light"},{q:"Какой праздник ты хочешь провести со мной?",c:"light"},{q:"Что ты любишь делать когда мы вместе дома?",c:"light"},{q:"Какая погода ассоциируется с нашими отношениями?",c:"light"},{q:"Какой цвет напоминает тебе о нас?",c:"light"},{q:"Что бы ты написал(а) обо мне в книге?",c:"light"},
-{q:"Какое время дня ты больше всего любишь проводить со мной?",c:"light"},{q:"Помнишь наш первый разговор?",c:"light"},{q:"Какой комплимент от меня запомнился?",c:"light"},{q:"Что ты делаешь когда скучаешь по мне?",c:"light"},{q:"Какую нашу традицию ты любишь?",c:"light"},{q:"Если бы у нас был общий плейлист из 3 песен?",c:"light"},{q:"Какой сезон года лучше для наших свиданий?",c:"light"},{q:"Ты жаворонок или сова в отношениях?",c:"light"},{q:"Какой emoji описывает наши отношения?",c:"light"},{q:"Что ты рассказываешь друзьям обо мне?",c:"light"},
-{q:"Какой мой талант тебя удивляет?",c:"light"},{q:"Что ты хочешь попробовать вместе впервые?",c:"light"},{q:"Какое кафе/ресторан ассоциируется с нами?",c:"light"},{q:"Помнишь момент когда понял(а) что влюбился/влюбилась?",c:"light"},{q:"Какое прозвище ты бы мне дал(а)?",c:"light"},{q:"Какую настольную игру ты хочешь со мной сыграть?",c:"light"},{q:"Что ты ценишь в нашем общении?",c:"light"},{q:"Какой вид спорта ты бы попробовал(а) со мной?",c:"light"},{q:"Если бы мы открыли бизнес вместе, какой?",c:"light"},{q:"Какой десерт символизирует наши отношения?",c:"light"},
-{q:"Что бы ты изменил(а) в нашем первом поцелуе?",c:"light"},{q:"Какую страну ты хочешь посетить со мной первой?",c:"light"},{q:"Что тебя привлекло во мне первым?",c:"light"},{q:"Какая моя черта характера тебе нравится?",c:"light"},{q:"Самый смешной момент в наших отношениях?",c:"light"},{q:"Какой подарок ты мечтаешь получить от меня?",c:"light"},{q:"Ты бы хотел(а) прожить со мной один день наоборот?",c:"light"},{q:"Какую роль я играю в твоей жизни?",c:"light"},{q:"Что бы ты сделал(а) если бы мы встретились на 5 лет раньше?",c:"light"},{q:"Какая наша лучшая поездка?",c:"light"},
-{q:"Ты веришь в нашу судьбу?",c:"light"},{q:"Какой момент ты хочешь пережить заново?",c:"light"},{q:"Что тебя заставляет улыбаться когда думаешь обо мне?",c:"light"},{q:"Какое хобби ты хочешь разделить со мной?",c:"light"},{q:"Ты помнишь что я был(а) одет(а) на первом свидании?",c:"light"},{q:"Какой жанр фильмов мы должны смотреть чаще?",c:"light"},{q:"Что для тебя идеальный вечер вдвоём?",c:"light"},{q:"Какую книгу ты хочешь прочитать вместе?",c:"light"},{q:"Что ты скажешь мне через 10 лет?",c:"light"},{q:"Какая наша самая забавная ссора?",c:"light"},
-{q:"Если бы ты мог(ла) телепортироваться ко мне прямо сейчас?",c:"light"},{q:"Какую серенаду ты бы мне спел(а)?",c:"light"},{q:"Ты бы согласился/согласилась на свидание вслепую со мной?",c:"light"},{q:"Какой наш внутренний мем?",c:"light"},{q:"Что ты думаешь о наших отношениях через 5 лет?",c:"light"},{q:"Какая моя привычка тебя умиляет?",c:"light"},{q:"Ты хочешь больше путешествовать или проводить время дома?",c:"light"},{q:"Какой язык любви у тебя?",c:"light"},{q:"Что бы ты сделал(а) если бы я исчез(ла) на день?",c:"light"},{q:"Какое наше лучшее совместное достижение?",c:"light"},
-{q:"Ты жалеешь о чём-то в наших отношениях?",c:"light"},{q:"Какой совместный челлендж ты хочешь?",c:"light"},{q:"Что бы ты изменил(а) в нашей рутине?",c:"light"},{q:"Какая черта моего характера дополняет твою?",c:"light"},{q:"Ты бы хотел(а) совместную татуировку?",c:"light"},{q:"Какой наш лучший «ленивый» день?",c:"light"},{q:"Что ты чувствуешь когда видишь мои сообщения?",c:"light"},{q:"Какой совет ты дал(а) бы нам в начале отношений?",c:"light"},{q:"Ты считаешь нас идеальной парой?",c:"light"},{q:"Какой момент заставил тебя влюбиться ещё сильнее?",c:"light"},
-
-// 💭 ГЛУБОКИЕ (80)
-{q:"Что для тебя значит любовь?",c:"deep"},{q:"Каким ты видишь наше будущее?",c:"deep"},{q:"Что ты больше всего боишься потерять в нас?",c:"deep"},{q:"Какой урок ты извлёк(ла) из наших отношений?",c:"deep"},{q:"Что ты хочешь чтобы я знал(а) но стесняешься сказать?",c:"deep"},{q:"Как ты представляешь нашу жизнь через 10 лет?",c:"deep"},{q:"Что для тебя значит верность?",c:"deep"},{q:"Какой самый сложный момент мы пережили?",c:"deep"},{q:"Что делает наши отношения уникальными?",c:"deep"},{q:"Ты бы хотел(а) детей?",c:"deep"},
-{q:"Какие ценности для тебя главные в отношениях?",c:"deep"},{q:"Что ты готов(а) изменить ради нас?",c:"deep"},{q:"Какой момент показал тебе что это серьёзно?",c:"deep"},{q:"Что бы ты сделал(а) если бы мы расстались?",c:"deep"},{q:"Какие границы важны для тебя?",c:"deep"},{q:"Ты доверяешь мне полностью?",c:"deep"},{q:"Что ты хочешь улучшить в нашем общении?",c:"deep"},{q:"Какой твой самый большой страх в отношениях?",c:"deep"},{q:"Что значит «быть рядом» для тебя?",c:"deep"},{q:"Ты чувствуешь себя собой рядом со мной?",c:"deep"},
-{q:"Какой компромисс дался тебе сложнее всего?",c:"deep"},{q:"Что ты хочешь чтобы я понимал(а) без слов?",c:"deep"},{q:"Как ты справляешься когда мы ссоримся?",c:"deep"},{q:"Что для тебя важнее: слова или действия?",c:"deep"},{q:"Ты бы простил(а) мне измену?",c:"deep"},{q:"Какой момент нашей связи самый глубокий?",c:"deep"},{q:"Что ты думаешь о браке?",c:"deep"},{q:"Какие качества ты хочешь перенять у меня?",c:"deep"},{q:"Что бы ты изменил(а) в себе ради нас?",c:"deep"},{q:"Ты счастлив(а) в наших отношениях?",c:"deep"},
-{q:"Что ты хочешь чтобы я делал(а) чаще?",c:"deep"},{q:"Какой секрет ты ещё не рассказал(а)?",c:"deep"},{q:"Что для тебя значит «навсегда»?",c:"deep"},{q:"Как ты хочешь стареть рядом со мной?",c:"deep"},{q:"Что тебя ранит больше всего?",c:"deep"},{q:"Ты готов(а) к трудностям вместе?",c:"deep"},{q:"Какой момент нежности запомнился навсегда?",c:"deep"},{q:"Что ты хочешь оставить нашим будущим детям?",c:"deep"},{q:"Какой самый важный разговор мы ещё не имели?",c:"deep"},{q:"Ты чувствуешь что растёшь рядом со мной?",c:"deep"},
-{q:"Что ты делаешь когда чувствуешь себя уязвимым рядом со мной?",c:"deep"},{q:"Какое обещание ты хочешь мне дать?",c:"deep"},{q:"Что значит поддержка для тебя?",c:"deep"},{q:"Ты бы выбрал(а) меня снова?",c:"deep"},{q:"Какой наш кризис сделал нас сильнее?",c:"deep"},{q:"Что ты чувствуешь когда думаешь о нашем будущем?",c:"deep"},{q:"Какую мечту ты готов(а) осуществить со мной?",c:"deep"},{q:"Что тебя пугает в долгосрочных отношениях?",c:"deep"},{q:"Как ты представляешь наш дом?",c:"deep"},{q:"Что ты хочешь чтобы я никогда не менял(а)?",c:"deep"},
-{q:"Какой момент тишины между нами был самым говорящим?",c:"deep"},{q:"Ты бы отказался/отказалась от мечты ради нас?",c:"deep"},{q:"Что значит «принимать» для тебя?",c:"deep"},{q:"Какие слова ты хочешь слышать чаще?",c:"deep"},{q:"Ты когда-нибудь сомневался/сомневалась в нас?",c:"deep"},{q:"Что ты хочешь чтобы изменилось между нами?",c:"deep"},{q:"Какая общая цель нас объединяет?",c:"deep"},{q:"Что ты готов(а) отдать за наше счастье?",c:"deep"},{q:"Как ты хочешь чтобы я тебя любил(а)?",c:"deep"},{q:"Какое наше совместное решение было самым правильным?",c:"deep"},
-{q:"Что делает тебя уязвимым рядом со мной?",c:"deep"},{q:"Ты веришь что мы созданы друг для друга?",c:"deep"},{q:"Какой жизненный урок ты хочешь выучить вместе?",c:"deep"},{q:"Что ты чувствуешь когда я плачу?",c:"deep"},{q:"Какое место в мире символизирует нашу любовь?",c:"deep"},{q:"Ты бы прождал(а) меня годы?",c:"deep"},{q:"Что делает наши отношения настоящими?",c:"deep"},{q:"Какой мой поступок тронул тебя до глубины души?",c:"deep"},{q:"Ты хочешь состариться рядом со мной?",c:"deep"},{q:"Что ты скажешь мне в последний день жизни?",c:"deep"},
-
-// 😂 СМЕШНЫЕ (60)
-{q:"Какой мой самый нелепый поступок?",c:"fun"},{q:"Если бы я был(а) едой, чем бы был(а)?",c:"fun"},{q:"Какой звук я издаю когда сплю?",c:"fun"},{q:"Что самое странное ты обо мне гуглил(а)?",c:"fun"},{q:"Какой мой танец самый ужасный?",c:"fun"},{q:"Если бы мы поменялись телами на день?",c:"fun"},{q:"Какая моя самая странная привычка?",c:"fun"},{q:"Ты бы съел(а) мою стряпню с закрытыми глазами?",c:"fun"},{q:"Какой мем описывает наши отношения?",c:"fun"},{q:"Что самое глупое я говорил(а)?",c:"fun"},
-{q:"Если бы мы были в зомби-апокалипсисе, кто бы выжил?",c:"fun"},{q:"Какую роль ты бы дал(а) мне в цирке?",c:"fun"},{q:"Если бы я был(а) супергероем, какая суперсила?",c:"fun"},{q:"Что ты делаешь когда я выхожу из комнаты?",c:"fun"},{q:"Какой мой самый нелепый страх?",c:"fun"},{q:"Если бы мы попали на необитаемый остров?",c:"fun"},{q:"Какой мой навык абсолютно бесполезен?",c:"fun"},{q:"Ты бы выбрал(а) миллион или вечную любовь?",c:"fun"},{q:"Какое животное описывает меня утром?",c:"fun"},{q:"Что я делаю что тебя бесит но ты молчишь?",c:"fun"},
-{q:"Если бы я был(а) персонажем мультфильма?",c:"fun"},{q:"Какой мой самый неловкий момент?",c:"fun"},{q:"Ты бы доверил(а) мне приготовить ужин на важный праздник?",c:"fun"},{q:"Какую дурацкую вещь я бы купил(а) если бы был(а) миллионером?",c:"fun"},{q:"Если бы мы были в реалити-шоу?",c:"fun"},{q:"Какой мой самый тупой вопрос?",c:"fun"},{q:"Ты бы пошёл/пошла со мной на курсы гончарства?",c:"fun"},{q:"Что я говорю во сне?",c:"fun"},{q:"Какой мой наряд был самым нелепым?",c:"fun"},{q:"Если бы я мог(ла) говорить только мемами?",c:"fun"},
-{q:"Ты бы доверил(а) мне постричь тебя?",c:"fun"},{q:"Какое моё селфи самое ужасное?",c:"fun"},{q:"Если бы мы поспорили из-за пиццы, кто бы победил?",c:"fun"},{q:"Какой мой танец в душе ты бы хотел(а) увидеть?",c:"fun"},{q:"Ты бы хотел(а) прочитать мои мысли на один день?",c:"fun"},{q:"Какой я персонаж из «Друзей»?",c:"fun"},{q:"Что самое нелепое мы делали вместе?",c:"fun"},{q:"Если бы я открыл(а) ресторан, как бы он назывался?",c:"fun"},{q:"Какой мой талант тебя пугает?",c:"fun"},{q:"Ты бы съел(а) насекомое за миллион?",c:"fun"},
-{q:"Какой мой смех самый странный?",c:"fun"},{q:"Если бы я был(а) профессором, какой предмет?",c:"fun"},{q:"Ты бы хотел(а) быть моим учителем вождения?",c:"fun"},{q:"Какое моё худшее фото ты хранишь?",c:"fun"},{q:"Если бы мы были парой из мультика?",c:"fun"},{q:"Что я делаю когда думаю что никто не видит?",c:"fun"},{q:"Какой мой рекорд в тупости?",c:"fun"},{q:"Ты бы доверил(а) мне собрать мебель из IKEA?",c:"fun"},{q:"Какое прозвище я бы получил(а) в тюрьме?",c:"fun"},{q:"Если бы я написал(а) книгу о нас, какое название?",c:"fun"},
-{q:"Какая моя отмазка самая нелепая?",c:"fun"},{q:"Ты бы участвовал(а) со мной в «Форт Боярд»?",c:"fun"},{q:"Какой мой навык готовки — катастрофа?",c:"fun"},{q:"Если бы мы поменялись гардеробами?",c:"fun"},{q:"Какое моё «фирменное блюдо» ты боишься?",c:"fun"},{q:"Ты бы пережил(а) квест со мной?",c:"fun"},{q:"Какой мой голос для пения — жанр?",c:"fun"},{q:"Если бы мы были на шоу талантов?",c:"fun"},{q:"Какая моя реакция на паука?",c:"fun"},{q:"Ты бы хотел(а) быть невидимкой рядом со мной?",c:"fun"},
-
-// 🔥 18+ (80)
-{q:"Что тебя больше всего возбуждает во мне?",c:"hot"},{q:"Какая часть моего тела тебе нравится больше всего?",c:"hot"},{q:"Ты когда-нибудь думал(а) обо мне в неприличном контексте при людях?",c:"hot"},{q:"Какой наш самый страстный момент?",c:"hot"},{q:"Что ты хочешь попробовать со мной в постели?",c:"hot"},{q:"Какое бельё на мне тебе нравится больше всего?",c:"hot"},{q:"Ты когда-нибудь подглядывал(а) за мной?",c:"hot"},{q:"Какой мой жест тебя заводит?",c:"hot"},{q:"Расскажи свою фантазию обо мне",c:"hot"},{q:"В каком необычном месте ты хочешь это сделать?",c:"hot"},
-{q:"Что я могу прошептать тебе на ухо чтобы ты потерял(а) голову?",c:"hot"},{q:"Утром или вечером — когда ты хочешь меня больше?",c:"hot"},{q:"Какой мой поцелуй тебе нравится больше?",c:"hot"},{q:"Ты думаешь обо мне когда принимаешь душ?",c:"hot"},{q:"Какую роль ты бы хотел(а) сыграть?",c:"hot"},{q:"Что тебя заводит больше: нежность или страсть?",c:"hot"},{q:"Какой запах моего тела тебе нравится?",c:"hot"},{q:"Ты бы хотел(а) снять видео для нас?",c:"hot"},{q:"Какое место на теле ты хочешь чтобы я целовал(а)?",c:"hot"},{q:"Что я могу надеть чтобы свести тебя с ума?",c:"hot"},
-{q:"Ты когда-нибудь ревновал(а) и это тебя заводило?",c:"hot"},{q:"Какой наш самый долгий поцелуй?",c:"hot"},{q:"Что ты хочешь чтобы я сделал(а) прямо сейчас?",c:"hot"},{q:"Расскажи о своём самом горячем сне обо мне",c:"hot"},{q:"Какую песню ты включишь для нашего вечера?",c:"hot"},{q:"Ты бы хотел(а) массаж с маслом?",c:"hot"},{q:"Какая комната в доме для тебя самая горячая?",c:"hot"},{q:"Ты когда-нибудь хотел(а) меня на рабочем месте?",c:"hot"},{q:"Что в моём голосе тебя заводит?",c:"hot"},{q:"Какой мой взгляд сводит тебя с ума?",c:"hot"},
-{q:"Ты бы хотел(а) пойти вместе в магазин для взрослых?",c:"hot"},{q:"Какое прикосновение тебя заводит мгновенно?",c:"hot"},{q:"Ты предпочитаешь свет или темноту?",c:"hot"},{q:"Какая моя одежда тебя больше заводит?",c:"hot"},{q:"Ты когда-нибудь отправлял(а) мне откровенное сообщение?",c:"hot"},{q:"Какой сценарий свидания закончится самым горячим?",c:"hot"},{q:"Ты хочешь чтобы я был(а) нежным или дерзким?",c:"hot"},{q:"Какое время суток ты хочешь меня больше всего?",c:"hot"},{q:"Ты бы хотел(а) игру с завязанными глазами?",c:"hot"},{q:"Что я могу сделать чтобы удивить тебя сегодня ночью?",c:"hot"},
-{q:"Какой мой жест в обычной жизни тебя неожиданно заводит?",c:"hot"},{q:"Ты бы хотел(а) провести целый день в постели?",c:"hot"},{q:"Какая моя фотография тебя заводит?",c:"hot"},{q:"Ты когда-нибудь хотел(а) меня на публике?",c:"hot"},{q:"Какой комплимент о своём теле ты хочешь слышать?",c:"hot"},{q:"Ты бы хотел(а) ролевую игру?",c:"hot"},{q:"Какой мой поступок был самым соблазнительным?",c:"hot"},{q:"Ты бы хотел(а) тантрический массаж?",c:"hot"},{q:"Что в постели тебе нравится больше всего?",c:"hot"},{q:"Какой мой навык в интимной жизни лучший?",c:"hot"},
-{q:"Ты бы хотел(а) душ вдвоём прямо сейчас?",c:"hot"},{q:"Какое бельё ты бы купил(а) для меня?",c:"hot"},{q:"Ты когда-нибудь представлял(а) нас в лифте?",c:"hot"},{q:"Какой фрукт ассоциируется с нашей интимной жизнью?",c:"hot"},{q:"Ты хочешь чтобы я говорил(а) больше или молчал(а)?",c:"hot"},{q:"Какой мой аромат духов тебя заводит?",c:"hot"},{q:"Ты бы хотел(а) танец на коленях?",c:"hot"},{q:"Какое место ты хочешь чтобы я укусил(а)?",c:"hot"},{q:"Ты мечтаешь о совместном отпуске «только для двоих»?",c:"hot"},{q:"Что бы ты сделал(а) если бы мы остались одни в лифте?",c:"hot"},
-{q:"Какой наш интимный момент был самым неожиданным?",c:"hot"},{q:"Ты бы хотел(а) стриптиз?",c:"hot"},{q:"Какой мой наряд для дома тебя заводит?",c:"hot"},{q:"Ты когда-нибудь фантазировал(а) обо мне на работе?",c:"hot"},{q:"Какую еду ты бы использовал(а) для романтического вечера?",c:"hot"},{q:"Ты хочешь чтобы я был(а) ведущим или ведомым?",c:"hot"},{q:"Какой фильм ты бы посмотрел(а) со мной под одеялом?",c:"hot"},{q:"Ты бы хотел(а) фотосессию в стиле будуар?",c:"hot"},{q:"Какой мой комплимент тебя заводит мгновенно?",c:"hot"},{q:"Что ты хочешь чтобы я сделал(а) после этой игры?",c:"hot"}
+// === 320 ВОПРОСОВ ===
+const tQs=[
+{q:"Какое первое впечатление обо мне?",c:"light"},{q:"Лучший совместный момент?",c:"light"},{q:"Что нравится в наших отношениях?",c:"light"},{q:"Какая моя привычка нравится?",c:"light"},{q:"Мы — герои какого фильма?",c:"light"},{q:"Какую суперспособность мне дашь?",c:"light"},{q:"Какое моё выражение лица нравится?",c:"light"},{q:"Какой подарок запомнился?",c:"light"},{q:"Что хочешь делать со мной каждый день?",c:"light"},{q:"Наша общая песня?",c:"light"},
+{q:"Опиши меня тремя словами",c:"light"},{q:"Куда хочешь поехать со мной?",c:"light"},{q:"Какой мой наряд нравится?",c:"light"},{q:"О чём думаешь просыпаясь рядом?",c:"light"},{q:"Какое животное напоминаю?",c:"light"},{q:"Что изменишь в первом свидании?",c:"light"},{q:"Какая моя шутка запомнилась?",c:"light"},{q:"Что приготовишь мне?",c:"light"},{q:"Какой фильм пересмотрим?",c:"light"},{q:"Обнимашки или поцелуи?",c:"light"},
+{q:"Какой запах со мной ассоциируется?",c:"light"},{q:"Какое мороженое для нас?",c:"light"},{q:"Что чувствуешь когда держу за руку?",c:"light"},{q:"Лучшая совместная фотка?",c:"light"},{q:"Какого питомца заведём?",c:"light"},{q:"Какой праздник проведём вместе?",c:"light"},{q:"Что любишь делать дома вместе?",c:"light"},{q:"Какая погода — наши отношения?",c:"light"},{q:"Какой цвет — мы?",c:"light"},{q:"Что напишешь обо мне в книге?",c:"light"},
+{q:"Лучшее время дня вместе?",c:"light"},{q:"Помнишь первый разговор?",c:"light"},{q:"Какой мой комплимент запомнился?",c:"light"},{q:"Что делаешь когда скучаешь?",c:"light"},{q:"Какую традицию любишь?",c:"light"},{q:"3 песни в наш плейлист?",c:"light"},{q:"Лучший сезон для свиданий?",c:"light"},{q:"Жаворонок или сова?",c:"light"},{q:"Emoji наших отношений?",c:"light"},{q:"Что рассказываешь друзьям обо мне?",c:"light"},
+{q:"Какой мой талант удивляет?",c:"light"},{q:"Что попробуем впервые вместе?",c:"light"},{q:"Кафе которое = мы?",c:"light"},{q:"Когда понял(а) что влюбился?",c:"light"},{q:"Какое прозвище мне дашь?",c:"light"},{q:"В какую игру сыграем?",c:"light"},{q:"Что ценишь в общении?",c:"light"},{q:"Какой спорт попробуем?",c:"light"},{q:"Наш общий бизнес?",c:"light"},{q:"Десерт = наши отношения?",c:"light"},
+{q:"Что изменишь в первом поцелуе?",c:"light"},{q:"Первая страна вместе?",c:"light"},{q:"Что привлекло первым?",c:"light"},{q:"Любимая черта характера?",c:"light"},{q:"Самый смешной момент?",c:"light"},{q:"Подарок мечты от меня?",c:"light"},{q:"День наоборот — хочешь?",c:"light"},{q:"Моя роль в твоей жизни?",c:"light"},{q:"Если бы встретились на 5 лет раньше?",c:"light"},{q:"Лучшая поездка?",c:"light"},
+{q:"Веришь в нашу судьбу?",c:"light"},{q:"Момент для повтора?",c:"light"},{q:"Почему улыбаешься думая обо мне?",c:"light"},{q:"Общее хобби?",c:"light"},{q:"Помнишь мой наряд на первом свидании?",c:"light"},{q:"Жанр фильмов для нас?",c:"light"},{q:"Идеальный вечер вдвоём?",c:"light"},{q:"Книга для чтения вместе?",c:"light"},{q:"Что скажешь через 10 лет?",c:"light"},{q:"Самая забавная ссора?",c:"light"},
+{q:"Телепортация ко мне — куда?",c:"light"},{q:"Серенада для меня?",c:"light"},{q:"Свидание вслепую со мной?",c:"light"},{q:"Наш внутренний мем?",c:"light"},{q:"Мы через 5 лет?",c:"light"},{q:"Моя умилительная привычка?",c:"light"},{q:"Путешествия или дом?",c:"light"},{q:"Твой язык любви?",c:"light"},{q:"Если исчезну на день?",c:"light"},{q:"Наше достижение?",c:"light"},
+{q:"Жалеешь о чём-то в нас?",c:"light"},{q:"Совместный челлендж?",c:"light"},{q:"Что изменить в рутине?",c:"light"},{q:"Моя черта + твоя черта?",c:"light"},{q:"Совместная татуировка?",c:"light"},{q:"Лучший ленивый день?",c:"light"},{q:"Что чувствуешь видя мои сообщения?",c:"light"},{q:"Совет нам в начале?",c:"light"},{q:"Мы идеальная пара?",c:"light"},{q:"Момент ещё большей любви?",c:"light"},
+{q:"Что значит любовь?",c:"deep"},{q:"Наше будущее?",c:"deep"},{q:"Что боишься потерять?",c:"deep"},{q:"Урок из отношений?",c:"deep"},{q:"Что стесняешься сказать?",c:"deep"},{q:"Жизнь через 10 лет?",c:"deep"},{q:"Что значит верность?",c:"deep"},{q:"Самый сложный момент?",c:"deep"},{q:"Что делает нас уникальными?",c:"deep"},{q:"Хочешь детей?",c:"deep"},
+{q:"Главные ценности?",c:"deep"},{q:"Что изменишь ради нас?",c:"deep"},{q:"Когда понял(а) что серьёзно?",c:"deep"},{q:"Если бы расстались?",c:"deep"},{q:"Важные границы?",c:"deep"},{q:"Полное доверие?",c:"deep"},{q:"Что улучшить в общении?",c:"deep"},{q:"Главный страх в отношениях?",c:"deep"},{q:"Что значит быть рядом?",c:"deep"},{q:"Ты — это ты рядом со мной?",c:"deep"},
+{q:"Сложнейший компромисс?",c:"deep"},{q:"Что понимать без слов?",c:"deep"},{q:"Как справляешься когда ссоримся?",c:"deep"},{q:"Слова или действия?",c:"deep"},{q:"Простишь измену?",c:"deep"},{q:"Самый глубокий момент связи?",c:"deep"},{q:"Мысли о браке?",c:"deep"},{q:"Качество для перенятия?",c:"deep"},{q:"Что изменишь в себе?",c:"deep"},{q:"Ты счастлив(а)?",c:"deep"},
+{q:"Что делать чаще?",c:"deep"},{q:"Нераскрытый секрет?",c:"deep"},{q:"Что значит навсегда?",c:"deep"},{q:"Как стареть вместе?",c:"deep"},{q:"Что ранит больше всего?",c:"deep"},{q:"Готов(а) к трудностям?",c:"deep"},{q:"Незабываемый момент нежности?",c:"deep"},{q:"Что оставим детям?",c:"deep"},{q:"Важный разговор который не было?",c:"deep"},{q:"Растёшь рядом?",c:"deep"},
+{q:"Уязвимость рядом со мной?",c:"deep"},{q:"Какое обещание?",c:"deep"},{q:"Что значит поддержка?",c:"deep"},{q:"Выбрал(а) бы снова?",c:"deep"},{q:"Кризис который усилил?",c:"deep"},{q:"Чувства о будущем?",c:"deep"},{q:"Общая мечта?",c:"deep"},{q:"Страх долгосрочных?",c:"deep"},{q:"Каким будет наш дом?",c:"deep"},{q:"Что никогда не менять?",c:"deep"},
+{q:"Самая говорящая тишина?",c:"deep"},{q:"Отказ от мечты ради нас?",c:"deep"},{q:"Что значит принимать?",c:"deep"},{q:"Слова чаще?",c:"deep"},{q:"Сомневался/лась в нас?",c:"deep"},{q:"Что изменить между нами?",c:"deep"},{q:"Общая цель?",c:"deep"},{q:"Что отдашь за счастье?",c:"deep"},{q:"Как хочешь быть любимой?",c:"deep"},{q:"Самое правильное решение?",c:"deep"},
+{q:"Что делает уязвимым?",c:"deep"},{q:"Созданы друг для друга?",c:"deep"},{q:"Урок для совместного изучения?",c:"deep"},{q:"Что чувствуешь когда плачу?",c:"deep"},{q:"Место = наша любовь?",c:"deep"},{q:"Прождал(а) бы годы?",c:"deep"},{q:"Что делает настоящим?",c:"deep"},{q:"Поступок до глубины души?",c:"deep"},{q:"Состариться рядом?",c:"deep"},{q:"Последние слова?",c:"deep"},
+{q:"Мой нелепый поступок?",c:"fun"},{q:"Если бы я был едой?",c:"fun"},{q:"Какой звук сплю?",c:"fun"},{q:"Что гуглил(а) обо мне?",c:"fun"},{q:"Мой ужасный танец?",c:"fun"},{q:"Поменяемся телами?",c:"fun"},{q:"Странная привычка?",c:"fun"},{q:"Съешь мою стряпню вслепую?",c:"fun"},{q:"Мем = мы?",c:"fun"},{q:"Глупейшее высказывание?",c:"fun"},
+{q:"Зомби-апокалипсис — кто выживет?",c:"fun"},{q:"Роль в цирке?",c:"fun"},{q:"Суперсила?",c:"fun"},{q:"Что делаешь когда выхожу?",c:"fun"},{q:"Нелепый страх?",c:"fun"},{q:"Необитаемый остров?",c:"fun"},{q:"Бесполезный навык?",c:"fun"},{q:"Миллион или вечная любовь?",c:"fun"},{q:"Животное утром?",c:"fun"},{q:"Что бесит но молчишь?",c:"fun"},
+{q:"Персонаж мультика?",c:"fun"},{q:"Неловкий момент?",c:"fun"},{q:"Доверишь праздничный ужин?",c:"fun"},{q:"Дурацкая покупка миллионера?",c:"fun"},{q:"Реалити-шоу?",c:"fun"},{q:"Тупой вопрос?",c:"fun"},{q:"Курсы гончарства?",c:"fun"},{q:"Что говорю во сне?",c:"fun"},{q:"Нелепый наряд?",c:"fun"},{q:"Говорить только мемами?",c:"fun"},
+{q:"Доверишь стрижку?",c:"fun"},{q:"Ужасное селфи?",c:"fun"},{q:"Спор из-за пиццы?",c:"fun"},{q:"Танец в душе?",c:"fun"},{q:"Прочитать мысли на день?",c:"fun"},{q:"Я — кто из Друзей?",c:"fun"},{q:"Самое нелепое вместе?",c:"fun"},{q:"Мой ресторан — название?",c:"fun"},{q:"Пугающий талант?",c:"fun"},{q:"Насекомое за миллион?",c:"fun"},
+{q:"Странный смех?",c:"fun"},{q:"Профессор чего?",c:"fun"},{q:"Учитель вождения?",c:"fun"},{q:"Худшее фото хранишь?",c:"fun"},{q:"Пара из мультика?",c:"fun"},{q:"Что делаю тайком?",c:"fun"},{q:"Рекорд тупости?",c:"fun"},{q:"Мебель IKEA?",c:"fun"},{q:"Тюремное прозвище?",c:"fun"},{q:"Книга о нас — название?",c:"fun"},
+{q:"Что возбуждает во мне?",c:"hot"},{q:"Любимая часть тела?",c:"hot"},{q:"Думал(а) обо мне неприлично при людях?",c:"hot"},{q:"Самый страстный момент?",c:"hot"},{q:"Что попробовать в постели?",c:"hot"},{q:"Лучшее бельё?",c:"hot"},{q:"Подглядывал(а)?",c:"hot"},{q:"Заводящий жест?",c:"hot"},{q:"Фантазия обо мне?",c:"hot"},{q:"Необычное место?",c:"hot"},
+{q:"Что шепнуть на ухо?",c:"hot"},{q:"Утром или вечером?",c:"hot"},{q:"Лучший поцелуй?",c:"hot"},{q:"Думаешь в душе?",c:"hot"},{q:"Роль для игры?",c:"hot"},{q:"Нежность или страсть?",c:"hot"},{q:"Запах тела?",c:"hot"},{q:"Видео для нас?",c:"hot"},{q:"Где целовать?",c:"hot"},{q:"Что надеть чтобы свести с ума?",c:"hot"},
+{q:"Ревность заводит?",c:"hot"},{q:"Самый долгий поцелуй?",c:"hot"},{q:"Что сделать прямо сейчас?",c:"hot"},{q:"Горячий сон обо мне?",c:"hot"},{q:"Песня для вечера?",c:"hot"},{q:"Массаж с маслом?",c:"hot"},{q:"Горячая комната?",c:"hot"},{q:"Хотел(а) на работе?",c:"hot"},{q:"Что в голосе заводит?",c:"hot"},{q:"Сводящий с ума взгляд?",c:"hot"},
+{q:"Магазин для взрослых?",c:"hot"},{q:"Мгновенное прикосновение?",c:"hot"},{q:"Свет или темнота?",c:"hot"},{q:"Заводящая одежда?",c:"hot"},{q:"Откровенное сообщение?",c:"hot"},{q:"Горячий сценарий свидания?",c:"hot"},{q:"Нежный или дерзкий?",c:"hot"},{q:"Время максимального желания?",c:"hot"},{q:"Завязанные глаза?",c:"hot"},{q:"Сюрприз на ночь?",c:"hot"},
+{q:"Неожиданно заводящий жест?",c:"hot"},{q:"Целый день в постели?",c:"hot"},{q:"Заводящая фотка?",c:"hot"},{q:"Хотел(а) на публике?",c:"hot"},{q:"Комплимент о теле?",c:"hot"},{q:"Ролевая игра?",c:"hot"},{q:"Соблазнительный поступок?",c:"hot"},{q:"Тантрический массаж?",c:"hot"},{q:"Лучшее в постели?",c:"hot"},{q:"Лучший навык?",c:"hot"},
+{q:"Душ вдвоём?",c:"hot"},{q:"Бельё для меня?",c:"hot"},{q:"В лифте?",c:"hot"},{q:"Фрукт интимной жизни?",c:"hot"},{q:"Говорить или молчать?",c:"hot"},{q:"Заводящий аромат?",c:"hot"},{q:"Танец на коленях?",c:"hot"},{q:"Где укусить?",c:"hot"},{q:"Отпуск для двоих?",c:"hot"},{q:"Одни в лифте?",c:"hot"},
+{q:"Неожиданный интимный момент?",c:"hot"},{q:"Стриптиз?",c:"hot"},{q:"Домашний наряд заводит?",c:"hot"},{q:"Фантазии на работе?",c:"hot"},{q:"Еда для романтики?",c:"hot"},{q:"Ведущий или ведомый?",c:"hot"},{q:"Фильм под одеялом?",c:"hot"},{q:"Будуар фотосессия?",c:"hot"},{q:"Мгновенный комплимент?",c:"hot"},{q:"Что после этой игры?",c:"hot"}
 ];
 
-let truthFilter='all',lastTQ=-1;
-function setTF(f,btn){truthFilter=f;document.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('act'));btn.classList.add('act')}
-function nextTruth(){const filtered=truthFilter==='all'?truthQs:truthQs.filter(q=>q.c===truthFilter);if(!filtered.length)return;let i;do{i=Math.floor(Math.random()*filtered.length)}while(i===lastTQ&&filtered.length>1);lastTQ=i;const q=filtered[i];const el=document.getElementById('truthQ');const cat=document.getElementById('truthCat');el.style.opacity=0;setTimeout(()=>{el.textContent=q.q;const labels={light:'😊 Лёгкий',deep:'💭 Глубокий',fun:'😂 Смешной',hot:'🔥 18+'};cat.textContent=labels[q.c]||'';el.style.opacity=1},250)}
+let tFilter='all',lastTQ=-1;
+function setTF(f,btn){tFilter=f;document.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('act'));btn.classList.add('act')}
+function nextT(){const fl=tFilter==='all'?tQs:tQs.filter(q=>q.c===tFilter);if(!fl.length)return;let i;do{i=Math.floor(Math.random()*fl.length)}while(i===lastTQ&&fl.length>1);lastTQ=i;const q=fl[i];const el=document.getElementById('tQ'),cat=document.getElementById('tCat');el.style.opacity=0;setTimeout(()=>{el.textContent=q.q;cat.textContent={light:'😊 Лёгкий',deep:'💭 Глубокий',fun:'😂 Смешной',hot:'🔥 18+'}[q.c]||'';el.style.opacity=1},250)}
 
-// STATS
-function renderS(){const g=document.getElementById('sGrid');const rd=document.getElementById('relD').value;const dt=rd?Math.floor((new Date()-new Date(rd))/864e5):0;g.innerHTML='';[{i:'📅',n:dt,l:'Дней вместе'},{i:'📸',n:photos.length,l:'Фото'},{i:'📝',n:notes.length,l:'Записей'},{i:'❤️',n:loveCount,l:'Сердечек'},{i:'🎁',n:wishes.length,l:'Желаний'},{i:'✅',n:wishes.filter(w=>w.completed).length,l:'Исполнено'},{i:'🕰️',n:capsules.length,l:'Капсул'},{i:'💬',n:msgs.length,l:'Сообщений'},{i:'🎵',n:songs.length,l:'Песен'}].forEach(s=>{g.innerHTML+=`<div class="card sc"><span class="si">${s.i}</span><span class="sn">${s.n}</span><span class="sl">${s.l}</span></div>`})}
+function renderS(){const g=document.getElementById('sGrid');const rd=document.getElementById('relD').value;const dt=rd?Math.floor((new Date()-new Date(rd))/864e5):0;g.innerHTML='';[{i:'📅',n:dt,l:'Дней'},{i:'📸',n:photos.length,l:'Фото'},{i:'📝',n:notes.length,l:'Записей'},{i:'❤️',n:loveCount,l:'Сердечек'},{i:'🎁',n:wishes.length,l:'Желаний'},{i:'✅',n:wishes.filter(w=>w.completed).length,l:'Исполнено'},{i:'💬',n:msgs.length,l:'Сообщений'},{i:'🎵',n:songs.length,l:'Песен'}].forEach(s=>{g.innerHTML+=`<div class="card sc"><span class="si">${s.i}</span><span class="sn">${s.n}</span><span class="sl">${s.l}</span></div>`})}
 
-const achDef=[{id:'fp',i:'📸',n:'Первое фото',d:'Загрузи фото',ck:()=>photos.length>=1},{id:'10p',i:'🖼️',n:'Фотограф',d:'10 фото',ck:()=>photos.length>=10},{id:'fn',i:'📝',n:'Первая запись',d:'Напиши в дневник',ck:()=>notes.length>=1},{id:'10n',i:'📚',n:'Писатель',d:'10 записей',ck:()=>notes.length>=10},{id:'100h',i:'💕',n:'100 сердечек',d:'100 нажатий',ck:()=>loveCount>=100},{id:'1kh',i:'💖',n:'1000 сердечек',d:'1000 нажатий',ck:()=>loveCount>=1000},{id:'fw',i:'🎁',n:'Первое желание',d:'Добавь желание',ck:()=>wishes.length>=1},{id:'wd',i:'✅',n:'Мечта сбылась',d:'Исполни желание',ck:()=>wishes.some(w=>w.completed)},{id:'cp',i:'🕰️',n:'Послание',d:'Создай капсулу',ck:()=>capsules.length>=1},{id:'7d',i:'🌱',n:'Неделя',d:'7 дней',ck:()=>{const d=document.getElementById('relD').value;return d&&(new Date()-new Date(d))/864e5>=7}},{id:'30d',i:'🌿',n:'Месяц',d:'30 дней',ck:()=>{const d=document.getElementById('relD').value;return d&&(new Date()-new Date(d))/864e5>=30}},{id:'100d',i:'🌳',n:'100 дней',d:'100 дней',ck:()=>{const d=document.getElementById('relD').value;return d&&(new Date()-new Date(d))/864e5>=100}},{id:'365d',i:'🏆',n:'Год!',d:'365 дней',ck:()=>{const d=document.getElementById('relD').value;return d&&(new Date()-new Date(d))/864e5>=365}},{id:'msg',i:'💬',n:'Первое сообщение',d:'Напиши в чат',ck:()=>msgs.length>=1},{id:'song',i:'🎵',n:'Наша песня',d:'Добавь песню',ck:()=>songs.length>=1}];
-
+const achDef=[{id:'fp',i:'📸',n:'Первое фото',d:'Загрузи',ck:()=>photos.length>=1},{id:'10p',i:'🖼️',n:'Фотограф',d:'10 фото',ck:()=>photos.length>=10},{id:'fn',i:'📝',n:'Первая запись',d:'Напиши',ck:()=>notes.length>=1},{id:'10n',i:'📚',n:'Писатель',d:'10 записей',ck:()=>notes.length>=10},{id:'100h',i:'💕',n:'100 ❤️',d:'100 нажатий',ck:()=>loveCount>=100},{id:'1kh',i:'💖',n:'1000 ❤️',d:'1000',ck:()=>loveCount>=1000},{id:'fw',i:'🎁',n:'Желание',d:'Добавь',ck:()=>wishes.length>=1},{id:'wd',i:'✅',n:'Сбылось',d:'Исполни',ck:()=>wishes.some(w=>w.completed)},{id:'cp',i:'🕰️',n:'Капсула',d:'Создай',ck:()=>capsules.length>=1},{id:'7d',i:'🌱',n:'Неделя',d:'7 дней',ck:()=>{const d=document.getElementById('relD').value;return d&&(new Date()-new Date(d))/864e5>=7}},{id:'30d',i:'🌿',n:'Месяц',d:'30 дней',ck:()=>{const d=document.getElementById('relD').value;return d&&(new Date()-new Date(d))/864e5>=30}},{id:'100d',i:'🌳',n:'100 дней',d:'100',ck:()=>{const d=document.getElementById('relD').value;return d&&(new Date()-new Date(d))/864e5>=100}},{id:'365d',i:'🏆',n:'Год!',d:'365',ck:()=>{const d=document.getElementById('relD').value;return d&&(new Date()-new Date(d))/864e5>=365}},{id:'msg',i:'💬',n:'Чат',d:'Напиши',ck:()=>msgs.length>=1},{id:'song',i:'🎵',n:'Песня',d:'Добавь',ck:()=>songs.length>=1}];
 function checkAch(){let u=[];achDef.forEach(a=>{if(a.ck())u.push(a.id)});db.ref('achievements').set(u)}
 function renderA(){const g=document.getElementById('aGrid');g.innerHTML='';db.ref('achievements').once('value',s=>{const u=s.val()||[];achDef.forEach(a=>{const is=u.includes(a.id);g.innerHTML+=`<div class="card ac ${is?'on':'off'}"><span class="ab">${is?'🏅':'🔒'}</span><span class="ai">${a.i}</span><div class="an">${a.n}</div><div class="ad">${a.d}</div></div>`})})}
 
