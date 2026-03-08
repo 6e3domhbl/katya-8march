@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💐 С 8 Марта, Катя! 💐</title>
+    <title>💐 Для Кати 💐</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap');
 
@@ -20,16 +20,60 @@
             --deep-rose: #c9184a;
             --lavender: #e6b8f7;
             --soft-white: #fff5f7;
+            --bg-dark: #1a0a14;
+            --bg-mid: #2d1b30;
         }
 
         body {
             font-family: 'Comfortaa', cursive;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #1a0a14 0%, #2d1b30 50%, #1a0a14 100%);
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-mid) 50%, var(--bg-dark) 100%);
             color: #fff;
         }
 
-        /* ===== ЭКРАН ЗАГРУЗКИ / ВХОД ===== */
+        /* ===== НАВИГАЦИЯ ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 9990;
+            background: rgba(26, 10, 20, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 107, 157, 0.1);
+            flex-wrap: wrap;
+            transition: transform 0.4s ease;
+        }
+
+        .navbar.hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-btn {
+            padding: 8px 18px;
+            font-family: 'Comfortaa', cursive;
+            font-size: 0.8rem;
+            background: rgba(255, 107, 157, 0.1);
+            color: var(--light-pink);
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--pink);
+            color: #fff;
+            border-color: var(--pink);
+            box-shadow: 0 3px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        /* ===== INTRO SCREEN ===== */
         .intro-screen {
             position: fixed;
             top: 0; left: 0;
@@ -90,9 +134,7 @@
             transition: all 0.5s ease;
         }
 
-        .enter-btn:hover::before {
-            left: 100%;
-        }
+        .enter-btn:hover::before { left: 100%; }
 
         .enter-btn:hover {
             transform: scale(1.08);
@@ -104,49 +146,54 @@
             50% { transform: translateY(-15px); }
         }
 
-        /* ===== ЧАСТИЦЫ / ЛЕПЕСТКИ ===== */
+        /* ===== ЧАСТИЦЫ ===== */
         .particles-container {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 9998;
             overflow: hidden;
         }
 
         .petal {
             position: absolute;
             top: -60px;
-            width: 15px;
-            height: 15px;
             border-radius: 50% 0 50% 50%;
             opacity: 0.7;
             animation: petalFall linear infinite;
         }
 
         @keyframes petalFall {
-            0% {
-                transform: translateY(-10vh) rotate(0deg) translateX(0);
-                opacity: 0;
-            }
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
             10% { opacity: 0.8; }
             90% { opacity: 0.6; }
-            100% {
-                transform: translateY(110vh) rotate(720deg) translateX(100px);
-                opacity: 0;
-            }
+            100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
         }
 
-        /* ===== ХЕДЕР ===== */
+        /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
         .main-content {
             opacity: 0;
             transition: opacity 1.5s ease;
+            padding-top: 70px;
         }
 
-        .main-content.visible {
-            opacity: 1;
+        .main-content.visible { opacity: 1; }
+
+        /* ===== СТРАНИЦЫ ===== */
+        .page {
+            display: none;
+            animation: fadeInPage 0.6s ease;
         }
 
+        .page.active { display: block; }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== HEADER ===== */
         header {
             min-height: 100vh;
             display: flex;
@@ -214,7 +261,6 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            animation: bounce 2s ease infinite;
             opacity: 0;
             animation: fadeInUp 1.5s ease 1.5s forwards, bounce 2s ease 3s infinite;
         }
@@ -262,7 +308,7 @@
             opacity: 0.5;
         }
 
-        /* ===== ПОЗДРАВЛЕНИЕ ===== */
+        /* ===== GREETING CARD ===== */
         .greeting-card {
             background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(201, 24, 74, 0.05));
             border: 1px solid rgba(255, 107, 157, 0.2);
@@ -293,18 +339,10 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        .greeting-text .highlight {
-            color: var(--pink);
-            font-weight: 600;
-        }
+        .greeting-text .highlight { color: var(--pink); font-weight: 600; }
+        .greeting-text .name { font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: var(--gold); }
 
-        .greeting-text .name {
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.8rem;
-            color: var(--gold);
-        }
-
-        /* ===== КАЧЕСТВА ===== */
+        /* ===== QUALITY CARDS ===== */
         .qualities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -333,9 +371,7 @@
             transition: left 0.6s ease;
         }
 
-        .quality-card:hover::before {
-            left: 100%;
-        }
+        .quality-card:hover::before { left: 100%; }
 
         .quality-card:hover {
             transform: translateY(-8px);
@@ -343,11 +379,7 @@
             box-shadow: 0 15px 40px rgba(255, 107, 157, 0.15);
         }
 
-        .quality-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: block;
-        }
+        .quality-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
 
         .quality-card h3 {
             font-family: 'Great Vibes', cursive;
@@ -363,7 +395,7 @@
             line-height: 1.6;
         }
 
-        /* ===== ТАЙМЛАЙН ПОЖЕЛАНИЙ ===== */
+        /* ===== WISHES TIMELINE ===== */
         .wishes-timeline {
             position: relative;
             padding-left: 40px;
@@ -384,15 +416,12 @@
             background: rgba(255, 255, 255, 0.03);
             border-radius: 15px;
             border: 1px solid rgba(255, 107, 157, 0.1);
-            transition: all 0.4s ease;
+            transition: all 0.6s ease;
             opacity: 0;
             transform: translateX(30px);
         }
 
-        .wish-item.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .wish-item.visible { opacity: 1; transform: translateX(0); }
 
         .wish-item:hover {
             background: rgba(255, 107, 157, 0.05);
@@ -409,11 +438,7 @@
             box-shadow: 0 0 15px var(--pink);
         }
 
-        .wish-item .wish-emoji {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            display: block;
-        }
+        .wish-item .wish-emoji { font-size: 1.8rem; margin-bottom: 10px; display: block; }
 
         .wish-item h3 {
             font-family: 'Great Vibes', cursive;
@@ -429,21 +454,13 @@
             line-height: 1.7;
         }
 
-        /* ===== ИНТЕРАКТИВНЫЙ КОНВЕРТ ===== */
-        .envelope-section {
-            text-align: center;
-            padding: 60px 20px;
-        }
+        /* ===== ENVELOPE ===== */
+        .envelope-section { text-align: center; padding: 60px 20px; }
 
-        .envelope-wrapper {
-            display: inline-block;
-            perspective: 1000px;
-            cursor: pointer;
-        }
+        .envelope-wrapper { display: inline-block; perspective: 1000px; cursor: pointer; }
 
         .envelope {
-            width: 280px;
-            height: 180px;
+            width: 280px; height: 180px;
             background: linear-gradient(135deg, #f7d1d1, #f4a7bb);
             border-radius: 10px;
             position: relative;
@@ -452,9 +469,7 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
-        .envelope:hover {
-            transform: scale(1.05);
-        }
+        .envelope:hover { transform: scale(1.05); }
 
         .envelope-flap {
             position: absolute;
@@ -467,9 +482,7 @@
             z-index: 2;
         }
 
-        .envelope.open .envelope-flap {
-            transform: rotateX(180deg);
-        }
+        .envelope.open .envelope-flap { transform: rotateX(180deg); }
 
         .envelope-body {
             position: absolute;
@@ -482,8 +495,7 @@
 
         .heart-seal {
             position: absolute;
-            top: 35%;
-            left: 50%;
+            top: 35%; left: 50%;
             transform: translateX(-50%);
             font-size: 2rem;
             z-index: 3;
@@ -491,9 +503,7 @@
             transition: opacity 0.5s ease;
         }
 
-        .envelope.open .heart-seal {
-            opacity: 0;
-        }
+        .envelope.open .heart-seal { opacity: 0; }
 
         @keyframes heartPulse {
             0%, 100% { transform: translateX(-50%) scale(1); }
@@ -510,9 +520,7 @@
             animation: fadeInUp 0.8s ease;
         }
 
-        .secret-message.show {
-            display: block;
-        }
+        .secret-message.show { display: block; }
 
         .secret-message p {
             font-family: 'Great Vibes', cursive;
@@ -533,216 +541,7 @@
             50% { opacity: 0.8; }
         }
 
-        /* ===== ГЕНЕРАТОР КОМПЛИМЕНТОВ ===== */
-        .compliment-section {
-            text-align: center;
-        }
-
-        .compliment-display {
-            min-height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-            margin: 30px 0;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 107, 157, 0.15);
-            border-radius: 20px;
-            transition: all 0.5s ease;
-        }
-
-        .compliment-display p {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(1.3rem, 4vw, 2rem);
-            color: var(--light-pink);
-            transition: all 0.5s ease;
-        }
-
-        .compliment-btn {
-            padding: 15px 40px;
-            font-family: 'Comfortaa', cursive;
-            font-size: 1rem;
-            background: linear-gradient(135deg, var(--pink), var(--deep-rose));
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 25px rgba(255, 107, 157, 0.3);
-        }
-
-        .compliment-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 35px rgba(255, 107, 157, 0.5);
-        }
-
-        .compliment-btn:active {
-            transform: scale(0.98);
-        }
-
-        /* ===== ФЕЙЕРВЕРК СЕРДЕЦ ===== */
-        .firework-btn-container {
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .firework-btn {
-            padding: 18px 45px;
-            font-family: 'Comfortaa', cursive;
-            font-size: 1rem;
-            background: linear-gradient(135deg, var(--gold), #ff9500);
-            color: #1a0a14;
-            font-weight: 700;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 25px rgba(255, 215, 0, 0.3);
-        }
-
-        .firework-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 35px rgba(255, 215, 0, 0.5);
-        }
-
-        .fireworks-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 9998;
-        }
-
-        /* ===== СЧЁТЧИК ЛЮБВИ ===== */
-        .love-counter {
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .counter-value {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(3rem, 10vw, 6rem);
-            color: var(--pink);
-            text-shadow: 0 0 30px rgba(255, 107, 157, 0.3);
-            cursor: pointer;
-            user-select: none;
-            transition: transform 0.2s ease;
-        }
-
-        .counter-value:active {
-            transform: scale(1.1);
-        }
-
-        .counter-label {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 10px;
-        }
-
-        .counter-sublabel {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.3);
-            margin-top: 5px;
-        }
-
-        /* ===== МУЗЫКАЛЬНЫЙ ПЛЕЕР ===== */
-        .music-toggle {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 55px; height: 55px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--pink), var(--deep-rose));
-            border: none;
-            cursor: pointer;
-            z-index: 9990;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            box-shadow: 0 5px 25px rgba(255, 107, 157, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .music-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        .music-toggle.playing {
-            animation: musicPulse 1s ease infinite;
-        }
-
-        @keyframes musicPulse {
-            0%, 100% { box-shadow: 0 5px 25px rgba(255, 107, 157, 0.4); }
-            50% { box-shadow: 0 5px 35px rgba(255, 107, 157, 0.7); }
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            text-align: center;
-            padding: 60px 20px 40px;
-            border-top: 1px solid rgba(255, 107, 157, 0.1);
-        }
-
-        .footer-heart {
-            font-size: 3rem;
-            animation: heartPulse 1.5s ease infinite;
-            display: block;
-            margin-bottom: 20px;
-        }
-
-        footer p {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.4);
-            line-height: 1.8;
-        }
-
-        .footer-big {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2rem;
-            color: var(--pink);
-            margin-bottom: 15px;
-        }
-
-        /* ===== FLOATING HEARTS ON CLICK ===== */
-        .click-heart {
-            position: fixed;
-            pointer-events: none;
-            font-size: 1.5rem;
-            z-index: 9997;
-            animation: floatHeart 1.5s ease forwards;
-        }
-
-        @keyframes floatHeart {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-120px) scale(0.3); }
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 600px) {
-            .greeting-card {
-                padding: 30px 20px;
-            }
-
-            .qualities-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .wishes-timeline {
-                padding-left: 30px;
-            }
-
-            .wish-item {
-                padding: 20px;
-            }
-
-            section {
-                padding: 50px 15px;
-            }
-        }
-
-        /* ===== ГАЛЕРЕЯ СТИХОВ ===== */
+        /* ===== POEM CAROUSEL ===== */
         .poem-carousel {
             position: relative;
             overflow: hidden;
@@ -762,9 +561,7 @@
             animation: fadeInUp 0.6s ease;
         }
 
-        .poem-slide.active {
-            display: block;
-        }
+        .poem-slide.active { display: block; }
 
         .poem-slide p {
             font-family: 'Montserrat', sans-serif;
@@ -795,18 +592,564 @@
             box-shadow: 0 0 10px var(--pink);
         }
 
-        .poem-nav button:hover {
-            background: var(--pink);
+        .poem-nav button:hover { background: var(--pink); }
+
+        /* ===== COMPLIMENT SECTION ===== */
+        .compliment-section { text-align: center; }
+
+        .compliment-display {
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            margin: 30px 0;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 107, 157, 0.15);
+            border-radius: 20px;
         }
 
-        /* ===== ГИРЛЯНДА ===== */
-        .garland {
+        .compliment-display p {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.3rem, 4vw, 2rem);
+            color: var(--light-pink);
+            transition: all 0.5s ease;
+        }
+
+        .action-btn {
+            padding: 15px 40px;
+            font-family: 'Comfortaa', cursive;
+            font-size: 1rem;
+            background: linear-gradient(135deg, var(--pink), var(--deep-rose));
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 25px rgba(255, 107, 157, 0.3);
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 35px rgba(255, 107, 157, 0.5);
+        }
+
+        .action-btn:active { transform: scale(0.98); }
+
+        .action-btn.gold {
+            background: linear-gradient(135deg, var(--gold), #ff9500);
+            color: #1a0a14;
+            font-weight: 700;
+            box-shadow: 0 5px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .action-btn.gold:hover { box-shadow: 0 8px 35px rgba(255, 215, 0, 0.5); }
+
+        /* ===== ФОТОГАЛЕРЕЯ ===== */
+        .gallery-controls {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .gallery-controls p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .upload-area {
+            border: 2px dashed rgba(255, 107, 157, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background: rgba(255, 107, 157, 0.03);
+            margin-bottom: 30px;
+        }
+
+        .upload-area:hover {
+            border-color: var(--pink);
+            background: rgba(255, 107, 157, 0.08);
+        }
+
+        .upload-area.dragover {
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.08);
+            transform: scale(1.02);
+        }
+
+        .upload-area .upload-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
+
+        .upload-area .upload-text {
+            font-size: 1.1rem;
+            color: var(--light-pink);
+            margin-bottom: 5px;
+        }
+
+        .upload-area .upload-hint {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        #fileInput { display: none; }
+
+        /* Сетка фото */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 107, 157, 0.15);
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.5s ease;
+            animation: fadeInUp 0.6s ease;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--pink);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img { transform: scale(1.05); }
+
+        .gallery-item-info {
+            padding: 15px 20px;
+        }
+
+        .gallery-item-date {
+            font-size: 0.8rem;
+            color: var(--gold);
+            margin-bottom: 5px;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .gallery-item-caption {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
+        .gallery-item-actions {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 15px 15px;
             gap: 8px;
-            margin: 30px 0;
+        }
+
+        .gallery-small-btn {
+            padding: 5px 12px;
+            font-size: 0.75rem;
+            font-family: 'Comfortaa', cursive;
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            background: transparent;
+            color: var(--light-pink);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-small-btn:hover {
+            background: var(--pink);
+            color: #fff;
+            border-color: var(--pink);
+        }
+
+        .gallery-small-btn.delete:hover {
+            background: #ff4444;
+            border-color: #ff4444;
+        }
+
+        /* Пустая галерея */
+        .gallery-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .gallery-empty .empty-icon { font-size: 4rem; margin-bottom: 20px; display: block; }
+        .gallery-empty p { font-size: 1rem; }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-caption {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .lightbox-caption .lb-date {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .lightbox-caption .lb-text {
+            color: var(--light-pink);
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 30px;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: none;
+            border: none;
+        }
+
+        .lightbox-close:hover { color: var(--pink); transform: scale(1.2); }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            color: rgba(255,255,255,0.7);
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .lightbox-nav:hover { color: var(--pink); }
+        .lightbox-nav.prev { left: 10px; }
+        .lightbox-nav.next { right: 10px; }
+
+        /* ===== МОДАЛКА ДОБАВЛЕНИЯ ФОТО ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10002;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2d1b30, #1a0a14);
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            border-radius: 25px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .modal-content h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: var(--pink);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 12px 18px;
+            font-family: 'Comfortaa', cursive;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            border-radius: 12px;
+            color: #fff;
+            margin-bottom: 15px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .modal-input:focus { border-color: var(--pink); }
+
+        .modal-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        /* ===== ДНЕВНИК / LOVE NOTES ===== */
+        .notes-section { max-width: 700px; margin: 0 auto; }
+
+        .note-form {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 107, 157, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .note-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 107, 157, 0.15);
+            border-radius: 15px;
+            color: #fff;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .note-textarea:focus { border-color: var(--pink); }
+        .note-textarea::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+        .note-form-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
             flex-wrap: wrap;
         }
+
+        .mood-selector {
+            display: flex;
+            gap: 8px;
+        }
+
+        .mood-btn {
+            font-size: 1.5rem;
+            background: none;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            width: 40px; height: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mood-btn:hover { border-color: rgba(255, 107, 157, 0.3); }
+        .mood-btn.selected { border-color: var(--pink); background: rgba(255, 107, 157, 0.1); }
+
+        .notes-list { display: flex; flex-direction: column; gap: 20px; }
+
+        .note-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 107, 157, 0.1);
+            border-radius: 18px;
+            padding: 25px;
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.5s ease;
+            position: relative;
+        }
+
+        .note-card:hover {
+            border-color: rgba(255, 107, 157, 0.3);
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.08);
+        }
+
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .note-date {
+            font-size: 0.8rem;
+            color: var(--gold);
+        }
+
+        .note-mood { font-size: 1.3rem; }
+
+        .note-body {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+
+        .note-delete {
+            position: absolute;
+            top: 15px; right: 15px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .note-delete:hover { color: #ff4444; }
+
+        /* ===== COUNTDOWN / ОБРАТНЫЙ ОТСЧЁТ ===== */
+        .countdown-section { text-align: center; }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 107, 157, 0.15);
+            border-radius: 20px;
+            padding: 25px 20px;
+            min-width: 110px;
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: var(--pink);
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 5px;
+        }
+
+        .countdown-event-form {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .countdown-event-form .modal-input {
+            width: auto;
+            min-width: 200px;
+            margin-bottom: 0;
+        }
+
+        /* ===== LOVE COUNTER ===== */
+        .love-counter { text-align: center; padding: 60px 20px; }
+
+        .counter-value {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: var(--pink);
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.3);
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s ease;
+        }
+
+        .counter-value:active { transform: scale(1.1); }
+
+        .counter-label { font-size: 1rem; color: rgba(255, 255, 255, 0.5); margin-top: 10px; }
+        .counter-sublabel { font-size: 0.85rem; color: rgba(255, 255, 255, 0.3); margin-top: 5px; }
+
+        /* ===== FIREWORKS ===== */
+        .fireworks-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ===== CLICK HEARTS ===== */
+        .click-heart {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.5rem;
+            z-index: 9997;
+            animation: floatHeart 1.5s ease forwards;
+        }
+
+        @keyframes floatHeart {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-120px) scale(0.3); }
+        }
+
+        /* ===== MUSIC TOGGLE ===== */
+        .music-toggle {
+            position: fixed;
+            bottom: 25px; right: 25px;
+            width: 55px; height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink), var(--deep-rose));
+            border: none;
+            cursor: pointer;
+            z-index: 9990;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 25px rgba(255, 107, 157, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .music-toggle:hover { transform: scale(1.1); }
+
+        .music-toggle.playing { animation: musicPulse 1s ease infinite; }
+
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 5px 25px rgba(255, 107, 157, 0.4); }
+            50% { box-shadow: 0 5px 35px rgba(255, 107, 157, 0.7); }
+        }
+
+        /* ===== GARLAND ===== */
+        .garland { display: flex; justify-content: center; gap: 8px; margin: 30px 0; flex-wrap: wrap; }
 
         .garland-light {
             width: 12px; height: 12px;
@@ -818,6 +1161,45 @@
             0%, 100% { opacity: 0.3; transform: scale(0.8); }
             50% { opacity: 1; transform: scale(1.2); }
         }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            border-top: 1px solid rgba(255, 107, 157, 0.1);
+        }
+
+        .footer-heart { font-size: 3rem; animation: heartPulse 1.5s ease infinite; display: block; margin-bottom: 20px; }
+
+        footer p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 1.8;
+        }
+
+        .footer-big {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: var(--pink);
+            margin-bottom: 15px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .greeting-card { padding: 30px 20px; }
+            .qualities-grid { grid-template-columns: 1fr; }
+            .wishes-timeline { padding-left: 30px; }
+            .wish-item { padding: 20px; }
+            section { padding: 50px 15px; }
+            .navbar { gap: 5px; padding: 10px 15px; }
+            .nav-btn { padding: 6px 12px; font-size: 0.7rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .countdown-grid { gap: 10px; }
+            .countdown-item { min-width: 80px; padding: 15px; }
+            .countdown-number { font-size: 2rem; }
+            .modal-content { padding: 25px; }
+        }
     </style>
 </head>
 <body>
@@ -825,259 +1207,325 @@
     <!-- ВСТУПИТЕЛЬНЫЙ ЭКРАН -->
     <div class="intro-screen" id="introScreen">
         <h1>Для тебя, Катя 💝</h1>
-        <p>Особенное поздравление с 8 марта</p>
+        <p>Особенное место только для нас двоих</p>
         <button class="enter-btn" onclick="enterSite()">Открыть 🌸</button>
     </div>
 
-    <!-- ПАДАЮЩИЕ ЛЕПЕСТКИ -->
+    <!-- ЛЕПЕСТКИ -->
     <div class="particles-container" id="particles"></div>
 
-    <!-- CANVAS ДЛЯ ФЕЙЕРВЕРКОВ -->
+    <!-- ФЕЙЕРВЕРКИ -->
     <canvas class="fireworks-canvas" id="fireworksCanvas"></canvas>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <button class="lightbox-nav prev" onclick="lightboxNav(-1)">‹</button>
+        <button class="lightbox-nav next" onclick="lightboxNav(1)">›</button>
+        <img id="lightboxImg" src="" alt="">
+        <div class="lightbox-caption">
+            <div class="lb-date" id="lightboxDate"></div>
+            <div class="lb-text" id="lightboxCaption"></div>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА ДОБАВЛЕНИЯ ФОТО -->
+    <div class="modal-overlay" id="photoModal">
+        <div class="modal-content">
+            <h3>Добавить фото 📷</h3>
+            <img class="modal-preview" id="modalPreview" src="" alt="" style="display: none;">
+            <input type="text" class="modal-input" id="photoCaption" placeholder="Подпись к фото... 💕">
+            <input type="date" class="modal-input" id="photoDate">
+            <div class="modal-buttons">
+                <button class="action-btn" onclick="savePhoto()">Сохранить 💝</button>
+                <button class="action-btn" style="background: rgba(255,255,255,0.1);" onclick="closePhotoModal()">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- НАВИГАЦИЯ -->
+    <nav class="navbar" id="navbar">
+        <button class="nav-btn active" onclick="showPage('home')">🏠 Главная</button>
+        <button class="nav-btn" onclick="showPage('gallery')">📸 Наши фото</button>
+        <button class="nav-btn" onclick="showPage('diary')">📝 Дневник</button>
+        <button class="nav-btn" onclick="showPage('countdown')">⏰ Отсчёт</button>
+        <button class="nav-btn" onclick="showPage('fun')">✨ Развлечения</button>
+    </nav>
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div class="main-content" id="mainContent">
 
-        <!-- ХЕДЕР -->
-        <header>
-            <div class="header-decoration d1"></div>
-            <div class="header-decoration d2"></div>
-            <div class="header-decoration d3"></div>
+        <!-- ==================== ГЛАВНАЯ ==================== -->
+        <div class="page active" id="page-home">
+            <header>
+                <div class="header-decoration d1"></div>
+                <div class="header-decoration d2"></div>
+                <div class="header-decoration d3"></div>
+                <h1 class="main-title">С 8 Марта, Катя!</h1>
+                <p class="subtitle">Самой прекрасной девушке на свете</p>
+                <div class="date-badge">✦ 8 МАРТА 2025 ✦</div>
+                <div class="scroll-indicator"><span></span></div>
+            </header>
 
-            <h1 class="main-title">С 8 Марта, Катя!</h1>
-            <p class="subtitle">Самой прекрасной девушке на свете</p>
-            <div class="date-badge">✦ 8 МАРТА 2025 ✦</div>
+            <div class="garland" id="garland"></div>
 
-            <div class="scroll-indicator">
-                <span></span>
-            </div>
-        </header>
+            <!-- Поздравление -->
+            <section>
+                <h2 class="section-title">Моё поздравление</h2>
+                <div class="greeting-card">
+                    <div class="greeting-text">
+                        <span class="name">Катюша,</span><br><br>
+                        Сегодня <span class="highlight">особенный день</span> — день, когда весь мир
+                        празднует красоту, нежность и силу женщин. Но для меня каждый день рядом с тобой —
+                        это праздник. 🌷<br><br>
+                        Ты — мой <span class="highlight">солнечный лучик</span> в пасмурный день,
+                        моя <span class="highlight">тихая гавань</span> в штормовом море
+                        и самая <span class="highlight">яркая звезда</span> на моём небе. ✨<br><br>
+                        Спасибо тебе за каждую улыбку, за каждый взгляд,
+                        за то, что ты <span class="highlight">наполняешь мою жизнь смыслом</span>
+                        и делаешь её по-настоящему прекрасной. 💕<br><br>
+                        Я хочу, чтобы ты всегда была счастлива —
+                        так же <span class="highlight">безгранично счастлива</span>,
+                        как ты делаешь счастливым меня. 🌸
+                    </div>
+                </div>
+            </section>
 
-        <!-- ГИРЛЯНДА -->
-        <div class="garland" id="garland"></div>
+            <!-- Качества -->
+            <section>
+                <h2 class="section-title">Почему ты особенная</h2>
+                <div class="qualities-grid">
+                    <div class="quality-card"><span class="quality-icon">🌺</span><h3>Красота</h3><p>Ты прекрасна не только внешне — твоя душа сияет невероятным светом</p></div>
+                    <div class="quality-card"><span class="quality-icon">💫</span><h3>Вдохновение</h3><p>Рядом с тобой хочется становиться лучше каждый день</p></div>
+                    <div class="quality-card"><span class="quality-icon">🦋</span><h3>Нежность</h3><p>Твоя нежность согревает даже в самые холодные дни</p></div>
+                    <div class="quality-card"><span class="quality-icon">🔥</span><h3>Сила</h3><p>За хрупкостью скрывается невероятная сила духа</p></div>
+                    <div class="quality-card"><span class="quality-icon">✨</span><h3>Уникальность</h3><p>Таких, как ты — больше нет и никогда не будет</p></div>
+                    <div class="quality-card"><span class="quality-icon">🌙</span><h3>Магия</h3><p>Ты умеешь превращать обычные моменты в волшебные</p></div>
+                </div>
+            </section>
 
-        <!-- ПОЗДРАВЛЕНИЕ -->
-        <section>
-            <h2 class="section-title">Моё поздравление</h2>
-            <div class="greeting-card">
-                <div class="greeting-text">
-                    <span class="name">Катюша,</span><br><br>
-                    Сегодня <span class="highlight">особенный день</span> — день, когда весь мир
-                    празднует красоту, нежность и силу женщин. Но для меня каждый день рядом с тобой —
-                    это праздник. 🌷<br><br>
-                    Ты — мой <span class="highlight">солнечный лучик</span> в пасмурный день,
-                    моя <span class="highlight">тихая гавань</span> в штормовом море
-                    и самая <span class="highlight">яркая звезда</span> на моём небе. ✨<br><br>
-                    Спасибо тебе за каждую улыбку, за каждый взгляд,
-                    за то, что ты <span class="highlight">наполняешь мою жизнь смыслом</span>
-                    и делаешь её по-настоящему прекрасной. 💕<br><br>
-                    Я хочу, чтобы ты всегда была счастлива —
-                    так же <span class="highlight">безгранично счастлива</span>,
-                    как ты делаешь счастливым меня. 🌸
+            <!-- Стихи -->
+            <section>
+                <h2 class="section-title">Строки для тебя</h2>
+                <div class="poem-carousel">
+                    <div class="poem-slide active" data-poem="0"><p>Весна приходит не с капелью,<br>Не с первым солнечным лучом —<br>Она приходит с нежной трелью<br>Твоих шагов за мой порог.<br><br>Ты — вся весна в одном дыханье,<br>Ты — первоцвет среди снегов,<br>Ты — тёплое воспоминанье<br>О самом главном из миров. 🌷</p></div>
+                    <div class="poem-slide" data-poem="1"><p>Когда ты рядом — мир светлее,<br>И звёзды ярче в вышине,<br>И я становлюсь чуть смелее,<br>И верю в сказку, как во сне.<br><br>Восьмое марта — лишь причина<br>Сказать, что значишь ты для меня:<br>Ты — самая красивая картина,<br>Что нарисована для меня. 💐</p></div>
+                    <div class="poem-slide" data-poem="2"><p>Не хватит слов, не хватит строчек,<br>Чтоб описать твою красу,<br>Но знай — ты больше, чем цветочек,<br>Ты — целый сад. Тебя люблю! 🌸<br><br>С Восьмым марта, моя родная,<br>Пусть счастье будет без границ,<br>Ты — лучшая, неповторимая,<br>Прекраснее всех в мире лиц. 💝</p></div>
                 </div>
-            </div>
-        </section>
+                <div class="poem-nav">
+                    <button class="active" onclick="showPoem(0)"></button>
+                    <button onclick="showPoem(1)"></button>
+                    <button onclick="showPoem(2)"></button>
+                </div>
+            </section>
 
-        <!-- КАЧЕСТВА -->
-        <section>
-            <h2 class="section-title">Почему ты особенная</h2>
-            <div class="qualities-grid">
-                <div class="quality-card">
-                    <span class="quality-icon">🌺</span>
-                    <h3>Красота</h3>
-                    <p>Ты прекрасна не только внешне — твоя душа сияет невероятным светом</p>
+            <!-- Пожелания -->
+            <section>
+                <h2 class="section-title">Мои пожелания тебе</h2>
+                <div class="wishes-timeline">
+                    <div class="wish-item"><span class="wish-emoji">🌅</span><h3>Счастья</h3><p>Пусть каждое утро начинается с улыбки, а каждый вечер заканчивается чувством, что день прожит не зря.</p></div>
+                    <div class="wish-item"><span class="wish-emoji">💪</span><h3>Здоровья</h3><p>Крепкого здоровья и неиссякаемой энергии для всех твоих мечтаний и планов.</p></div>
+                    <div class="wish-item"><span class="wish-emoji">🎯</span><h3>Исполнения мечт</h3><p>Пусть все твои мечты — даже самые смелые и невероятные — сбудутся!</p></div>
+                    <div class="wish-item"><span class="wish-emoji">🌈</span><h3>Ярких моментов</h3><p>Пусть жизнь дарит тебе моменты, от которых захватывает дух.</p></div>
+                    <div class="wish-item"><span class="wish-emoji">🤗</span><h3>Любви</h3><p>Пусть тебя всегда окружают те, кто любит и ценит тебя по-настоящему. Люблю тебя! ❤️</p></div>
+                    <div class="wish-item"><span class="wish-emoji">🦄</span><h3>Волшебства</h3><p>Пусть в твоей жизни всегда будет место для чудес, магии и сказки!</p></div>
                 </div>
-                <div class="quality-card">
-                    <span class="quality-icon">💫</span>
-                    <h3>Вдохновение</h3>
-                    <p>Рядом с тобой хочется становиться лучше каждый день</p>
-                </div>
-                <div class="quality-card">
-                    <span class="quality-icon">🦋</span>
-                    <h3>Нежность</h3>
-                    <p>Твоя нежность согревает даже в самые холодные дни</p>
-                </div>
-                <div class="quality-card">
-                    <span class="quality-icon">🔥</span>
-                    <h3>Сила</h3>
-                    <p>За хрупкостью скрывается невероятная сила духа</p>
-                </div>
-                <div class="quality-card">
-                    <span class="quality-icon">✨</span>
-                    <h3>Уникальность</h3>
-                    <p>Таких, как ты — больше нет и никогда не будет</p>
-                </div>
-                <div class="quality-card">
-                    <span class="quality-icon">🌙</span>
-                    <h3>Магия</h3>
-                    <p>Ты умеешь превращать обычные моменты в волшебные</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- СТИХИ -->
-        <section>
-            <h2 class="section-title">Строки для тебя</h2>
-            <div class="poem-carousel">
-                <div class="poem-slide active" data-poem="0">
-                    <p>
-                        Весна приходит не с капелью,<br>
-                        Не с первым солнечным лучом —<br>
-                        Она приходит с нежной трелью<br>
-                        Твоих шагов за мой порог.<br><br>
-                        Ты — вся весна в одном дыханье,<br>
-                        Ты — первоцвет среди снегов,<br>
-                        Ты — тёплое воспоминанье<br>
-                        О самом главном из миров. 🌷
-                    </p>
+            <!-- Конверт -->
+            <section class="envelope-section">
+                <h2 class="section-title">Секретное послание</h2>
+                <div class="envelope-wrapper" onclick="openEnvelope()">
+                    <div class="envelope" id="envelope">
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-body"></div>
+                        <span class="heart-seal">💌</span>
+                    </div>
+                    <p class="envelope-hint">Нажми, чтобы открыть конверт</p>
                 </div>
-                <div class="poem-slide" data-poem="1">
-                    <p>
-                        Когда ты рядом — мир светлее,<br>
-                        И звёзды ярче в вышине,<br>
-                        И я становлюсь чуть смелее,<br>
-                        И верю в сказку, как во сне.<br><br>
-                        Восьмое марта — лишь причина<br>
-                        Сказать, что значишь ты для меня:<br>
-                        Ты — самая красивая картина,<br>
-                        Что нарисована для меня. 💐
-                    </p>
+                <div class="secret-message" id="secretMessage">
+                    <p>Катя, ты — лучшее, что случалось в моей жизни. 💖<br><br>Каждый день рядом с тобой — это подарок, который я буду ценить вечно. 🌟<br><br>Ты делаешь мой мир прекрасным просто тем, что ты в нём есть. 🦋</p>
                 </div>
-                <div class="poem-slide" data-poem="2">
-                    <p>
-                        Не хватит слов, не хватит строчек,<br>
-                        Чтоб описать твою красу,<br>
-                        Но знай — ты больше, чем цветочек,<br>
-                        Ты — целый сад. Тебя люблю! 🌸<br><br>
-                        С Восьмым марта, моя родная,<br>
-                        Пусть счастье будет без границ,<br>
-                        Ты — лучшая, неповторимая,<br>
-                        Прекраснее всех в мире лиц. 💝
-                    </p>
-                </div>
-            </div>
-            <div class="poem-nav">
-                <button class="active" onclick="showPoem(0)"></button>
-                <button onclick="showPoem(1)"></button>
-                <button onclick="showPoem(2)"></button>
-            </div>
-        </section>
+            </section>
+        </div>
 
-        <!-- ПОЖЕЛАНИЯ -->
-        <section>
-            <h2 class="section-title">Мои пожелания тебе</h2>
-            <div class="wishes-timeline">
-                <div class="wish-item">
-                    <span class="wish-emoji">🌅</span>
-                    <h3>Счастья</h3>
-                    <p>Пусть каждое утро начинается с улыбки, а каждый вечер заканчивается чувством, что день прожит не зря. Ты заслуживаешь океан счастья!</p>
-                </div>
-                <div class="wish-item">
-                    <span class="wish-emoji">💪</span>
-                    <h3>Здоровья</h3>
-                    <p>Крепкого здоровья и неиссякаемой энергии для всех твоих мечтаний и планов. Береги себя — ты бесценна.</p>
-                </div>
-                <div class="wish-item">
-                    <span class="wish-emoji">🎯</span>
-                    <h3>Исполнения мечт</h3>
-                    <p>Пусть все твои мечты — даже самые смелые и невероятные — сбудутся. А я постараюсь помочь исполнить каждую из них!</p>
-                </div>
-                <div class="wish-item">
-                    <span class="wish-emoji">🌈</span>
-                    <h3>Ярких моментов</h3>
-                    <p>Пусть жизнь дарит тебе моменты, от которых захватывает дух. Путешествия, открытия, приключения — всё самое лучшее!</p>
-                </div>
-                <div class="wish-item">
-                    <span class="wish-emoji">🤗</span>
-                    <h3>Любви</h3>
-                    <p>Пусть тебя всегда окружают те, кто любит и ценит тебя по-настоящему. И знай — я всегда буду рядом. Люблю тебя! ❤️</p>
-                </div>
-                <div class="wish-item">
-                    <span class="wish-emoji">🦄</span>
-                    <h3>Волшебства</h3>
-                    <p>Пусть в твоей жизни всегда будет место для чудес, магии и сказки. Ведь ты сама — настоящее волшебство!</p>
-                </div>
-            </div>
-        </section>
+        <!-- ==================== ФОТОГАЛЕРЕЯ ==================== -->
+        <div class="page" id="page-gallery">
+            <section>
+                <h2 class="section-title">Наши моменты</h2>
 
-        <!-- КОНВЕРТ -->
-        <section class="envelope-section">
-            <h2 class="section-title">Секретное послание</h2>
-            <div class="envelope-wrapper" onclick="openEnvelope()">
-                <div class="envelope" id="envelope">
-                    <div class="envelope-flap"></div>
-                    <div class="envelope-body"></div>
-                    <span class="heart-seal">💌</span>
+                <div class="gallery-controls">
+                    <p>Загружай наши совместные фотографии — они сохранятся в браузере 💕</p>
+                    <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                        <span class="upload-icon">📷</span>
+                        <div class="upload-text">Нажми или перетащи фото сюда</div>
+                        <div class="upload-hint">Поддерживаются JPG, PNG, WEBP</div>
+                    </div>
+                    <input type="file" id="fileInput" accept="image/*" multiple onchange="handleFiles(this.files)">
                 </div>
-                <p class="envelope-hint">Нажми, чтобы открыть конверт</p>
-            </div>
-            <div class="secret-message" id="secretMessage">
-                <p>
-                    Катя, я хочу, чтобы ты знала:<br>
-                    ты — лучшее, что случалось в моей жизни. 💖<br><br>
-                    Каждый день рядом с тобой — это подарок,<br>
-                    который я буду ценить вечно. 🌟<br><br>
-                    Ты делаешь мой мир прекрасным<br>
-                    просто тем, что ты в нём есть. 🦋
+
+                <div id="galleryContainer">
+                    <div class="gallery-grid" id="galleryGrid"></div>
+                    <div class="gallery-empty" id="galleryEmpty">
+                        <span class="empty-icon">📸</span>
+                        <p>Пока нет фотографий.<br>Добавь первую — начни нашу историю!</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== ДНЕВНИК ==================== -->
+        <div class="page" id="page-diary">
+            <section class="notes-section">
+                <h2 class="section-title">Наш дневник любви</h2>
+                <p style="text-align:center; color:rgba(255,255,255,0.5); margin-bottom:30px;">
+                    Записывай моменты, мысли и воспоминания — всё сохранится 💝
                 </p>
-            </div>
-        </section>
 
-        <!-- ГЕНЕРАТОР КОМПЛИМЕНТОВ -->
-        <section class="compliment-section">
-            <h2 class="section-title">Генератор комплиментов</h2>
-            <p style="color: rgba(255,255,255,0.5); margin-bottom: 10px;">Нажимай снова и снова — все комплименты для тебя!</p>
-            <div class="compliment-display" id="complimentDisplay">
-                <p id="complimentText">Нажми кнопку ✨</p>
-            </div>
-            <button class="compliment-btn" onclick="generateCompliment()">🌸 Новый комплимент</button>
-        </section>
+                <div class="note-form">
+                    <textarea class="note-textarea" id="noteText" placeholder="Напиши что-нибудь приятное... 💭"></textarea>
+                    <div class="note-form-row">
+                        <div class="mood-selector">
+                            <button class="mood-btn" onclick="selectMood(this, '🥰')">🥰</button>
+                            <button class="mood-btn" onclick="selectMood(this, '😍')">😍</button>
+                            <button class="mood-btn" onclick="selectMood(this, '🤗')">🤗</button>
+                            <button class="mood-btn" onclick="selectMood(this, '💕')">💕</button>
+                            <button class="mood-btn" onclick="selectMood(this, '🌸')">🌸</button>
+                            <button class="mood-btn" onclick="selectMood(this, '✨')">✨</button>
+                        </div>
+                        <button class="action-btn" onclick="addNote()" style="margin-left:auto;">Сохранить 💌</button>
+                    </div>
+                </div>
 
-        <!-- ФЕЙЕРВЕРК -->
-        <section class="firework-btn-container">
-            <h2 class="section-title">Устроим салют!</h2>
-            <button class="firework-btn" onclick="launchFireworks()">🎆 Запустить салют в твою честь!</button>
-        </section>
+                <div class="notes-list" id="notesList"></div>
+            </section>
+        </div>
 
-        <!-- СЧЁТЧИК ЛЮБВИ -->
-        <section class="love-counter">
-            <h2 class="section-title">Счётчик любви</h2>
-            <p style="color: rgba(255,255,255,0.5); margin-bottom: 20px;">Нажимай на сердечко!</p>
-            <div class="counter-value" id="loveCounter" onclick="addLove(event)">❤️ 0</div>
-            <p class="counter-label">раз нажато с любовью</p>
-            <p class="counter-sublabel">(но на самом деле моя любовь к тебе бесконечна)</p>
-        </section>
+        <!-- ==================== ОБРАТНЫЙ ОТСЧЁТ ==================== -->
+        <div class="page" id="page-countdown">
+            <section class="countdown-section">
+                <h2 class="section-title">Сколько мы вместе</h2>
+                <p style="color:rgba(255,255,255,0.5); margin-bottom:10px;">Укажи дату начала наших отношений:</p>
 
-        <!-- ФУТЕР -->
+                <div style="text-align:center; margin-bottom:30px;">
+                    <input type="date" class="modal-input" id="relationshipDate" style="width:auto; display:inline-block;" onchange="saveRelationshipDate()">
+                </div>
+
+                <div class="countdown-grid" id="togetherCountdown">
+                    <div class="countdown-item"><span class="countdown-number" id="countDays">0</span><span class="countdown-label">дней</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="countHours">0</span><span class="countdown-label">часов</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="countMinutes">0</span><span class="countdown-label">минут</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="countSeconds">0</span><span class="countdown-label">секунд</span></div>
+                </div>
+
+                <div style="text-align:center; margin-top:50px;">
+                    <h2 class="section-title">Обратный отсчёт до события</h2>
+                    <p style="color:rgba(255,255,255,0.5); margin-bottom:20px;">Добавь важную дату — годовщину, день рождения, поездку...</p>
+
+                    <div class="countdown-event-form">
+                        <input type="text" class="modal-input" id="eventName" placeholder="Название события 🎉">
+                        <input type="date" class="modal-input" id="eventDate">
+                        <button class="action-btn" onclick="saveEvent()">Добавить</button>
+                    </div>
+
+                    <div id="eventsList" style="margin-top:30px;"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== РАЗВЛЕЧЕНИЯ ==================== -->
+        <div class="page" id="page-fun">
+            <!-- Комплименты -->
+            <section class="compliment-section">
+                <h2 class="section-title">Генератор комплиментов</h2>
+                <p style="color:rgba(255,255,255,0.5); margin-bottom:10px;">Нажимай снова и снова — все комплименты для тебя!</p>
+                <div class="compliment-display" id="complimentDisplay">
+                    <p id="complimentText">Нажми кнопку ✨</p>
+                </div>
+                <button class="action-btn" onclick="generateCompliment()">🌸 Новый комплимент</button>
+            </section>
+
+            <!-- Фейерверк -->
+            <section style="text-align:center;">
+                <h2 class="section-title">Устроим салют!</h2>
+                <button class="action-btn gold" onclick="launchFireworks()">🎆 Запустить салют в твою честь!</button>
+            </section>
+
+            <!-- Счётчик любви -->
+            <section class="love-counter">
+                <h2 class="section-title">Счётчик любви</h2>
+                <p style="color:rgba(255,255,255,0.5); margin-bottom:20px;">Нажимай на сердечко!</p>
+                <div class="counter-value" id="loveCounter" onclick="addLove(event)">❤️ 0</div>
+                <p class="counter-label">раз нажато с любовью</p>
+                <p class="counter-sublabel">(но на самом деле моя любовь к тебе бесконечна)</p>
+            </section>
+        </div>
+
+        <!-- FOOTER -->
         <footer>
             <span class="footer-heart">💝</span>
             <p class="footer-big">С любовью, навсегда твой ❤️</p>
-            <p>Создано специально для Кати • 8 Марта 2025</p>
+            <p>Создано специально для Кати • 2025</p>
             <p style="margin-top: 10px;">Ты — моё всё 🌸</p>
         </footer>
     </div>
 
-    <!-- КНОПКА МУЗЫКИ -->
-    <button class="music-toggle" id="musicBtn" onclick="toggleMusic()" title="Включить музыку">
-        🎵
-    </button>
+    <!-- МУЗЫКА -->
+    <button class="music-toggle" id="musicBtn" onclick="toggleMusic()" title="Включить музыку">🎵</button>
 
     <script>
-        // ===== ВХОД НА САЙТ =====
+        // =============================================
+        // НАВИГАЦИЯ
+        // =============================================
+        let currentPage = 'home';
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            currentPage = pageId;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (pageId === 'gallery') renderGallery();
+            if (pageId === 'diary') renderNotes();
+            if (pageId === 'countdown') initCountdown();
+        }
+
+        // Скрытие навбара при скролле вниз
+        let lastScrollY = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                navbar.classList.add('hidden');
+            } else {
+                navbar.classList.remove('hidden');
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // =============================================
+        // ВХОД НА САЙТ
+        // =============================================
         function enterSite() {
             document.getElementById('introScreen').classList.add('hidden');
             document.getElementById('mainContent').classList.add('visible');
             createPetals();
             createGarland();
             startObserver();
+            loadLoveCount();
+            initCountdown();
         }
 
-        // ===== ПАДАЮЩИЕ ЛЕПЕСТКИ =====
+        // =============================================
+        // ЛЕПЕСТКИ
+        // =============================================
         function createPetals() {
             const container = document.getElementById('particles');
             const colors = ['#ff6b9d', '#ffc2d1', '#e6b8f7', '#ffd700', '#ff9a9e', '#fad0c4'];
-
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 25; i++) {
                 setTimeout(() => {
                     const petal = document.createElement('div');
                     petal.classList.add('petal');
@@ -1085,19 +1533,21 @@
                     petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                     petal.style.animationDuration = (Math.random() * 8 + 6) + 's';
                     petal.style.animationDelay = (Math.random() * 10) + 's';
-                    petal.style.width = (Math.random() * 10 + 8) + 'px';
-                    petal.style.height = petal.style.width;
+                    const size = (Math.random() * 10 + 8) + 'px';
+                    petal.style.width = size;
+                    petal.style.height = size;
                     petal.style.opacity = Math.random() * 0.5 + 0.3;
                     container.appendChild(petal);
                 }, i * 300);
             }
         }
 
-        // ===== ГИРЛЯНДА =====
+        // =============================================
+        // ГИРЛЯНДА
+        // =============================================
         function createGarland() {
             const garland = document.getElementById('garland');
             const colors = ['#ff6b9d', '#ffd700', '#e6b8f7', '#ff9a9e', '#87CEEB', '#98FB98'];
-
             for (let i = 0; i < 40; i++) {
                 const light = document.createElement('div');
                 light.classList.add('garland-light');
@@ -1108,52 +1558,48 @@
             }
         }
 
-        // ===== INTERSECTION OBSERVER ДЛЯ АНИМАЦИИ =====
+        // =============================================
+        // OBSERVER
+        // =============================================
         function startObserver() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
                 });
             }, { threshold: 0.2 });
-
-            document.querySelectorAll('.wish-item').forEach(item => {
-                observer.observe(item);
-            });
+            document.querySelectorAll('.wish-item').forEach(item => observer.observe(item));
         }
 
-        // ===== КОНВЕРТ =====
+        // =============================================
+        // КОНВЕРТ
+        // =============================================
         function openEnvelope() {
             const envelope = document.getElementById('envelope');
             const message = document.getElementById('secretMessage');
             envelope.classList.toggle('open');
-
             if (envelope.classList.contains('open')) {
-                setTimeout(() => {
-                    message.classList.add('show');
-                }, 500);
+                setTimeout(() => message.classList.add('show'), 500);
             } else {
                 message.classList.remove('show');
             }
         }
 
-        // ===== СТИХИ =====
+        // =============================================
+        // СТИХИ
+        // =============================================
+        let currentPoem = 0;
         function showPoem(index) {
             document.querySelectorAll('.poem-slide').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.poem-nav button').forEach(b => b.classList.remove('active'));
             document.querySelector(`[data-poem="${index}"]`).classList.add('active');
             document.querySelectorAll('.poem-nav button')[index].classList.add('active');
+            currentPoem = index;
         }
+        setInterval(() => { currentPoem = (currentPoem + 1) % 3; showPoem(currentPoem); }, 8000);
 
-        // Автопереключение стихов
-        let currentPoem = 0;
-        setInterval(() => {
-            currentPoem = (currentPoem + 1) % 3;
-            showPoem(currentPoem);
-        }, 8000);
-
-        // ===== ГЕНЕРАТОР КОМПЛИМЕНТОВ =====
+        // =============================================
+        // КОМПЛИМЕНТЫ
+        // =============================================
         const compliments = [
             "Катя, ты прекраснее всех рассветов мира вместе взятых 🌅",
             "Твоя улыбка лечит любые раны на сердце 💝",
@@ -1172,7 +1618,7 @@
             "Твоя доброта согревает лучше любого камина 🔥",
             "Ты — то самое «вау» в моём каждом дне 🤩",
             "Даже звёзды завидуют тому, как ты сияешь ⭐",
-            "Ты — лучший подарок, который мне когда-либо дарила судьба 🎁",
+            "Ты — лучший подарок, который мне дарила судьба 🎁",
             "Катюша, ты бесконечно потрясающая! 💫",
             "Ты делаешь обычные дни необыкновенными 🦋"
         ];
@@ -1180,15 +1626,11 @@
         let lastCompliment = -1;
         function generateCompliment() {
             let index;
-            do {
-                index = Math.floor(Math.random() * compliments.length);
-            } while (index === lastCompliment);
+            do { index = Math.floor(Math.random() * compliments.length); } while (index === lastCompliment);
             lastCompliment = index;
-
             const text = document.getElementById('complimentText');
             text.style.opacity = 0;
             text.style.transform = 'translateY(20px)';
-
             setTimeout(() => {
                 text.textContent = compliments[index];
                 text.style.opacity = 1;
@@ -1196,27 +1638,36 @@
             }, 300);
         }
 
-        // ===== СЧЁТЧИК ЛЮБВИ =====
+        // =============================================
+        // СЧЁТЧИК ЛЮБВИ
+        // =============================================
         let loveCount = 0;
+        function loadLoveCount() {
+            loveCount = parseInt(localStorage.getItem('loveCount') || '0');
+            document.getElementById('loveCounter').innerHTML = `❤️ ${loveCount}`;
+        }
+
         function addLove(event) {
             loveCount++;
             document.getElementById('loveCounter').innerHTML = `❤️ ${loveCount}`;
+            localStorage.setItem('loveCount', loveCount);
+            spawnHeart(event.clientX, event.clientY);
+        }
 
-            // Сердечко вылетает
+        function spawnHeart(x, y) {
             const heart = document.createElement('div');
             heart.classList.add('click-heart');
             heart.textContent = ['❤️', '💕', '💖', '💗', '💝', '🌸', '✨'][Math.floor(Math.random() * 7)];
-            heart.style.left = event.clientX + 'px';
-            heart.style.top = event.clientY + 'px';
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
             document.body.appendChild(heart);
-
             setTimeout(() => heart.remove(), 1500);
         }
 
-        // ===== СЕРДЕЧКИ ПО КЛИКУ В ЛЮБОМ МЕСТЕ =====
+        // Сердечки по клику
         document.addEventListener('click', (e) => {
             if (e.target.closest('.love-counter') || e.target.id === 'loveCounter') return;
-
+            if (e.target.closest('button') || e.target.closest('input') || e.target.closest('textarea')) return;
             const heart = document.createElement('div');
             heart.classList.add('click-heart');
             heart.textContent = ['💕', '🌸', '✨', '💖'][Math.floor(Math.random() * 4)];
@@ -1226,24 +1677,21 @@
             setTimeout(() => heart.remove(), 1500);
         });
 
-        // ===== ФЕЙЕРВЕРКИ =====
+        // =============================================
+        // ФЕЙЕРВЕРКИ
+        // =============================================
         const canvas = document.getElementById('fireworksCanvas');
         const ctx = canvas.getContext('2d');
         let fireworkParticles = [];
         let fireworksRunning = false;
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
         class FireworkParticle {
             constructor(x, y, color) {
-                this.x = x;
-                this.y = y;
-                this.color = color;
+                this.x = x; this.y = y; this.color = color;
                 const angle = Math.random() * Math.PI * 2;
                 const speed = Math.random() * 6 + 2;
                 this.vx = Math.cos(angle) * speed;
@@ -1252,48 +1700,27 @@
                 this.decay = Math.random() * 0.015 + 0.01;
                 this.size = Math.random() * 3 + 1;
             }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.vy += 0.05;
-                this.alpha -= this.decay;
-            }
+            update() { this.x += this.vx; this.y += this.vy; this.vy += 0.05; this.alpha -= this.decay; }
             draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
+                ctx.save(); ctx.globalAlpha = this.alpha; ctx.fillStyle = this.color;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); ctx.restore();
             }
         }
 
         function createFirework() {
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height * 0.5 + 50;
-            const colors = ['#ff6b9d', '#ffd700', '#e6b8f7', '#ff9a9e', '#87CEEB', '#ff69b4', '#ffc0cb', '#FFD700'];
+            const colors = ['#ff6b9d', '#ffd700', '#e6b8f7', '#ff9a9e', '#87CEEB', '#ff69b4'];
             const color = colors[Math.floor(Math.random() * colors.length)];
-
-            for (let i = 0; i < 80; i++) {
-                fireworkParticles.push(new FireworkParticle(x, y, color));
-            }
+            for (let i = 0; i < 80; i++) fireworkParticles.push(new FireworkParticle(x, y, color));
         }
 
         function animateFireworks() {
             if (!fireworksRunning && fireworkParticles.length === 0) return;
-
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
             fireworkParticles = fireworkParticles.filter(p => p.alpha > 0);
-            fireworkParticles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-
-            if (fireworkParticles.length > 0 || fireworksRunning) {
-                requestAnimationFrame(animateFireworks);
-            }
+            fireworkParticles.forEach(p => { p.update(); p.draw(); });
+            if (fireworkParticles.length > 0 || fireworksRunning) requestAnimationFrame(animateFireworks);
         }
 
         function launchFireworks() {
@@ -1303,84 +1730,351 @@
                 createFirework();
                 if (Math.random() > 0.5) createFirework();
                 count++;
-                if (count > 15) {
-                    clearInterval(interval);
-                    fireworksRunning = false;
-                }
+                if (count > 15) { clearInterval(interval); fireworksRunning = false; }
             }, 400);
             animateFireworks();
         }
 
-        // ===== МУЗЫКА (Web Audio API) =====
-        let audioContext;
-        let isPlaying = false;
-        let musicInterval;
+        // =============================================
+        // МУЗЫКА
+        // =============================================
+        let audioContext, isPlaying = false, musicInterval;
 
         function toggleMusic() {
             const btn = document.getElementById('musicBtn');
-
             if (!isPlaying) {
-                if (!audioContext) {
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                }
+                if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 playMelody();
-                btn.classList.add('playing');
-                btn.textContent = '🎶';
-                isPlaying = true;
+                btn.classList.add('playing'); btn.textContent = '🎶'; isPlaying = true;
             } else {
                 clearInterval(musicInterval);
-                btn.classList.remove('playing');
-                btn.textContent = '🎵';
-                isPlaying = false;
+                btn.classList.remove('playing'); btn.textContent = '🎵'; isPlaying = false;
             }
         }
 
-        function playNote(frequency, startTime, duration, type = 'sine') {
+        function playNote(freq, start, dur, type = 'sine') {
             if (!audioContext) return;
             const osc = audioContext.createOscillator();
             const gain = audioContext.createGain();
-            osc.type = type;
-            osc.frequency.value = frequency;
-            gain.gain.setValueAtTime(0, startTime);
-            gain.gain.linearRampToValueAtTime(0.08, startTime + 0.05);
-            gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
-            osc.connect(gain);
-            gain.connect(audioContext.destination);
-            osc.start(startTime);
-            osc.stop(startTime + duration);
+            osc.type = type; osc.frequency.value = freq;
+            gain.gain.setValueAtTime(0, start);
+            gain.gain.linearRampToValueAtTime(0.06, start + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + dur);
+            osc.connect(gain); gain.connect(audioContext.destination);
+            osc.start(start); osc.stop(start + dur);
         }
 
         function playMelody() {
-            // Красивая мелодия
-            const notes = [
-                523.25, 587.33, 659.25, 698.46, 783.99, 659.25, 523.25, 587.33,
-                659.25, 523.25, 493.88, 440.00, 392.00, 440.00, 493.88, 523.25,
-                587.33, 659.25, 783.99, 880.00, 783.99, 659.25, 587.33, 523.25,
-                493.88, 523.25, 587.33, 523.25, 440.00, 493.88, 523.25, 587.33
-            ];
-
-            function playSequence() {
+            const notes = [523.25,587.33,659.25,698.46,783.99,659.25,523.25,587.33,659.25,523.25,493.88,440,392,440,493.88,523.25,587.33,659.25,783.99,880,783.99,659.25,587.33,523.25,493.88,523.25,587.33,523.25,440,493.88,523.25,587.33];
+            function play() {
                 if (!isPlaying) return;
                 const now = audioContext.currentTime;
-                notes.forEach((note, i) => {
-                    playNote(note, now + i * 0.35, 0.5, 'sine');
-                    // Гармоника
-                    playNote(note * 0.5, now + i * 0.35, 0.6, 'triangle');
-                });
+                notes.forEach((n, i) => { playNote(n, now + i * 0.35, 0.5); playNote(n * 0.5, now + i * 0.35, 0.6, 'triangle'); });
             }
-
-            playSequence();
-            musicInterval = setInterval(() => {
-                if (isPlaying) playSequence();
-            }, notes.length * 350 + 500);
+            play();
+            musicInterval = setInterval(() => { if (isPlaying) play(); }, notes.length * 350 + 500);
         }
 
-        // ===== ПЛАВНАЯ ПРОКРУТКА =====
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        // =============================================
+        // ФОТОГАЛЕРЕЯ
+        // =============================================
+        let photos = JSON.parse(localStorage.getItem('katyaPhotos') || '[]');
+        let pendingFile = null;
+        let currentLightboxIndex = 0;
+
+        // Drag & Drop
+        const uploadArea = document.getElementById('uploadArea');
+        uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+        uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        function handleFiles(files) {
+            for (const file of files) {
+                if (!file.type.startsWith('image/')) continue;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    pendingFile = e.target.result;
+                    document.getElementById('modalPreview').src = pendingFile;
+                    document.getElementById('modalPreview').style.display = 'block';
+                    document.getElementById('photoDate').value = new Date().toISOString().split('T')[0];
+                    document.getElementById('photoCaption').value = '';
+                    document.getElementById('photoModal').classList.add('active');
+                };
+                reader.readAsDataURL(file);
+                break; // по одной фотке
+            }
+        }
+
+        function savePhoto() {
+            if (!pendingFile) return;
+            const caption = document.getElementById('photoCaption').value || 'Наш момент 💕';
+            const date = document.getElementById('photoDate').value || new Date().toISOString().split('T')[0];
+
+            photos.unshift({ src: pendingFile, caption, date, id: Date.now() });
+
+            try {
+                localStorage.setItem('katyaPhotos', JSON.stringify(photos));
+            } catch (e) {
+                // Если localStorage переполнен — сжимаем
+                alert('Хранилище заполнено! Фото сохранено только на время сессии.');
+            }
+
+            closePhotoModal();
+            renderGallery();
+        }
+
+        function closePhotoModal() {
+            document.getElementById('photoModal').classList.remove('active');
+            pendingFile = null;
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            const empty = document.getElementById('galleryEmpty');
+            grid.innerHTML = '';
+
+            if (photos.length === 0) {
+                empty.style.display = 'block';
+                return;
+            }
+            empty.style.display = 'none';
+
+            photos.forEach((photo, index) => {
+                const item = document.createElement('div');
+                item.classList.add('gallery-item');
+                item.innerHTML = `
+                    <img src="${photo.src}" alt="${photo.caption}" onclick="openLightbox(${index})">
+                    <div class="gallery-item-info">
+                        <div class="gallery-item-date">📅 ${formatDate(photo.date)}</div>
+                        <div class="gallery-item-caption">${photo.caption}</div>
+                    </div>
+                    <div class="gallery-item-actions">
+                        <button class="gallery-small-btn delete" onclick="deletePhoto(${index})">🗑️ Удалить</button>
+                    </div>
+                `;
+                grid.appendChild(item);
             });
+        }
+
+        function deletePhoto(index) {
+            if (!confirm('Удалить это фото?')) return;
+            photos.splice(index, 1);
+            localStorage.setItem('katyaPhotos', JSON.stringify(photos));
+            renderGallery();
+        }
+
+        function formatDate(dateStr) {
+            const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+            const d = new Date(dateStr);
+            return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+        }
+
+        // Lightbox
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lb = document.getElementById('lightbox');
+            updateLightbox();
+            lb.classList.add('active');
+        }
+
+        function updateLightbox() {
+            const photo = photos[currentLightboxIndex];
+            document.getElementById('lightboxImg').src = photo.src;
+            document.getElementById('lightboxDate').textContent = '📅 ' + formatDate(photo.date);
+            document.getElementById('lightboxCaption').textContent = photo.caption;
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function lightboxNav(dir) {
+            currentLightboxIndex += dir;
+            if (currentLightboxIndex < 0) currentLightboxIndex = photos.length - 1;
+            if (currentLightboxIndex >= photos.length) currentLightboxIndex = 0;
+            updateLightbox();
+        }
+
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('lightbox')) closeLightbox();
+        });
+
+        // =============================================
+        // ДНЕВНИК
+        // =============================================
+        let notes = JSON.parse(localStorage.getItem('katyaNotes') || '[]');
+        let selectedMood = '🥰';
+
+        function selectMood(btn, mood) {
+            document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedMood = mood;
+        }
+
+        function addNote() {
+            const text = document.getElementById('noteText').value.trim();
+            if (!text) return;
+
+            notes.unshift({
+                text,
+                mood: selectedMood,
+                date: new Date().toISOString(),
+                id: Date.now()
+            });
+
+            localStorage.setItem('katyaNotes', JSON.stringify(notes));
+            document.getElementById('noteText').value = '';
+            renderNotes();
+        }
+
+        function deleteNote(id) {
+            notes = notes.filter(n => n.id !== id);
+            localStorage.setItem('katyaNotes', JSON.stringify(notes));
+            renderNotes();
+        }
+
+        function renderNotes() {
+            const list = document.getElementById('notesList');
+            list.innerHTML = '';
+
+            if (notes.length === 0) {
+                list.innerHTML = '<div class="gallery-empty"><span class="empty-icon">📝</span><p>Пока нет записей.<br>Напиши первую!</p></div>';
+                return;
+            }
+
+            notes.forEach(note => {
+                const card = document.createElement('div');
+                card.classList.add('note-card');
+                const d = new Date(note.date);
+                const dateStr = `${d.getDate().toString().padStart(2,'0')}.${(d.getMonth()+1).toString().padStart(2,'0')}.${d.getFullYear()} в ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
+
+                card.innerHTML = `
+                    <button class="note-delete" onclick="deleteNote(${note.id})">✕</button>
+                    <div class="note-header">
+                        <span class="note-date">📅 ${dateStr}</span>
+                        <span class="note-mood">${note.mood}</span>
+                    </div>
+                    <div class="note-body">${note.text}</div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        // =============================================
+        // ОБРАТНЫЙ ОТСЧЁТ
+        // =============================================
+        let countdownInterval;
+
+        function initCountdown() {
+            const saved = localStorage.getItem('relationshipDate');
+            if (saved) {
+                document.getElementById('relationshipDate').value = saved;
+                startTogetherCounter();
+            }
+            renderEvents();
+        }
+
+        function saveRelationshipDate() {
+            const date = document.getElementById('relationshipDate').value;
+            if (date) {
+                localStorage.setItem('relationshipDate', date);
+                startTogetherCounter();
+            }
+        }
+
+        function startTogetherCounter() {
+            if (countdownInterval) clearInterval(countdownInterval);
+            const startDate = new Date(localStorage.getItem('relationshipDate'));
+
+            function update() {
+                const now = new Date();
+                const diff = now - startDate;
+                if (diff < 0) return;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('countDays').textContent = days;
+                document.getElementById('countHours').textContent = hours;
+                document.getElementById('countMinutes').textContent = minutes;
+                document.getElementById('countSeconds').textContent = seconds;
+            }
+
+            update();
+            countdownInterval = setInterval(update, 1000);
+        }
+
+        // События
+        let events = JSON.parse(localStorage.getItem('katyaEvents') || '[]');
+
+        function saveEvent() {
+            const name = document.getElementById('eventName').value.trim();
+            const date = document.getElementById('eventDate').value;
+            if (!name || !date) return;
+
+            events.push({ name, date, id: Date.now() });
+            localStorage.setItem('katyaEvents', JSON.stringify(events));
+            document.getElementById('eventName').value = '';
+            document.getElementById('eventDate').value = '';
+            renderEvents();
+        }
+
+        function deleteEvent(id) {
+            events = events.filter(e => e.id !== id);
+            localStorage.setItem('katyaEvents', JSON.stringify(events));
+            renderEvents();
+        }
+
+        function renderEvents() {
+            const container = document.getElementById('eventsList');
+            container.innerHTML = '';
+
+            events.forEach(evt => {
+                const now = new Date();
+                const target = new Date(evt.date);
+                const diff = target - now;
+
+                let timeStr;
+                if (diff <= 0) {
+                    timeStr = '🎉 Уже наступило!';
+                } else {
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    timeStr = `${days} дней ${hours} часов`;
+                }
+
+                const card = document.createElement('div');
+                card.classList.add('note-card');
+                card.innerHTML = `
+                    <button class="note-delete" onclick="deleteEvent(${evt.id})">✕</button>
+                    <div class="note-header">
+                        <span class="note-date">📅 ${formatDate(evt.date)}</span>
+                    </div>
+                    <div class="note-body" style="font-size:1.1rem;"><strong>${evt.name}</strong><br><span style="color:var(--pink);">⏰ Осталось: ${timeStr}</span></div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Обновляем события каждую минуту
+        setInterval(renderEvents, 60000);
+
+        // =============================================
+        // КЛАВИША ESC
+        // =============================================
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                closePhotoModal();
+            }
+            if (e.key === 'ArrowLeft') lightboxNav(-1);
+            if (e.key === 'ArrowRight') lightboxNav(1);
         });
     </script>
 </body>
