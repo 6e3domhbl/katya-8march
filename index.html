@@ -46,7 +46,8 @@ body{font-family:'Comfortaa',cursive;background:var(--bg1);color:var(--t1);overf
 .topbar-right{width:40px}
 
 /* SIDEBAR */
-.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9992;opacity:0;visibility:hidden;transition:all .3s ease}
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9992;opacity:0;visibility:hidden;pointer-events:none;transition:all .3s ease}
+.sidebar-overlay.open{opacity:1;visibility:visible;pointer-events:auto}
 .sidebar-overlay.open{opacity:1;visibility:visible}
 .sidebar{position:fixed;top:0;left:0;width:280px;height:100%;background:var(--bg2);border-right:1px solid rgba(255,255,255,.06);z-index:9993;transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow-y:auto}
 .sidebar.open{transform:translateX(0)}
