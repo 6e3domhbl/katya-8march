@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💐 С 8 Марта, Катя! 💐</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink: #ff6b9d;
+            --light-pink: #ffc2d1;
+            --gold: #ffd700;
+            --deep-rose: #c9184a;
+            --lavender: #e6b8f7;
+            --soft-white: #fff5f7;
+        }
+
+        body {
+            font-family: 'Comfortaa', cursive;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #1a0a14 0%, #2d1b30 50%, #1a0a14 100%);
+            color: #fff;
+        }
+
+        /* ===== ЭКРАН ЗАГРУЗКИ / ВХОД ===== */
+        .intro-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(ellipse at center, #2d1b30 0%, #0d0208 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .intro-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .intro-screen h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--pink);
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+            margin-bottom: 20px;
+            animation: introFloat 3s ease-in-out infinite;
+        }
+
+        .intro-screen p {
+            font-size: 1.1rem;
+            color: var(--light-pink);
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        .enter-btn {
+            padding: 18px 50px;
+            font-family: 'Comfortaa', cursive;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, var(--pink), var(--deep-rose));
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 30px rgba(255, 107, 157, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enter-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .enter-btn:hover::before {
+            left: 100%;
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 40px rgba(255, 107, 157, 0.6);
+        }
+
+        @keyframes introFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* ===== ЧАСТИЦЫ / ЛЕПЕСТКИ ===== */
+        .particles-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            top: -60px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50% 0 50% 50%;
+            opacity: 0.7;
+            animation: petalFall linear infinite;
+        }
+
+        @keyframes petalFall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) translateX(0);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translateY(110vh) rotate(720deg) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* ===== ХЕДЕР ===== */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+        }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        .header-decoration {
+            position: absolute;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+        }
+
+        .header-decoration.d1 { top: 10%; left: 10%; background: var(--pink); }
+        .header-decoration.d2 { bottom: 10%; right: 10%; background: var(--lavender); }
+        .header-decoration.d3 { top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--gold); opacity: 0.08; }
+
+        .main-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 10vw, 7rem);
+            background: linear-gradient(135deg, var(--pink), var(--gold), var(--lavender), var(--pink));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            color: var(--light-pink);
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease 0.5s forwards;
+        }
+
+        .date-badge {
+            display: inline-block;
+            padding: 10px 30px;
+            border: 2px solid var(--pink);
+            border-radius: 50px;
+            font-size: 1rem;
+            color: var(--light-pink);
+            letter-spacing: 3px;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease 1s forwards;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s ease infinite;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease 1.5s forwards, bounce 2s ease 3s infinite;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 25px; height: 25px;
+            border-right: 3px solid var(--pink);
+            border-bottom: 3px solid var(--pink);
+            transform: rotate(45deg);
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(15px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== СЕКЦИИ ===== */
+        section {
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: var(--pink);
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '✿';
+            display: block;
+            font-size: 1.5rem;
+            margin-top: 10px;
+            opacity: 0.5;
+        }
+
+        /* ===== ПОЗДРАВЛЕНИЕ ===== */
+        .greeting-card {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(201, 24, 74, 0.05));
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            border-radius: 30px;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .greeting-card::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, var(--pink), var(--gold), var(--lavender), var(--pink));
+            background-size: 400% 400%;
+            animation: gradientShift 6s ease infinite;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .greeting-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .greeting-text .highlight {
+            color: var(--pink);
+            font-weight: 600;
+        }
+
+        .greeting-text .name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+
+        /* ===== КАЧЕСТВА ===== */
+        .qualities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .quality-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 107, 157, 0.15);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.5s ease;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quality-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .quality-card:hover::before {
+            left: 100%;
+        }
+
+        .quality-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--pink);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.15);
+        }
+
+        .quality-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .quality-card h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            color: var(--pink);
+            margin-bottom: 10px;
+        }
+
+        .quality-card p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        /* ===== ТАЙМЛАЙН ПОЖЕЛАНИЙ ===== */
+        .wishes-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .wishes-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px; top: 0;
+            width: 2px; height: 100%;
+            background: linear-gradient(to bottom, var(--pink), var(--lavender), var(--gold));
+        }
+
+        .wish-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding: 25px 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 157, 0.1);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateX(30px);
+        }
+
+        .wish-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .wish-item:hover {
+            background: rgba(255, 107, 157, 0.05);
+            border-color: var(--pink);
+        }
+
+        .wish-item::before {
+            content: '';
+            position: absolute;
+            left: -33px; top: 30px;
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: var(--pink);
+            box-shadow: 0 0 15px var(--pink);
+        }
+
+        .wish-item .wish-emoji {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .wish-item h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .wish-item p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+
+        /* ===== ИНТЕРАКТИВНЫЙ КОНВЕРТ ===== */
+        .envelope-section {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .envelope-wrapper {
+            display: inline-block;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .envelope {
+            width: 280px;
+            height: 180px;
+            background: linear-gradient(135deg, #f7d1d1, #f4a7bb);
+            border-radius: 10px;
+            position: relative;
+            margin: 0 auto;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            clip-path: polygon(0 0, 50% 50%, 100% 0);
+            background: linear-gradient(135deg, #e895aa, #d4758d);
+            transform-origin: top center;
+            transition: transform 0.8s ease;
+            z-index: 2;
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-body {
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 100%;
+            clip-path: polygon(0 0, 0 100%, 50% 60%, 100% 100%, 100% 0);
+            background: linear-gradient(135deg, #f0b8c6, #e8a0b4);
+            z-index: 1;
+        }
+
+        .heart-seal {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            z-index: 3;
+            animation: heartPulse 1.5s ease infinite;
+            transition: opacity 0.5s ease;
+        }
+
+        .envelope.open .heart-seal {
+            opacity: 0;
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        .secret-message {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(255, 107, 157, 0.08);
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            border-radius: 20px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .secret-message.show {
+            display: block;
+        }
+
+        .secret-message p {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.6rem;
+            color: var(--pink);
+            line-height: 1.8;
+        }
+
+        .envelope-hint {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        /* ===== ГЕНЕРАТОР КОМПЛИМЕНТОВ ===== */
+        .compliment-section {
+            text-align: center;
+        }
+
+        .compliment-display {
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            margin: 30px 0;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 107, 157, 0.15);
+            border-radius: 20px;
+            transition: all 0.5s ease;
+        }
+
+        .compliment-display p {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.3rem, 4vw, 2rem);
+            color: var(--light-pink);
+            transition: all 0.5s ease;
+        }
+
+        .compliment-btn {
+            padding: 15px 40px;
+            font-family: 'Comfortaa', cursive;
+            font-size: 1rem;
+            background: linear-gradient(135deg, var(--pink), var(--deep-rose));
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 25px rgba(255, 107, 157, 0.3);
+        }
+
+        .compliment-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 35px rgba(255, 107, 157, 0.5);
+        }
+
+        .compliment-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ===== ФЕЙЕРВЕРК СЕРДЕЦ ===== */
+        .firework-btn-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .firework-btn {
+            padding: 18px 45px;
+            font-family: 'Comfortaa', cursive;
+            font-size: 1rem;
+            background: linear-gradient(135deg, var(--gold), #ff9500);
+            color: #1a0a14;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .firework-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 35px rgba(255, 215, 0, 0.5);
+        }
+
+        .fireworks-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* ===== СЧЁТЧИК ЛЮБВИ ===== */
+        .love-counter {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .counter-value {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: var(--pink);
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.3);
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s ease;
+        }
+
+        .counter-value:active {
+            transform: scale(1.1);
+        }
+
+        .counter-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 10px;
+        }
+
+        .counter-sublabel {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 5px;
+        }
+
+        /* ===== МУЗЫКАЛЬНЫЙ ПЛЕЕР ===== */
+        .music-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px; height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink), var(--deep-rose));
+            border: none;
+            cursor: pointer;
+            z-index: 9990;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 25px rgba(255, 107, 157, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .music-toggle.playing {
+            animation: musicPulse 1s ease infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 5px 25px rgba(255, 107, 157, 0.4); }
+            50% { box-shadow: 0 5px 35px rgba(255, 107, 157, 0.7); }
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            border-top: 1px solid rgba(255, 107, 157, 0.1);
+        }
+
+        .footer-heart {
+            font-size: 3rem;
+            animation: heartPulse 1.5s ease infinite;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        footer p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 1.8;
+        }
+
+        .footer-big {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: var(--pink);
+            margin-bottom: 15px;
+        }
+
+        /* ===== FLOATING HEARTS ON CLICK ===== */
+        .click-heart {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.5rem;
+            z-index: 9997;
+            animation: floatHeart 1.5s ease forwards;
+        }
+
+        @keyframes floatHeart {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-120px) scale(0.3); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .greeting-card {
+                padding: 30px 20px;
+            }
+
+            .qualities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wishes-timeline {
+                padding-left: 30px;
+            }
+
+            .wish-item {
+                padding: 20px;
+            }
+
+            section {
+                padding: 50px 15px;
+            }
+        }
+
+        /* ===== ГАЛЕРЕЯ СТИХОВ ===== */
+        .poem-carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 107, 157, 0.15);
+            padding: 40px 30px;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .poem-slide {
+            display: none;
+            text-align: center;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .poem-slide.active {
+            display: block;
+        }
+
+        .poem-slide p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            font-style: italic;
+        }
+
+        .poem-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .poem-nav button {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--pink);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .poem-nav button.active {
+            background: var(--pink);
+            box-shadow: 0 0 10px var(--pink);
+        }
+
+        .poem-nav button:hover {
+            background: var(--pink);
+        }
+
+        /* ===== ГИРЛЯНДА ===== */
+        .garland {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .garland-light {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            animation: glow 2s ease infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ВСТУПИТЕЛЬНЫЙ ЭКРАН -->
+    <div class="intro-screen" id="introScreen">
+        <h1>Для тебя, Катя 💝</h1>
+        <p>Особенное поздравление с 8 марта</p>
+        <button class="enter-btn" onclick="enterSite()">Открыть 🌸</button>
+    </div>
+
+    <!-- ПАДАЮЩИЕ ЛЕПЕСТКИ -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- CANVAS ДЛЯ ФЕЙЕРВЕРКОВ -->
+    <canvas class="fireworks-canvas" id="fireworksCanvas"></canvas>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="main-content" id="mainContent">
+
+        <!-- ХЕДЕР -->
+        <header>
+            <div class="header-decoration d1"></div>
+            <div class="header-decoration d2"></div>
+            <div class="header-decoration d3"></div>
+
+            <h1 class="main-title">С 8 Марта, Катя!</h1>
+            <p class="subtitle">Самой прекрасной девушке на свете</p>
+            <div class="date-badge">✦ 8 МАРТА 2025 ✦</div>
+
+            <div class="scroll-indicator">
+                <span></span>
+            </div>
+        </header>
+
+        <!-- ГИРЛЯНДА -->
+        <div class="garland" id="garland"></div>
+
+        <!-- ПОЗДРАВЛЕНИЕ -->
+        <section>
+            <h2 class="section-title">Моё поздравление</h2>
+            <div class="greeting-card">
+                <div class="greeting-text">
+                    <span class="name">Катюша,</span><br><br>
+                    Сегодня <span class="highlight">особенный день</span> — день, когда весь мир
+                    празднует красоту, нежность и силу женщин. Но для меня каждый день рядом с тобой —
+                    это праздник. 🌷<br><br>
+                    Ты — мой <span class="highlight">солнечный лучик</span> в пасмурный день,
+                    моя <span class="highlight">тихая гавань</span> в штормовом море
+                    и самая <span class="highlight">яркая звезда</span> на моём небе. ✨<br><br>
+                    Спасибо тебе за каждую улыбку, за каждый взгляд,
+                    за то, что ты <span class="highlight">наполняешь мою жизнь смыслом</span>
+                    и делаешь её по-настоящему прекрасной. 💕<br><br>
+                    Я хочу, чтобы ты всегда была счастлива —
+                    так же <span class="highlight">безгранично счастлива</span>,
+                    как ты делаешь счастливым меня. 🌸
+                </div>
+            </div>
+        </section>
+
+        <!-- КАЧЕСТВА -->
+        <section>
+            <h2 class="section-title">Почему ты особенная</h2>
+            <div class="qualities-grid">
+                <div class="quality-card">
+                    <span class="quality-icon">🌺</span>
+                    <h3>Красота</h3>
+                    <p>Ты прекрасна не только внешне — твоя душа сияет невероятным светом</p>
+                </div>
+                <div class="quality-card">
+                    <span class="quality-icon">💫</span>
+                    <h3>Вдохновение</h3>
+                    <p>Рядом с тобой хочется становиться лучше каждый день</p>
+                </div>
+                <div class="quality-card">
+                    <span class="quality-icon">🦋</span>
+                    <h3>Нежность</h3>
+                    <p>Твоя нежность согревает даже в самые холодные дни</p>
+                </div>
+                <div class="quality-card">
+                    <span class="quality-icon">🔥</span>
+                    <h3>Сила</h3>
+                    <p>За хрупкостью скрывается невероятная сила духа</p>
+                </div>
+                <div class="quality-card">
+                    <span class="quality-icon">✨</span>
+                    <h3>Уникальность</h3>
+                    <p>Таких, как ты — больше нет и никогда не будет</p>
+                </div>
+                <div class="quality-card">
+                    <span class="quality-icon">🌙</span>
+                    <h3>Магия</h3>
+                    <p>Ты умеешь превращать обычные моменты в волшебные</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- СТИХИ -->
+        <section>
+            <h2 class="section-title">Строки для тебя</h2>
+            <div class="poem-carousel">
+                <div class="poem-slide active" data-poem="0">
+                    <p>
+                        Весна приходит не с капелью,<br>
+                        Не с первым солнечным лучом —<br>
+                        Она приходит с нежной трелью<br>
+                        Твоих шагов за мой порог.<br><br>
+                        Ты — вся весна в одном дыханье,<br>
+                        Ты — первоцвет среди снегов,<br>
+                        Ты — тёплое воспоминанье<br>
+                        О самом главном из миров. 🌷
+                    </p>
+                </div>
+                <div class="poem-slide" data-poem="1">
+                    <p>
+                        Когда ты рядом — мир светлее,<br>
+                        И звёзды ярче в вышине,<br>
+                        И я становлюсь чуть смелее,<br>
+                        И верю в сказку, как во сне.<br><br>
+                        Восьмое марта — лишь причина<br>
+                        Сказать, что значишь ты для меня:<br>
+                        Ты — самая красивая картина,<br>
+                        Что нарисована для меня. 💐
+                    </p>
+                </div>
+                <div class="poem-slide" data-poem="2">
+                    <p>
+                        Не хватит слов, не хватит строчек,<br>
+                        Чтоб описать твою красу,<br>
+                        Но знай — ты больше, чем цветочек,<br>
+                        Ты — целый сад. Тебя люблю! 🌸<br><br>
+                        С Восьмым марта, моя родная,<br>
+                        Пусть счастье будет без границ,<br>
+                        Ты — лучшая, неповторимая,<br>
+                        Прекраснее всех в мире лиц. 💝
+                    </p>
+                </div>
+            </div>
+            <div class="poem-nav">
+                <button class="active" onclick="showPoem(0)"></button>
+                <button onclick="showPoem(1)"></button>
+                <button onclick="showPoem(2)"></button>
+            </div>
+        </section>
+
+        <!-- ПОЖЕЛАНИЯ -->
+        <section>
+            <h2 class="section-title">Мои пожелания тебе</h2>
+            <div class="wishes-timeline">
+                <div class="wish-item">
+                    <span class="wish-emoji">🌅</span>
+                    <h3>Счастья</h3>
+                    <p>Пусть каждое утро начинается с улыбки, а каждый вечер заканчивается чувством, что день прожит не зря. Ты заслуживаешь океан счастья!</p>
+                </div>
+                <div class="wish-item">
+                    <span class="wish-emoji">💪</span>
+                    <h3>Здоровья</h3>
+                    <p>Крепкого здоровья и неиссякаемой энергии для всех твоих мечтаний и планов. Береги себя — ты бесценна.</p>
+                </div>
+                <div class="wish-item">
+                    <span class="wish-emoji">🎯</span>
+                    <h3>Исполнения мечт</h3>
+                    <p>Пусть все твои мечты — даже самые смелые и невероятные — сбудутся. А я постараюсь помочь исполнить каждую из них!</p>
+                </div>
+                <div class="wish-item">
+                    <span class="wish-emoji">🌈</span>
+                    <h3>Ярких моментов</h3>
+                    <p>Пусть жизнь дарит тебе моменты, от которых захватывает дух. Путешествия, открытия, приключения — всё самое лучшее!</p>
+                </div>
+                <div class="wish-item">
+                    <span class="wish-emoji">🤗</span>
+                    <h3>Любви</h3>
+                    <p>Пусть тебя всегда окружают те, кто любит и ценит тебя по-настоящему. И знай — я всегда буду рядом. Люблю тебя! ❤️</p>
+                </div>
+                <div class="wish-item">
+                    <span class="wish-emoji">🦄</span>
+                    <h3>Волшебства</h3>
+                    <p>Пусть в твоей жизни всегда будет место для чудес, магии и сказки. Ведь ты сама — настоящее волшебство!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- КОНВЕРТ -->
+        <section class="envelope-section">
+            <h2 class="section-title">Секретное послание</h2>
+            <div class="envelope-wrapper" onclick="openEnvelope()">
+                <div class="envelope" id="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-body"></div>
+                    <span class="heart-seal">💌</span>
+                </div>
+                <p class="envelope-hint">Нажми, чтобы открыть конверт</p>
+            </div>
+            <div class="secret-message" id="secretMessage">
+                <p>
+                    Катя, я хочу, чтобы ты знала:<br>
+                    ты — лучшее, что случалось в моей жизни. 💖<br><br>
+                    Каждый день рядом с тобой — это подарок,<br>
+                    который я буду ценить вечно. 🌟<br><br>
+                    Ты делаешь мой мир прекрасным<br>
+                    просто тем, что ты в нём есть. 🦋
+                </p>
+            </div>
+        </section>
+
+        <!-- ГЕНЕРАТОР КОМПЛИМЕНТОВ -->
+        <section class="compliment-section">
+            <h2 class="section-title">Генератор комплиментов</h2>
+            <p style="color: rgba(255,255,255,0.5); margin-bottom: 10px;">Нажимай снова и снова — все комплименты для тебя!</p>
+            <div class="compliment-display" id="complimentDisplay">
+                <p id="complimentText">Нажми кнопку ✨</p>
+            </div>
+            <button class="compliment-btn" onclick="generateCompliment()">🌸 Новый комплимент</button>
+        </section>
+
+        <!-- ФЕЙЕРВЕРК -->
+        <section class="firework-btn-container">
+            <h2 class="section-title">Устроим салют!</h2>
+            <button class="firework-btn" onclick="launchFireworks()">🎆 Запустить салют в твою честь!</button>
+        </section>
+
+        <!-- СЧЁТЧИК ЛЮБВИ -->
+        <section class="love-counter">
+            <h2 class="section-title">Счётчик любви</h2>
+            <p style="color: rgba(255,255,255,0.5); margin-bottom: 20px;">Нажимай на сердечко!</p>
+            <div class="counter-value" id="loveCounter" onclick="addLove(event)">❤️ 0</div>
+            <p class="counter-label">раз нажато с любовью</p>
+            <p class="counter-sublabel">(но на самом деле моя любовь к тебе бесконечна)</p>
+        </section>
+
+        <!-- ФУТЕР -->
+        <footer>
+            <span class="footer-heart">💝</span>
+            <p class="footer-big">С любовью, навсегда твой ❤️</p>
+            <p>Создано специально для Кати • 8 Марта 2025</p>
+            <p style="margin-top: 10px;">Ты — моё всё 🌸</p>
+        </footer>
+    </div>
+
+    <!-- КНОПКА МУЗЫКИ -->
+    <button class="music-toggle" id="musicBtn" onclick="toggleMusic()" title="Включить музыку">
+        🎵
+    </button>
+
+    <script>
+        // ===== ВХОД НА САЙТ =====
+        function enterSite() {
+            document.getElementById('introScreen').classList.add('hidden');
+            document.getElementById('mainContent').classList.add('visible');
+            createPetals();
+            createGarland();
+            startObserver();
+        }
+
+        // ===== ПАДАЮЩИЕ ЛЕПЕСТКИ =====
+        function createPetals() {
+            const container = document.getElementById('particles');
+            const colors = ['#ff6b9d', '#ffc2d1', '#e6b8f7', '#ffd700', '#ff9a9e', '#fad0c4'];
+
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.classList.add('petal');
+                    petal.style.left = Math.random() * 100 + 'vw';
+                    petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    petal.style.animationDuration = (Math.random() * 8 + 6) + 's';
+                    petal.style.animationDelay = (Math.random() * 10) + 's';
+                    petal.style.width = (Math.random() * 10 + 8) + 'px';
+                    petal.style.height = petal.style.width;
+                    petal.style.opacity = Math.random() * 0.5 + 0.3;
+                    container.appendChild(petal);
+                }, i * 300);
+            }
+        }
+
+        // ===== ГИРЛЯНДА =====
+        function createGarland() {
+            const garland = document.getElementById('garland');
+            const colors = ['#ff6b9d', '#ffd700', '#e6b8f7', '#ff9a9e', '#87CEEB', '#98FB98'];
+
+            for (let i = 0; i < 40; i++) {
+                const light = document.createElement('div');
+                light.classList.add('garland-light');
+                light.style.backgroundColor = colors[i % colors.length];
+                light.style.animationDelay = (i * 0.15) + 's';
+                light.style.boxShadow = `0 0 8px ${colors[i % colors.length]}`;
+                garland.appendChild(light);
+            }
+        }
+
+        // ===== INTERSECTION OBSERVER ДЛЯ АНИМАЦИИ =====
+        function startObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            document.querySelectorAll('.wish-item').forEach(item => {
+                observer.observe(item);
+            });
+        }
+
+        // ===== КОНВЕРТ =====
+        function openEnvelope() {
+            const envelope = document.getElementById('envelope');
+            const message = document.getElementById('secretMessage');
+            envelope.classList.toggle('open');
+
+            if (envelope.classList.contains('open')) {
+                setTimeout(() => {
+                    message.classList.add('show');
+                }, 500);
+            } else {
+                message.classList.remove('show');
+            }
+        }
+
+        // ===== СТИХИ =====
+        function showPoem(index) {
+            document.querySelectorAll('.poem-slide').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.poem-nav button').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-poem="${index}"]`).classList.add('active');
+            document.querySelectorAll('.poem-nav button')[index].classList.add('active');
+        }
+
+        // Автопереключение стихов
+        let currentPoem = 0;
+        setInterval(() => {
+            currentPoem = (currentPoem + 1) % 3;
+            showPoem(currentPoem);
+        }, 8000);
+
+        // ===== ГЕНЕРАТОР КОМПЛИМЕНТОВ =====
+        const compliments = [
+            "Катя, ты прекраснее всех рассветов мира вместе взятых 🌅",
+            "Твоя улыбка лечит любые раны на сердце 💝",
+            "Ты — причина, по которой я верю в чудеса ✨",
+            "Каждый твой взгляд — это маленькая вселенная 🌌",
+            "Ты красивее всех цветов в самом прекрасном саду 🌺",
+            "Твой смех — это лучшая мелодия на свете 🎶",
+            "Рядом с тобой даже воздух пахнет счастьем 🌸",
+            "Ты делаешь мир ярче просто своим существованием 🌈",
+            "Твои глаза — два океана, в которых я хочу утонуть 🌊",
+            "Ты — моя любимая глава в книге жизни 📖",
+            "С тобой даже тишина наполнена смыслом 🤫",
+            "Ты — солнце моей солнечной системы ☀️",
+            "Каждый момент с тобой — бесценный бриллиант 💎",
+            "Ты идеальна в своей неидеальности, и это магия 🪄",
+            "Твоя доброта согревает лучше любого камина 🔥",
+            "Ты — то самое «вау» в моём каждом дне 🤩",
+            "Даже звёзды завидуют тому, как ты сияешь ⭐",
+            "Ты — лучший подарок, который мне когда-либо дарила судьба 🎁",
+            "Катюша, ты бесконечно потрясающая! 💫",
+            "Ты делаешь обычные дни необыкновенными 🦋"
+        ];
+
+        let lastCompliment = -1;
+        function generateCompliment() {
+            let index;
+            do {
+                index = Math.floor(Math.random() * compliments.length);
+            } while (index === lastCompliment);
+            lastCompliment = index;
+
+            const text = document.getElementById('complimentText');
+            text.style.opacity = 0;
+            text.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                text.textContent = compliments[index];
+                text.style.opacity = 1;
+                text.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        // ===== СЧЁТЧИК ЛЮБВИ =====
+        let loveCount = 0;
+        function addLove(event) {
+            loveCount++;
+            document.getElementById('loveCounter').innerHTML = `❤️ ${loveCount}`;
+
+            // Сердечко вылетает
+            const heart = document.createElement('div');
+            heart.classList.add('click-heart');
+            heart.textContent = ['❤️', '💕', '💖', '💗', '💝', '🌸', '✨'][Math.floor(Math.random() * 7)];
+            heart.style.left = event.clientX + 'px';
+            heart.style.top = event.clientY + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 1500);
+        }
+
+        // ===== СЕРДЕЧКИ ПО КЛИКУ В ЛЮБОМ МЕСТЕ =====
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.love-counter') || e.target.id === 'loveCounter') return;
+
+            const heart = document.createElement('div');
+            heart.classList.add('click-heart');
+            heart.textContent = ['💕', '🌸', '✨', '💖'][Math.floor(Math.random() * 4)];
+            heart.style.left = e.clientX + 'px';
+            heart.style.top = e.clientY + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1500);
+        });
+
+        // ===== ФЕЙЕРВЕРКИ =====
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        let fireworkParticles = [];
+        let fireworksRunning = false;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class FireworkParticle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 6 + 2;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.01;
+                this.size = Math.random() * 3 + 1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.05;
+                this.alpha -= this.decay;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function createFirework() {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height * 0.5 + 50;
+            const colors = ['#ff6b9d', '#ffd700', '#e6b8f7', '#ff9a9e', '#87CEEB', '#ff69b4', '#ffc0cb', '#FFD700'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            for (let i = 0; i < 80; i++) {
+                fireworkParticles.push(new FireworkParticle(x, y, color));
+            }
+        }
+
+        function animateFireworks() {
+            if (!fireworksRunning && fireworkParticles.length === 0) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            fireworkParticles = fireworkParticles.filter(p => p.alpha > 0);
+            fireworkParticles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            if (fireworkParticles.length > 0 || fireworksRunning) {
+                requestAnimationFrame(animateFireworks);
+            }
+        }
+
+        function launchFireworks() {
+            fireworksRunning = true;
+            let count = 0;
+            const interval = setInterval(() => {
+                createFirework();
+                if (Math.random() > 0.5) createFirework();
+                count++;
+                if (count > 15) {
+                    clearInterval(interval);
+                    fireworksRunning = false;
+                }
+            }, 400);
+            animateFireworks();
+        }
+
+        // ===== МУЗЫКА (Web Audio API) =====
+        let audioContext;
+        let isPlaying = false;
+        let musicInterval;
+
+        function toggleMusic() {
+            const btn = document.getElementById('musicBtn');
+
+            if (!isPlaying) {
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                playMelody();
+                btn.classList.add('playing');
+                btn.textContent = '🎶';
+                isPlaying = true;
+            } else {
+                clearInterval(musicInterval);
+                btn.classList.remove('playing');
+                btn.textContent = '🎵';
+                isPlaying = false;
+            }
+        }
+
+        function playNote(frequency, startTime, duration, type = 'sine') {
+            if (!audioContext) return;
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.type = type;
+            osc.frequency.value = frequency;
+            gain.gain.setValueAtTime(0, startTime);
+            gain.gain.linearRampToValueAtTime(0.08, startTime + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.start(startTime);
+            osc.stop(startTime + duration);
+        }
+
+        function playMelody() {
+            // Красивая мелодия
+            const notes = [
+                523.25, 587.33, 659.25, 698.46, 783.99, 659.25, 523.25, 587.33,
+                659.25, 523.25, 493.88, 440.00, 392.00, 440.00, 493.88, 523.25,
+                587.33, 659.25, 783.99, 880.00, 783.99, 659.25, 587.33, 523.25,
+                493.88, 523.25, 587.33, 523.25, 440.00, 493.88, 523.25, 587.33
+            ];
+
+            function playSequence() {
+                if (!isPlaying) return;
+                const now = audioContext.currentTime;
+                notes.forEach((note, i) => {
+                    playNote(note, now + i * 0.35, 0.5, 'sine');
+                    // Гармоника
+                    playNote(note * 0.5, now + i * 0.35, 0.6, 'triangle');
+                });
+            }
+
+            playSequence();
+            musicInterval = setInterval(() => {
+                if (isPlaying) playSequence();
+            }, notes.length * 350 + 500);
+        }
+
+        // ===== ПЛАВНАЯ ПРОКРУТКА =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
